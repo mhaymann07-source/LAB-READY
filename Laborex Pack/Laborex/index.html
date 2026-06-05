@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Lab-Ready | Interactive Lab Management & Safety</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/color.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+<style>
+/* Custom CSS for modal and simulation */
+.modal-content {
+    border-radius: 12px;
+}
+.emergency-checklist {
+    list-style: none;
+    padding-left: 0;
+}
+.emergency-checklist li {
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+}
+.emergency-checklist li:before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+}
+.simulate-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.simulate-btn:hover {
+    background: #c0392b;
+    color: white;
+}
+.modal-header {
+    background: #1a2b4c;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+.modal-header .close {
+    color: white;
+    opacity: 1;
+}
+.section-title-custom {
+    margin-bottom: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">Preloader Close</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="L" class="letters-loading">L</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="b" class="letters-loading">b</span>
+                        <span data-text-preloader="-" class="letters-loading">-</span>
+                        <span data-text-preloader="R" class="letters-loading">R</span>
+                        <span data-text-preloader="e" class="letters-loading">e</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="d" class="letters-loading">d</span>
+                        <span data-text-preloader="y" class="letters-loading">y</span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- search-popup -->
+    <div id="search-popup" class="search-popup">
+        <div class="close-search"><span>x</span></div>
+        <div class="popup-inner">
+            <div class="overlay-layer"></div>
+            <div class="search-form">
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <fieldset>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search chemicals or apparatus..." required>
+                            <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- search-popup end -->
+
+    <!-- main header -->
+    <header class="main-header style-four style-five">
+        <div class="header-lower">
+            <div class="outer-box">
+                <div class="logo-box">
+                    <figure class="logo"><a href="#"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
+                </div>
+                <div class="menu-area clearfix">
+                    <div class="mobile-nav-toggler">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </div>
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul class="navigation scroll-nav clearfix">
+                                <li class="current"><a href="#home">Home</a></li>
+                                <li><a href="#service">Modules</a></li>
+                                <li><a href="#chemicals">Chemicals</a></li>
+                                <li><a href="#emergency">Emergency SOP</a></li>
+                                <li><a href="#simulation">Simulation</a></li>
+                                <li><a href="#about">About</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="menu-right-content clearfix">
+                    <li class="search-btn">
+                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                    </li>
+                    <li class="btn-box">
+                        <a href="#emergency" class="theme-btn-one">Emergency Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left">
+                        <nav class="main-menu clearfix"></nav>
+                    </div>
+                    <ul class="menu-right-content pull-right clearfix">
+                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="btn-box"><a href="#emergency" class="theme-btn-one">Emergency Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="#"><img src="assets/images/logo-2.png" alt=""></a></div>
+            <div class="menu-outer"></div>
+        </nav>
+    </div>
+
+    <!-- banner-section / Home -->
+    <section class="banner-section style-four style-five" id="home" style="background-image: url('assets/images/background/homepage1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+        <!-- Dark overlay for background image only -->
+        <div class="bg-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1;"></div>
+
+        <!-- Existing pattern layer (if any) – ensure it stays above overlay -->
+        <div class="pattern-layer" style="position: relative; z-index: 2;">
+            <!-- pattern divs go here -->
+        </div>
+
+        <div class="banner-carousel owl-theme owl-carousel owl-dots-none" style="position: relative; z-index: 2;">
+           <div class="slide-item" style="margin-top: 70px;">
+                <div class="auto-container">
+                    <div class="row align-items-center clearfix">
+                        <div class="col-lg-8 col-md-12 col-sm-12 content-column">
+                            <div class="content-box">
+                                <h2>Lab-Ready: <br>Interactive Lab Management & Safety</h2>
+                                <p>Your complete guide to laboratory apparatus, chemicals, and emergency procedures. Designed for students to learn lab safety and management interactively.</p>
+                                <div class="btn-box">
+                                    <a href="#service" class="theme-btn-one">Explore Modules</a>
+                                    <a href="#emergency" class="banner-btn">Emergency SOP</a>
+                                </div>
+                            </div>
+                        </div><!--
+                        <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                            <div class="image-box">
+                                <figure class="image"><img src="assets/images/banner/apparatus-1.jpg" alt="Lab-Ready" style="width: 440px; height: 500px; object-fit: cover;"></figure>
+                                <div class="admin-box">
+                                    <figure class="admin-thumb"><img src="assets/images/banner/apparatus-2.jpg" alt="" style="width: 80px; height: 80px; object-fit: cover;"></figure>
+                                    <h4>Interactive Modules</h4>
+                                    <p>Apparatus · Chemicals · Safety</p>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- service-section (3 modules) -->
+    <section class="service-section alternat-2" id="service">
+        <div class="pattern-layer"></div>
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Lab-Ready Modules</h6>
+                <h2>Essential Resources for <br />Laboratory Management</h2>
+            </div>
+            <div class="row clearfix">
+                <!-- Apparatus -->
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-5"></i></div>
+                            <h4><a href="#" data-toggle="modal" data-target="#apparatusModal">Laboratory Apparatus</a></h4>
+                            <p>Beakers, flasks, burettes, pipettes, burners, and more. Click to view storage, usage, and types.</p>
+                            <div class="btn-box"><a href="#" data-toggle="modal" data-target="#apparatusModal" class="theme-btn-two">Browse All</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chemicals -->
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated" data-wow-delay="200ms">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-6"></i></div>
+                            <h4><a href="#" data-toggle="modal" data-target="#chemicalsModal">Common Chemicals</a></h4>
+                            <p>Acids, bases, salts, indicators. Safety precautions, storage, and typical usage for each chemical.</p>
+                            <div class="btn-box"><a href="#" data-toggle="modal" data-target="#chemicalsModal" class="theme-btn-two">View Chemicals</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Emergency SOP -->
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated" data-wow-delay="400ms">
+                        <div class="inner-box">
+                            <div class="icon-box"><i class="icon-8"></i></div>
+                            <h4><a href="#emergency">Emergency SOP & Simulation</a></h4>
+                            <p>Step-by-step procedures for acid spills, fires, chemical splashes. Interactive checklist and simulation.</p>
+                            <div class="btn-box"><a href="#emergency" class="theme-btn-two">Learn Protocols</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About section (general) -->
+    <section class="about-style-two sec-pad" id="about">
+        <div class="auto-container">
+            <div class="row align-items-center clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div class="image_block_8">
+                        <div class="image-box">
+                            <figure class="image image-1"><img src="assets/images/banner/person-1.jpg" alt="Lab" style="width: 270px; height: 400px; object-fit: cover;"></figure>
+                            <figure class="image image-2 paroller"><img src="assets/images/banner/person-2.jpg" alt="Chemicals" style="width: 200px; height: 200px; object-fit: cover;"></figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div class="content_block_1">
+                        <div class="content-box">
+                            <div class="sec-title">
+                                <h6>Lab-Ready Project</h6>
+                                <h2>Interactive Web for Lab Management & Safety</h2>
+                            </div>
+                            <div class="bold-text">
+                                <p>This interactive website helps students understand laboratory apparatus, chemical handling, and emergency response — all in one place.</p>
+                            </div>
+                            <div class="text">
+                                <p>Designed based on real chemistry curriculum needs. Improve lab safety knowledge and management skills.</p>
+                                <ul class="list-style-one clearfix">
+                                    <li>Apparatus storage & usage</li>
+                                    <li>Chemical hazard & precaution</li>
+                                    <li>Emergency simulation & SOP</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chemicals list section -->
+    <section class="research-section bg-color-1" id="chemicals">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Chemical Database</h6>
+                <h2>Common Lab Chemicals <br />with Precaution & Storage</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInLeft" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <h4>Hydrochloric Acid (HCl)</h4>
+                            <span>Corrosive | Use fume hood</span>
+                            <p>Storage: Acid cabinet, separate from bases. Precaution: Wear gloves & goggles. Usage: pH adjustment, cleaning metals.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two chemical-detail" data-name="HCl" data-prec="Corrosive, causes burns. Use PPE. Add acid to water." data-store="Acid cabinet, ventilated area." data-usage="Titration, pH control.">View Details</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInRight" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <h4>Sodium Hydroxide (NaOH)</h4>
+                            <span>Caustic | Hygroscopic</span>
+                            <p>Storage: Tightly closed, dry place. Precaution: Causes severe burns. Use eye protection. Usage: Neutralization, saponification.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two chemical-detail" data-name="NaOH" data-prec="Causes severe skin burns. Wear chemical-resistant gloves." data-store="In polyethylene bottles, away from acids." data-usage="Base for titrations, cleaning glassware.">View Details</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInLeft" data-wow-delay="300ms">
+                        <div class="inner-box">
+                            <h4>Sulfuric Acid (H₂SO₄)</h4>
+                            <span>Dehydrating | Strong acid</span>
+                            <p>Storage: Acid cabinet, secondary containment. Precaution: Always add acid to water. Use fume hood. Usage: Catalyst, pH adjustment.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two chemical-detail" data-name="H2SO4" data-prec="Extremely corrosive, produces heat when mixed with water." data-store="Acid resistant tray, away from organics." data-usage="Dehydrating agent, electrolyte in batteries.">View Details</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInRight" data-wow-delay="300ms">
+                        <div class="inner-box">
+                            <h4>Ethanol (C₂H₅OH)</h4>
+                            <span>Flammable | Solvent</span>
+                            <p>Storage: Flammable cabinet, away from ignition sources. Precaution: No flames. Use in well-ventilated area. Usage: Solvent, disinfection.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two chemical-detail" data-name="Ethanol" data-prec="Highly flammable, avoid inhalation." data-store="Cool, ventilated flammables cabinet." data-usage="Extraction, cleaning, fuel.">View Details</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency section -->
+    <section class="events-section sec-pad bg-color-1" id="emergency">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Emergency Response</h6>
+                <h2>Step-by-Step SOPs <br />with Interactive Simulation</h2>
+            </div>
+            <div class="row clearfix">
+                <!-- Acid Spill -->
+                <div class="col-lg-4 col-md-6 col-sm-12 event-block">
+                    <div class="event-block-one wow fadeInUp" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <div class="post-date"><h3>⚠️<span>ACID</span></h3></div>
+                            <h4><a href="#">Acid Spill on Floor</a></h4>
+                            <ul class="info clearfix">
+                                <li><i class="icon-21"></i> Immediate Action</li>
+                                <li><i class="icon-22"></i> PPE Required</li>
+                            </ul>
+                            <p>Neutralize with sodium bicarbonate, contain spill, dispose safely.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two emergency-detail" data-emergency="acidSpill">View Checklist & Simulate</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chemical Fire -->
+                <div class="col-lg-4 col-md-6 col-sm-12 event-block">
+                    <div class="event-block-one wow fadeInUp" data-wow-delay="200ms">
+                        <div class="inner-box">
+                            <div class="post-date"><h3>🔥<span>FIRE</span></h3></div>
+                            <h4><a href="#">Chemical Fire (Small)</a></h4>
+                            <ul class="info clearfix">
+                                <li><i class="icon-21"></i> Evacuate if large</li>
+                                <li><i class="icon-22"></i> Use fire blanket</li>
+                            </ul>
+                            <p>Smother with fire blanket or dry sand. Never use water on flammable liquids.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two emergency-detail" data-emergency="fire">View Checklist & Simulate</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chemical on Skin -->
+                <div class="col-lg-4 col-md-6 col-sm-12 event-block">
+                    <div class="event-block-one wow fadeInUp" data-wow-delay="400ms">
+                        <div class="inner-box">
+                            <div class="post-date"><h3>🧴<span>SPLASH</span></h3></div>
+                            <h4><a href="#">Chemical Splash on Skin/Eyes</a></h4>
+                            <ul class="info clearfix">
+                                <li><i class="icon-21"></i> Rinse immediately</li>
+                                <li><i class="icon-22"></i> 15 minutes min.</li>
+                            </ul>
+                            <p>Use eyewash station or safety shower. Remove contaminated clothing.</p>
+                            <div class="btn-box"><a href="#" class="theme-btn-two emergency-detail" data-emergency="skinSplash">View Checklist & Simulate</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="cta-style-two bg-color-4" id="simulation">
+        <div class="auto-container">
+            <div class="inner-box clearfix">
+                <div class="text pull-left">
+                    <h2>Interactive Simulation<br />Practice Emergency Response</h2>
+                </div>
+                <div class="btn-box pull-right">
+                    <a href="gallery-2.html" class="banner-btn-two">Start Simulation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="main-footer bg-color-1">
+        <div class="footer-top">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget logo-widget">
+                            <div class="footer-logo">
+                                <figure class="logo"><a href="#"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
+                            </div>
+                            <div class="text">
+                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
+                                <ul class="info clearfix">
+                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
+                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
+                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title"><h4>Quick Links</h4></div>
+                            <div class="widget-content">
+                                <ul class="links-list clearfix">
+                                    <li><a href="#service">Modules</a></li>
+                                    <li><a href="#chemicals">Chemicals Database</a></li>
+                                    <li><a href="#emergency">Emergency SOP</a></li>
+                                    <li><a href="#about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget subscribe-widget">
+                            <div class="widget-title"><h4>For Students</h4></div>
+                            <div class="widget-content">
+                                <p>Learn lab safety and management interactively.</p>
+                                <form action="#" method="post" class="subscribe-form">
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <button type="submit"><i class="icon-27"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom centred">
+            <div class="auto-container">
+                <div class="copyright">
+                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
+</div>
+
+<!-- Modals (sama macam asal) -->
+<!-- Apparatus Modal -->
+<div class="modal fade" id="apparatusModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Laboratory Apparatus & Their Details</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Beaker</h5>
+                        <p><strong>Storage:</strong> Stack upside down on drying rack.<br>
+                        <strong>Usage:</strong> Mixing, heating liquids. Not for precise volume.<br>
+                        <strong>Type:</strong> Borosilicate glass, plastic. Sizes: 50-1000mL.</p>
+                        <hr>
+                        <h5>Erlenmeyer Flask</h5>
+                        <p><strong>Storage:</strong> On shelves, avoid rim chipping.<br>
+                        <strong>Usage:</strong> Swirling liquids, titration.<br>
+                        <strong>Type:</strong> Conical shape, narrow neck.</p>
+                        <hr>
+                        <h5>Burette</h5>
+                        <p><strong>Storage:</strong> Hang vertically or lay flat in drawer.<br>
+                        <strong>Usage:</strong> Precise volume dispensing for titration.<br>
+                        <strong>Type:</strong> Glass, PTFE stopcock.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Pipette</h5>
+                        <p><strong>Storage:</strong> Vertical in pipette stand.<br>
+                        <strong>Usage:</strong> Transfer exact liquid volumes.<br>
+                        <strong>Type:</strong> Volumetric, serological, micropipette.</p>
+                        <hr>
+                        <h5>Bunsen Burner</h5>
+                        <p><strong>Storage:</strong> Securely on base, gas hose attached.<br>
+                        <strong>Usage:</strong> Heating, sterilizing, combustion.<br>
+                        <strong>Type:</strong> Adjustable air hole.</p>
+                        <hr>
+                        <h5>Test Tube & Rack</h5>
+                        <p><strong>Storage:</strong> Rack on shelf, cleaned and dried.<br>
+                        <strong>Usage:</strong> Small reactions, heating.<br>
+                        <strong>Type:</strong> Borosilicate, rimmed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chemicals Modal (detail popup) -->
+<div class="modal fade" id="chemDetailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chemical Details</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="chemDetailBody">
+                <!-- dynamic -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional modal for chemicals listing from service button -->
+<div class="modal fade" id="chemicalsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Common Chemicals</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Click on any chemical below for detailed precaution, storage, and usage:</p>
+                <ul>
+                    <li><a href="#" class="chemical-detail" data-name="HCl" data-prec="Corrosive, causes burns. Use PPE. Add acid to water." data-store="Acid cabinet, ventilated area." data-usage="Titration, pH control.">Hydrochloric Acid (HCl)</a></li>
+                    <li><a href="#" class="chemical-detail" data-name="NaOH" data-prec="Causes severe skin burns. Wear chemical-resistant gloves." data-store="In polyethylene bottles, away from acids." data-usage="Base for titrations, cleaning glassware.">Sodium Hydroxide (NaOH)</a></li>
+                    <li><a href="#" class="chemical-detail" data-name="H2SO4" data-prec="Extremely corrosive, produces heat when mixed with water." data-store="Acid resistant tray, away from organics." data-usage="Dehydrating agent, electrolyte in batteries.">Sulfuric Acid (H₂SO₄)</a></li>
+                    <li><a href="#" class="chemical-detail" data-name="Ethanol" data-prec="Highly flammable, avoid inhalation." data-store="Cool, ventilated flammables cabinet." data-usage="Extraction, cleaning, fuel.">Ethanol</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Emergency Modal -->
+<div class="modal fade" id="emergencyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Emergency Procedure</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="emergencyBody">
+                <!-- dynamic -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/nav-tool.js"></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+<script src="assets/js/pagenav.js"></script>
+<script src="assets/js/script.js"></script>
+
+<script>
+// Chemical detail modal
+$(document).on('click', '.chemical-detail', function(e){
+    e.preventDefault();
+    var name = $(this).data('name');
+    var prec = $(this).data('prec');
+    var store = $(this).data('store');
+    var usage = $(this).data('usage');
+    var html = '<h4>'+name+'</h4><hr><p><strong>Precaution:</strong> '+prec+'</p><p><strong>Storage:</strong> '+store+'</p><p><strong>Usage:</strong> '+usage+'</p>';
+    $('#chemDetailBody').html(html);
+    $('#chemDetailModal').modal('show');
+});
+
+// Emergency detail with checklist and simulation
+$(document).on('click', '.emergency-detail', function(e){
+    e.preventDefault();
+    var type = $(this).data('emergency');
+    var html = '';
+    if(type === 'acidSpill'){
+        html = '<h4>Acid Spill on Floor</h4><ul class="emergency-checklist"><li>Alert people nearby & evacuate area</li><li>Wear acid-resistant gloves, goggles, lab coat</li><li>Neutralize spill with sodium bicarbonate (baking soda)</li><li>Scoop neutralized material into hazardous waste bag</li><li>Clean area with water and wipe dry</li><li>Dispose according to lab protocol</li></ul><br><button class="simulate-btn" onclick="simulateEmergency(\'acidSpill\')">Start Simulation (Step-by-Step)</button>';
+    } else if(type === 'fire'){
+        html = '<h4>Small Chemical Fire</h4><ul class="emergency-checklist"><li>Activate nearest fire alarm</li><li>If safe, use fire blanket or dry sand to smother flames</li><li>Do NOT use water on flammable liquid fires</li><li>Evacuate if fire grows beyond small size</li><li>Call emergency services</li><li>After fire, ventilate area</li></ul><br><button class="simulate-btn" onclick="simulateEmergency(\'fire\')">Start Simulation (Step-by-Step)</button>';
+    } else if(type === 'skinSplash'){
+        html = '<h4>Chemical Splash on Skin/Eyes</h4><ul class="emergency-checklist"><li>Immediately rinse affected area with copious water</li><li>For eyes: use eyewash station for at least 15 minutes</li><li>Remove contaminated clothing while rinsing</li><li>Do not apply neutralizing chemicals</li><li>Seek medical attention</li><li>Report incident to lab supervisor</li></ul><br><button class="simulate-btn" onclick="simulateEmergency(\'skinSplash\')">Start Simulation (Step-by-Step)</button>';
+    }
+    $('#emergencyBody').html(html);
+    $('#emergencyModal').modal('show');
+});
+
+// Simulation function (simple alert-based demo)
+function simulateEmergency(type){
+    let steps = [];
+    if(type === 'acidSpill'){
+        steps = ["Step 1: Alert everyone in the lab and evacuate area.", "Step 2: Put on acid-resistant gloves and goggles.", "Step 3: Apply sodium bicarbonate from spill kit.", "Step 4: Wait for neutralization (fizzing stops).", "Step 5: Scoop up residue into hazardous waste bag.", "Step 6: Clean surface with water and dry."];
+    } else if(type === 'fire'){
+        steps = ["Step 1: Pull fire alarm.", "Step 2: Grab fire blanket or dry sand.", "Step 3: Smother the fire, don't fan it.", "Step 4: If fire persists, evacuate immediately.", "Step 5: Call 999 from safe location."];
+    } else if(type === 'skinSplash'){
+        steps = ["Step 1: Immediately go to eyewash station or safety shower.", "Step 2: Flush affected area for 15 minutes.", "Step 3: Remove contaminated clothing while rinsing.", "Step 4: Do not apply any ointment.", "Step 5: Report and seek medical help."];
+    }
+    let msg = "SIMULATION:\n" + steps.join("\n");
+    alert(msg);
+}
+
+// Smooth scroll for anchor links
+$(document).ready(function(){
+    $(".scroll-nav a, .theme-btn-one, .banner-btn, .banner-btn-two").on('click', function(event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 80
+            }, 800);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
