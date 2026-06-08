@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Lab-Ready | Emergency SOP & Simulation</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/color.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+<style>
+/* Emergency custom styles */
+.emergency-grid {
+    padding: 40px 0 80px;
+}
+.filter-bar {
+    margin: 30px 0 40px;
+    text-align: center;
+}
+.filter-btn {
+    display: inline-block;
+    background: #f0f4f8;
+    color: #1a2b4c;
+    border: none;
+    padding: 8px 24px;
+    margin: 5px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: #1a2b4c;
+    color: #fff;
+}
+.emergency-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 40px; /* increased spacing */
+    overflow: hidden;
+    text-align: center;
+    padding: 25px 15px;
+    border-top: 4px solid #e74c3c;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.emergency-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+/* Video thumbnail inside card */
+.card-video {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.card-video img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.card-video img:hover {
+    transform: scale(1.02);
+}
+.emergency-icon {
+    font-size: 56px;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+.emergency-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.emergency-badge {
+    display: inline-block;
+    background: #fdecea;
+    color: #e74c3c;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.emergency-card p {
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+.btn-emergency {
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    align-self: center;
+}
+.btn-emergency:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+.loader-wrap {
+    display: none;
+}
+/* Hero video background */
+.page-title {
+    position: relative;
+    overflow: hidden;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-title .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.page-title .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+.page-title .auto-container {
+    position: relative;
+    z-index: 2;
+}
+/* Simulation modal */
+.sim-step-progress {
+    margin-bottom: 20px;
+}
+.progress {
+    height: 8px;
+    border-radius: 4px;
+}
+.step-content {
+    min-height: 200px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+.step-description {
+    font-size: 18px;
+    line-height: 1.6;
+}
+/* Increase gap between columns */
+.row > [class*="col-"] {
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="boxed_wrapper">
+
+    <!-- preloader (auto-hide) -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">Preloader Close</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="L" class="letters-loading">L</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="b" class="letters-loading">b</span>
+                        <span data-text-preloader="-" class="letters-loading">-</span>
+                        <span data-text-preloader="R" class="letters-loading">R</span>
+                        <span data-text-preloader="e" class="letters-loading">e</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="d" class="letters-loading">d</span>
+                        <span data-text-preloader="y" class="letters-loading">y</span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- search-popup -->
+    <div id="search-popup" class="search-popup">
+        <div class="close-search"><span>x</span></div>
+        <div class="popup-inner">
+            <div class="overlay-layer"></div>
+            <div class="search-form">
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <fieldset>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search emergency procedures..." required>
+                            <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- search-popup end -->
+
+    <!-- main header (same as index) -->
+    <header class="main-header style-four style-five">
+        <div class="header-lower">
+            <div class="outer-box">
+                <div class="logo-box">
+                    <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
+                </div>
+                <div class="menu-area clearfix">
+                    <div class="mobile-nav-toggler">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </div>
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul class="navigation scroll-nav clearfix">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="apparatus.html">Apparatus</a></li>
+                                <li><a href="chemicals.html">Chemicals</a></li>
+                                <li class="current"><a href="emergency.html">Emergency SOP</a></li>
+                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="menu-right-content clearfix">
+                    <li class="search-btn">
+                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                    </li>
+                    <li class="btn-box">
+                        <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left">
+                        <nav class="main-menu clearfix"></nav>
+                    </div>
+                    <ul class="menu-right-content pull-right clearfix">
+                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></div>
+            <div class="menu-outer"></div>
+        </nav>
+    </div>
+
+    <!-- Page Title / Hero with Video Background -->
+    <section class="page-title centred" style="position: relative;">
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-scientist-working-with-chemicals-in-a-lab-32852-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
+                <div class="title">
+                    <h1>Emergency SOP & Simulation</h1>
+                </div>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Emergency SOP</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Heading & Description -->
+    <section class="emergency-grid">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Emergency Response</h6>
+                <h2>Step-by-Step SOPs <br />with Interactive Simulation</h2>
+                <p>Learn how to respond quickly and safely to laboratory emergencies. Select a situation below to view the checklist and practice the procedure interactively.</p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="Chemical Spills">Chemical Spills</button>
+                <button class="filter-btn" data-category="Fire & Burns">Fire & Burns</button>
+                <button class="filter-btn" data-category="Physical Hazards">Physical Hazards</button>
+                <button class="filter-btn" data-category="Medical">Medical</button>
+            </div>
+
+            <!-- Emergency Cards Grid -->
+            <div class="row" id="emergencyCardsContainer">
+                <!-- Cards will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- footer (same as index) -->
+    <footer class="main-footer bg-color-1">
+        <div class="footer-top">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget logo-widget">
+                            <div class="footer-logo">
+                                <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
+                            </div>
+                            <div class="text">
+                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
+                                <ul class="info clearfix">
+                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
+                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
+                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title"><h4>Quick Links</h4></div>
+                            <div class="widget-content">
+                                <ul class="links-list clearfix">
+                                    <li><a href="apparatus.html">Apparatus</a></li>
+                                    <li><a href="chemicals.html">Chemicals</a></li>
+                                    <li><a href="emergency.html">Emergency SOP</a></li>
+                                    <li><a href="videos.html">Simulations</a></li>
+                                    <li><a href="index.html#about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget subscribe-widget">
+                            <div class="widget-title"><h4>For Students</h4></div>
+                            <div class="widget-content">
+                                <p>Learn lab safety and management interactively.</p>
+                                <form action="#" method="post" class="subscribe-form">
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <button type="submit"><i class="icon-27"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom centred">
+            <div class="auto-container">
+                <div class="copyright">
+                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
+</div>
+
+<!-- Modal for simulation wizard -->
+<div class="modal fade" id="simulationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #e74c3c; color: white;">
+                <h5 class="modal-title" id="modalTitle">Emergency Simulation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="sim-step-progress">
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                </div>
+                <div class="step-content" id="stepContent">
+                    <p class="step-description">Loading steps...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="resetSimBtn">Reset</button>
+                <button type="button" class="btn btn-danger" id="nextStepBtn">Next Step <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/nav-tool.js"></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+<script src="assets/js/script.js"></script>
+
+<script>
+// Hide preloader after page load
+window.addEventListener('load', function() {
+    var preloader = document.querySelector('.loader-wrap');
+    if (preloader) preloader.style.display = 'none';
+});
+
+// Emergency data with categories, steps, and video thumbnails (replace URLs as needed)
+const emergencies = [
+    { id: "acidSpill", title: "Acid Spill on Floor", category: "Chemical Spills", icon: "fa-exclamation-triangle", badge: "Corrosive", description: "Neutralize with sodium bicarbonate, contain spill, dispose safely.", videoThumb: "https://img.youtube.com/vi/ZPnrWnIf6oQ/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/ZPnrWnIf6oQ", steps: ["Alert people nearby & evacuate area.", "Wear acid-resistant gloves, goggles, lab coat.", "Neutralize spill with sodium bicarbonate (baking soda).", "Scoop neutralized material into hazardous waste bag.", "Clean area with water and wipe dry.", "Dispose according to lab protocol."] },
+    { id: "skinSplash", title: "Chemical Splash on Skin", category: "Medical", icon: "fa-hand-holding-water", badge: "Irritant", description: "Immediately rinse with copious water for 15 minutes.", videoThumb: "https://img.youtube.com/vi/2yV-lT4_sng/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/2yV-lT4_sng", steps: ["Immediately go to safety shower or nearest sink.", "Remove contaminated clothing while rinsing.", "Flush affected skin with gentle water for at least 15 minutes.", "Do not apply any ointment or neutralizing chemicals.", "Report incident to lab supervisor.", "Seek medical attention."] },
+    { id: "eyeSplash", title: "Chemical Splash in Eyes", category: "Medical", icon: "fa-eye", badge: "Emergency", description: "Use eyewash station for 15+ minutes, keep eyelids open.", videoThumb: "https://img.youtube.com/vi/4aCj8sRw6VY/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/4aCj8sRw6VY", steps: ["Immediately go to eyewash station.", "Hold eyelids open with fingers.", "Rinse eyes continuously for at least 15 minutes.", "Rotate eyes to ensure thorough rinsing.", "Remove contact lenses if present (if possible).", "Seek immediate medical evaluation."] },
+    { id: "fire", title: "Fire Emergency", category: "Fire & Burns", icon: "fa-fire", badge: "Flammable", description: "Activate alarm, smother small fires, evacuate if large.", videoThumb: "https://img.youtube.com/vi/mcCyKKp6S_M/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/mcCyKKp6S_M", steps: ["Activate nearest fire alarm.", "If small fire: use fire blanket or dry sand to smother flames.", "Do NOT use water on flammable liquid fires.", "If fire grows, evacuate immediately.", "Call emergency services from safe location.", "Assemble at designated meeting point."] },
+    { id: "clothingFire", title: "Clothing Catches Fire", category: "Fire & Burns", icon: "fa-tshirt", badge: "Critical", description: "STOP, DROP, and ROLL. Use safety shower.", videoThumb: "https://img.youtube.com/vi/5HfQwJgXQ2o/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/5HfQwJgXQ2o", steps: ["STOP moving immediately.", "DROP to the ground.", "ROLL over and over to smother flames.", "Use safety shower if available.", "Remove burned clothing (unless stuck to skin).", "Call for medical help."] },
+    { id: "toxicSpill", title: "Toxic Chemical Spill", category: "Chemical Spills", icon: "fa-skull-crossbones", badge: "Toxic", description: "Evacuate, ventilate, call emergency response.", videoThumb: "https://img.youtube.com/vi/ZPnrWnIf6oQ/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/ZPnrWnIf6oQ", steps: ["Evacuate the area immediately.", "Close doors to contain spill if safe.", "Ventilate the area (open windows, turn on fume hood).", "Do not attempt cleanup unless trained.", "Call emergency response team.", "Seek medical attention if exposed."] },
+    { id: "brokenGlass", title: "Broken Glassware", category: "Physical Hazards", icon: "fa-glass-martini-alt", badge: "Physical hazard", description: "Use dustpan & brush, dispose in sharps container.", videoThumb: "https://img.youtube.com/vi/0cPJqZ4z5F4/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/0cPJqZ4z5F4", steps: ["Wear cut-resistant gloves.", "Use dustpan and brush – never hands.", "Place broken glass in designated sharps container.", "Clean area with damp paper towel to catch small fragments.", "Dispose of towels appropriately.", "Report incident to supervisor."] },
+    { id: "inhalation", title: "Chemical Inhalation", category: "Medical", icon: "fa-lungs", badge: "Toxic fume", description: "Move to fresh air immediately, administer oxygen if needed.", videoThumb: "https://img.youtube.com/vi/2yV-lT4_sng/mqdefault.jpg", videoUrl: "https://www.youtube.com/embed/2yV-lT4_sng", steps: ["Move victim to fresh air immediately.", "Loosen tight clothing.", "If not breathing, give artificial respiration (only if trained).", "Administer oxygen if available.", "Keep victim warm and at rest.", "Seek immediate medical attention."] }
+];
+
+// Render cards with filter, including video thumbnail
+function renderCards(filterCategory = "all") {
+    const container = document.getElementById("emergencyCardsContainer");
+    container.innerHTML = "";
+    const filtered = emergencies.filter(item => filterCategory === "all" || item.category === filterCategory);
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center"><p>No emergencies found.</p></div>';
+        return;
+    }
+    filtered.forEach(emerg => {
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6 col-sm-12";
+        col.innerHTML = `
+            <div class="emergency-card">
+                <div class="card-video">
+                    <a href="${emerg.videoUrl}" data-fancybox="emergency-videos" data-caption="${emerg.title}">
+                        <img src="${emerg.videoThumb}" alt="Video thumbnail for ${emerg.title}">
+                    </a>
+                </div>
+                <div class="emergency-icon"><i class="fas ${emerg.icon}"></i></div>
+                <h4>${emerg.title}</h4>
+                <div class="emergency-badge">${emerg.badge}</div>
+                <p>${emerg.description}</p>
+                <button class="btn-emergency" data-id="${emerg.id}">View SOP & Simulate</button>
+            </div>
+        `;
+        container.appendChild(col);
+    });
+    // attach event listeners to detail buttons
+    document.querySelectorAll(".btn-emergency").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const id = this.getAttribute("data-id");
+            const emerg = emergencies.find(e => e.id === id);
+            if (emerg) startSimulation(emerg);
+        });
+    });
+    // Initialize fancybox for videos
+    if ($.fancybox) {
+        $.fancybox.defaults.buttons = ["zoom","slideShow","fullScreen","thumbs","close"];
+        $('[data-fancybox="emergency-videos"]').fancybox();
+    }
+}
+
+// Filter logic
+let currentCategory = "all";
+function updateDisplay() {
+    renderCards(currentCategory);
+}
+document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active");
+        currentCategory = this.getAttribute("data-category");
+        updateDisplay();
+    });
+});
+
+// Simulation wizard (same as before)
+let currentSim = null;
+let currentStep = 0;
+let totalSteps = 0;
+
+function startSimulation(emergency) {
+    currentSim = emergency;
+    currentStep = 0;
+    totalSteps = emergency.steps.length;
+    updateModalUI();
+    $("#simulationModal").modal("show");
+}
+
+function updateModalUI() {
+    if (!currentSim) return;
+    document.getElementById("modalTitle").innerHTML = `<i class="fas ${currentSim.icon}"></i> ${currentSim.title}`;
+    const stepContent = document.getElementById("stepContent");
+    if (currentStep < totalSteps) {
+        stepContent.innerHTML = `
+            <div class="step-description">
+                <strong>Step ${currentStep + 1} of ${totalSteps}</strong>
+                <p style="margin-top: 15px; font-size: 18px;">${currentSim.steps[currentStep]}</p>
+            </div>
+        `;
+        const percent = ((currentStep + 1) / totalSteps) * 100;
+        const progressBar = document.querySelector("#simulationModal .progress-bar");
+        progressBar.style.width = percent + "%";
+        progressBar.setAttribute("aria-valuenow", percent);
+        progressBar.innerText = Math.floor(percent) + "%";
+    } else {
+        stepContent.innerHTML = `
+            <div class="step-description text-center">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: #28a745;"></i>
+                <h4>Simulation Complete!</h4>
+                <p>You have successfully learned the procedure for ${currentSim.title}.</p>
+                <p>Stay safe in the lab!</p>
+            </div>
+        `;
+        document.querySelector("#simulationModal .progress-bar").style.width = "100%";
+        document.querySelector("#simulationModal .progress-bar").innerText = "100%";
+    }
+}
+
+document.getElementById("nextStepBtn").addEventListener("click", function() {
+    if (!currentSim) return;
+    if (currentStep < totalSteps) {
+        currentStep++;
+        updateModalUI();
+    } else {
+        $("#simulationModal").modal("hide");
+    }
+});
+
+document.getElementById("resetSimBtn").addEventListener("click", function() {
+    if (!currentSim) return;
+    currentStep = 0;
+    updateModalUI();
+});
+
+$("#simulationModal").on("hidden.bs.modal", function() {
+    currentSim = null;
+    currentStep = 0;
+});
+
+// Initial render
+renderCards();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Lab-Ready | Laboratory Apparatus</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/color.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+<style>
+/* Custom styles */
+.apparatus-grid {
+    padding: 40px 0 80px;
+}
+.filter-bar {
+    margin: 30px 0 40px;
+    text-align: center;
+}
+.filter-btn {
+    display: inline-block;
+    background: #f0f4f8;
+    color: #1a2b4c;
+    border: none;
+    padding: 8px 24px;
+    margin: 5px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: #1a2b4c;
+    color: #fff;
+}
+.search-box {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+.search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 40px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+.apparatus-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 30px;
+    overflow: hidden;
+    text-align: center;
+    padding: 25px 15px;
+}
+.apparatus-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.apparatus-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.apparatus-img:hover {
+    transform: scale(1.02);
+}
+.apparatus-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.category-badge {
+    display: inline-block;
+    background: #eef2f5;
+    color: #1a5f7a;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+.btn-details {
+    background: transparent;
+    border: 1px solid #1a5f7a;
+    color: #1a5f7a;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-details:hover {
+    background: #1a5f7a;
+    color: #fff;
+}
+.modal-body p {
+    margin-bottom: 10px;
+}
+.loader-wrap {
+    display: none;
+}
+
+/* Hero section with video background - taller height */
+.page-title {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-title .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.page-title .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+.page-title .auto-container {
+    position: relative;
+    z-index: 2;
+}
+</style>
+</head>
+<body>
+
+<div class="boxed_wrapper">
+
+    <!-- preloader (auto-hide) -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">Preloader Close</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="L" class="letters-loading">L</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="b" class="letters-loading">b</span>
+                        <span data-text-preloader="-" class="letters-loading">-</span>
+                        <span data-text-preloader="R" class="letters-loading">R</span>
+                        <span data-text-preloader="e" class="letters-loading">e</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="d" class="letters-loading">d</span>
+                        <span data-text-preloader="y" class="letters-loading">y</span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- search-popup -->
+    <div id="search-popup" class="search-popup">
+        <div class="close-search"><span>x</span></div>
+        <div class="popup-inner">
+            <div class="overlay-layer"></div>
+            <div class="search-form">
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <fieldset>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search apparatus..." required>
+                            <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- search-popup end -->
+
+    <!-- main header -->
+    <header class="main-header style-four style-five">
+        <div class="header-lower">
+            <div class="outer-box">
+                <div class="logo-box">
+                    <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
+                </div>
+                <div class="menu-area clearfix">
+                    <div class="mobile-nav-toggler">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </div>
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul class="navigation scroll-nav clearfix">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="current"><a href="apparatus.html">Apparatus</a></li>
+                                <li><a href="chemicals.html">Chemicals</a></li>
+                                <li><a href="emergency.html">Emergency SOP</a></li>
+                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="menu-right-content clearfix">
+                    <li class="search-btn">
+                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                    </li>
+                    <li class="btn-box">
+                        <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left">
+                        <nav class="main-menu clearfix"></nav>
+                    </div>
+                    <ul class="menu-right-content pull-right clearfix">
+                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></div>
+            <div class="menu-outer"></div>
+        </nav>
+    </div>
+
+    <!-- Page Title / Hero with Video Background -->
+    <section class="page-title centred" style="position: relative;">
+        <video class="video-background" autoplay loop muted playsinline>
+            <!-- Free stock video from Mixkit (lab scientist) – client can replace with own video -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-scientist-working-with-chemicals-in-a-lab-32852-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
+                <div class="title">
+                    <h1>Laboratory Apparatus</h1>
+                </div>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Apparatus</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <section class="apparatus-grid">
+        <div class="auto-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search apparatus... (e.g., Beaker, Burette)">
+            </div>
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="Glassware">Glassware</button>
+                <button class="filter-btn" data-category="Support & Handling">Support & Handling</button>
+                <button class="filter-btn" data-category="Heating">Heating</button>
+                <button class="filter-btn" data-category="Measuring">Measuring</button>
+                <button class="filter-btn" data-category="Safety Equipment">Safety Equipment</button>
+            </div>
+            <div class="row" id="apparatusContainer">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="main-footer bg-color-1">
+        <div class="footer-top">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget logo-widget">
+                            <div class="footer-logo">
+                                <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
+                            </div>
+                            <div class="text">
+                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
+                                <ul class="info clearfix">
+                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
+                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
+                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title"><h4>Quick Links</h4></div>
+                            <div class="widget-content">
+                                <ul class="links-list clearfix">
+                                    <li><a href="apparatus.html">Apparatus</a></li>
+                                    <li><a href="chemicals.html">Chemicals</a></li>
+                                    <li><a href="emergency.html">Emergency SOP</a></li>
+                                    <li><a href="videos.html">Simulations</a></li>
+                                    <li><a href="index.html#about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget subscribe-widget">
+                            <div class="widget-title"><h4>For Students</h4></div>
+                            <div class="widget-content">
+                                <p>Learn lab safety and management interactively.</p>
+                                <form action="#" method="post" class="subscribe-form">
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <button type="submit"><i class="icon-27"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom centred">
+            <div class="auto-container">
+                <div class="copyright">
+                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
+</div>
+
+<!-- Modal for details -->
+<div class="modal fade" id="apparatusDetailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Apparatus Details</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- dynamic -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/nav-tool.js"></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+<script src="assets/js/script.js"></script>
+
+<script>
+// Hide preloader after page load
+window.addEventListener('load', function() {
+    var preloader = document.querySelector('.loader-wrap');
+    if (preloader) preloader.style.display = 'none';
+});
+
+// APPARATUS DATA (same as before)
+const apparatusData = [
+    { name: "Beaker", category: "Glassware", storage: "Stack upside down on drying rack.", usage: "Mixing, heating liquids. Not for precise volume.", type: "Borosilicate glass, plastic. Sizes: 50-1000mL." },
+    { name: "Erlenmeyer Flask (Conical Flask)", category: "Glassware", storage: "On shelves, avoid rim chipping.", usage: "Swirling liquids, titration.", type: "Conical shape, narrow neck." },
+    { name: "Volumetric Flask", category: "Glassware", storage: "Stoppered, upright in cabinet.", usage: "Precise solution preparation.", type: "Glass, single calibration mark." },
+    { name: "Boiling Flask", category: "Glassware", storage: "On padded shelves.", usage: "Heating liquids to boiling.", type: "Round bottom, flat bottom available." },
+    { name: "Test Tube", category: "Glassware", storage: "In test tube racks.", usage: "Small reactions, heating.", type: "Borosilicate, rimmed." },
+    { name: "Test Tube Rack", category: "Glassware", storage: "On shelf, dry.", usage: "Holding test tubes upright.", type: "Wood, plastic, wire." },
+    { name: "Graduated Cylinder", category: "Glassware", storage: "Upright, away from edge.", usage: "Measuring liquid volumes.", type: "Glass or plastic, various sizes." },
+    { name: "Funnel", category: "Glassware", storage: "Nested, on shelf.", usage: "Pouring liquids into narrow openings.", type: "Glass, plastic, porcelain." },
+    { name: "Filter Funnel", category: "Glassware", storage: "With filter paper nearby.", usage: "Filtration with filter paper.", type: "Angled stem." },
+    { name: "Burette", category: "Glassware", storage: "Hang vertically or lay flat.", usage: "Precise volume dispensing for titration.", type: "Glass, PTFE stopcock." },
+    { name: "Pipette", category: "Glassware", storage: "Vertical in pipette stand.", usage: "Transfer exact liquid volumes.", type: "Volumetric, serological, micropipette." },
+    { name: "Dropper", category: "Glassware", storage: "In container, upright.", usage: "Transfer small drops.", type: "Glass or plastic." },
+    { name: "Watch Glass", category: "Glassware", storage: "Stacked in cabinet.", usage: "Covering beakers, evaporating small amounts.", type: "Concave glass." },
+    { name: "Glass Stirring Rod", category: "Glassware", storage: "In beaker or drawer.", usage: "Stirring solutions.", type: "Solid glass rod." },
+    { name: "Evaporating Dish", category: "Glassware", storage: "Stacked carefully.", usage: "Evaporating liquids to leave solids.", type: "Porcelain or glass." },
+    { name: "Crucible", category: "Glassware", storage: "With lid, in desiccator.", usage: "Heating solids to high temperatures.", type: "Porcelain, metal." },
+    { name: "Desiccator", category: "Glassware", storage: "On bench with lid sealed.", usage: "Drying substances.", type: "Glass with airtight lid." },
+    { name: "Distillation Apparatus", category: "Glassware", storage: "Disassembled in padded box.", usage: "Separating liquids by boiling point.", type: "Glass set with condenser." },
+    { name: "Retort Stand (Ring Stand)", category: "Support & Handling", storage: "Upright on shelf.", usage: "Supporting clamps and apparatus.", type: "Metal rod + heavy base." },
+    { name: "Iron Ring", category: "Support & Handling", storage: "Hanging on pegboard.", usage: "Holding wire gauze or clay triangle.", type: "Cast iron with clamp." },
+    { name: "Clamps and Holders", category: "Support & Handling", storage: "Organised by size.", usage: "Holding burettes, flasks.", type: "Metal with rubber grips." },
+    { name: "Test Tube Holder", category: "Support & Handling", storage: "In drawer.", usage: "Holding test tube over flame.", type: "Metal spring clamp." },
+    { name: "Crucible Tongs", category: "Support & Handling", storage: "Hanging.", usage: "Handling hot crucibles.", type: "Stainless steel." },
+    { name: "Forceps", category: "Support & Handling", storage: "In drawer.", usage: "Picking small items.", type: "Metal, plastic tips." },
+    { name: "Spatula", category: "Support & Handling", storage: "In drawer or beaker.", usage: "Transferring solids.", type: "Stainless steel, porcelain." },
+    { name: "Scoopula", category: "Support & Handling", storage: "In drawer.", usage: "Scooping powders.", type: "Metal." },
+    { name: "Wire Gauze", category: "Support & Handling", storage: "Flat on shelf.", usage: "Supporting beakers on tripod.", type: "Metal mesh with ceramic centre." },
+    { name: "Bunsen Burner", category: "Heating", storage: "Securely on base, gas hose attached.", usage: "Heating, sterilizing, combustion.", type: "Adjustable air hole." },
+    { name: "Hot Plate", category: "Heating", storage: "On bench, cord wrapped.", usage: "Heating liquids indirectly.", type: "Electric, ceramic top." },
+    { name: "Water Bath", category: "Heating", storage: "Empty, dry.", usage: "Incubation at constant temperature.", type: "Electric or simple container." },
+    { name: "Heating Mantle", category: "Heating", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, electric." },
+    { name: "Drying Oven", category: "Heating", storage: "On bench, vented.", usage: "Drying glassware or samples.", type: "Electric, temperature controlled." },
+    { name: "Analytical Balance", category: "Measuring", storage: "On vibration-free bench, levelled.", usage: "Precise mass measurement (0.0001g).", type: "Digital, enclosed draft shield." },
+    { name: "Electronic Balance", category: "Measuring", storage: "On flat surface.", usage: "Mass measurement (0.01g - 0.1g).", type: "Digital." },
+    { name: "Thermometer", category: "Measuring", storage: "In protective case.", usage: "Measuring temperature.", type: "Mercury, alcohol, digital." },
+    { name: "pH Meter", category: "Measuring", storage: "Electrode stored in buffer.", usage: "Measuring pH of solutions.", type: "Electronic with probe." },
+    { name: "Conductivity Meter", category: "Measuring", storage: "Electrode clean and dry.", usage: "Measuring electrical conductivity.", type: "Portable or benchtop." },
+    { name: "Spectrophotometer", category: "Measuring", storage: "Covered, dust-free.", usage: "Measuring light absorbance.", type: "UV-Vis, single beam." },
+    { name: "Safety Goggles", category: "Safety Equipment", storage: "Clean, in case.", usage: "Protecting eyes from splashes.", type: "Chemical splash goggles." },
+    { name: "Laboratory Coat", category: "Safety Equipment", storage: "Hanging.", usage: "Protecting skin and clothing.", type: "Cotton, polyester." },
+    { name: "Chemical-Resistant Gloves", category: "Safety Equipment", storage: "Dry, away from sunlight.", usage: "Handling hazardous chemicals.", type: "Nitrile, neoprene." },
+    { name: "Fume Hood", category: "Safety Equipment", storage: "Working area clear, sash down when not in use.", usage: "Removing toxic fumes.", type: "Ducted or recirculating." },
+    { name: "Fire Extinguisher", category: "Safety Equipment", storage: "Mounted on wall, accessible.", usage: "Putting out small fires.", type: "Class ABC, CO2." },
+    { name: "Eyewash Station", category: "Safety Equipment", storage: "Unobstructed, tested weekly.", usage: "Flushing eyes after chemical splash.", type: "Plumbed or portable." },
+    { name: "Safety Shower", category: "Safety Equipment", storage: "Clear access.", usage: "Emergency body rinse.", type: "Plumbed." },
+    { name: "First Aid Kit", category: "Safety Equipment", storage: "Visible, accessible.", usage: "Treating minor injuries.", type: "Wall-mounted box." },
+    { name: "Chemical Spill Kit", category: "Safety Equipment", storage: "Near chemical storage.", usage: "Containing and neutralising spills.", type: "Contains absorbents, neutralisers, PPE." }
+];
+
+function renderCards(filterCategory = "all", searchTerm = "") {
+    const container = document.getElementById("apparatusContainer");
+    container.innerHTML = "";
+    const filtered = apparatusData.filter(item => {
+        const matchesCategory = (filterCategory === "all" || item.category === filterCategory);
+        const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center"><p>No apparatus found.</p></div>';
+        return;
+    }
+    filtered.forEach(item => {
+        const placeholderImg = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,15))}`;
+        const fullImg = `https://placehold.co/800x800?text=${encodeURIComponent(item.name)}`;
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6 col-sm-12";
+        col.innerHTML = `
+            <div class="apparatus-card">
+                <a href="${fullImg}" data-fancybox="apparatus-gallery" data-caption="${item.name}">
+                    <img src="${placeholderImg}" alt="${item.name}" class="apparatus-img">
+                </a>
+                <h4>${item.name}</h4>
+                <div class="category-badge">${item.category}</div>
+                <button class="btn-details" data-name="${item.name}" data-storage="${item.storage}" data-usage="${item.usage}" data-type="${item.type}">View Details</button>
+            </div>
+        `;
+        container.appendChild(col);
+    });
+    document.querySelectorAll(".btn-details").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const name = this.getAttribute("data-name");
+            const storage = this.getAttribute("data-storage");
+            const usage = this.getAttribute("data-usage");
+            const type = this.getAttribute("data-type");
+            document.getElementById("modalBody").innerHTML = `
+                <h4>${name}</h4>
+                <hr>
+                <p><strong>Storage:</strong> ${storage}</p>
+                <p><strong>Usage:</strong> ${usage}</p>
+                <p><strong>Type/Material:</strong> ${type}</p>
+            `;
+            $("#apparatusDetailModal").modal("show");
+        });
+    });
+    if ($.fancybox) {
+        $.fancybox.defaults.buttons = ["zoom","slideShow","fullScreen","thumbs","close"];
+        $('[data-fancybox="apparatus-gallery"]').fancybox();
+    }
+}
+
+let currentCategory = "all";
+let currentSearch = "";
+
+function updateDisplay() {
+    renderCards(currentCategory, currentSearch);
+}
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active");
+        currentCategory = this.getAttribute("data-category");
+        updateDisplay();
+    });
+});
+
+document.getElementById("searchInput").addEventListener("keyup", function(e) {
+    currentSearch = this.value;
+    updateDisplay();
+});
+
+renderCards();
+</script>
+
+</body>
+</html>

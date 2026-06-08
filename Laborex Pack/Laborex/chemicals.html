@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Lab-Ready | Common Chemicals</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/color.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+<style>
+/* Same styles as apparatus, with slight badge color change */
+.chemicals-grid {
+    padding: 40px 0 80px;
+}
+.filter-bar {
+    margin: 30px 0 40px;
+    text-align: center;
+}
+.filter-btn {
+    display: inline-block;
+    background: #f0f4f8;
+    color: #1a2b4c;
+    border: none;
+    padding: 8px 24px;
+    margin: 5px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: #1a2b4c;
+    color: #fff;
+}
+.search-box {
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+.search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 40px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+.chemical-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 30px;
+    overflow: hidden;
+    text-align: center;
+    padding: 25px 15px;
+}
+.chemical-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.chemical-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.chemical-img:hover {
+    transform: scale(1.02);
+}
+.chemical-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.category-badge {
+    display: inline-block;
+    background: #fdf0e0;
+    color: #e67e22;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+.btn-details {
+    background: transparent;
+    border: 1px solid #e67e22;
+    color: #e67e22;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-details:hover {
+    background: #e67e22;
+    color: #fff;
+}
+.modal-body p {
+    margin-bottom: 10px;
+}
+.loader-wrap {
+    display: none;
+}
+.page-title {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-title .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+.page-title .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+.page-title .auto-container {
+    position: relative;
+    z-index: 2;
+}
+</style>
+</head>
+<body>
+
+<div class="boxed_wrapper">
+
+    <!-- preloader (auto-hide) -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">Preloader Close</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="L" class="letters-loading">L</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="b" class="letters-loading">b</span>
+                        <span data-text-preloader="-" class="letters-loading">-</span>
+                        <span data-text-preloader="R" class="letters-loading">R</span>
+                        <span data-text-preloader="e" class="letters-loading">e</span>
+                        <span data-text-preloader="a" class="letters-loading">a</span>
+                        <span data-text-preloader="d" class="letters-loading">d</span>
+                        <span data-text-preloader="y" class="letters-loading">y</span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- search-popup -->
+    <div id="search-popup" class="search-popup">
+        <div class="close-search"><span>x</span></div>
+        <div class="popup-inner">
+            <div class="overlay-layer"></div>
+            <div class="search-form">
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <fieldset>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search chemicals..." required>
+                            <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- search-popup end -->
+
+    <!-- main header -->
+    <header class="main-header style-four style-five">
+        <div class="header-lower">
+            <div class="outer-box">
+                <div class="logo-box">
+                    <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
+                </div>
+                <div class="menu-area clearfix">
+                    <div class="mobile-nav-toggler">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </div>
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul class="navigation scroll-nav clearfix">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="apparatus.html">Apparatus</a></li>
+                                <li class="current"><a href="chemicals.html">Chemicals</a></li>
+                                <li><a href="emergency.html">Emergency SOP</a></li>
+                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="menu-right-content clearfix">
+                    <li class="search-btn">
+                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                    </li>
+                    <li class="btn-box">
+                        <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left">
+                        <nav class="main-menu clearfix"></nav>
+                    </div>
+                    <ul class="menu-right-content pull-right clearfix">
+                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></div>
+            <div class="menu-outer"></div>
+        </nav>
+    </div>
+
+    <!-- Page Title / Hero with Video Background -->
+    <section class="page-title centred" style="position: relative;">
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-scientist-working-with-chemicals-in-a-lab-32852-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
+                <div class="title">
+                    <h1>Common Chemicals</h1>
+                </div>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Chemicals</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <section class="chemicals-grid">
+        <div class="auto-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search chemicals... (e.g., HCl, Ethanol)">
+            </div>
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="Acids">Acids</button>
+                <button class="filter-btn" data-category="Bases">Bases</button>
+                <button class="filter-btn" data-category="Salts">Salts</button>
+                <button class="filter-btn" data-category="Indicators">Indicators</button>
+                <button class="filter-btn" data-category="Solvents">Solvents</button>
+                <button class="filter-btn" data-category="Other">Other</button>
+            </div>
+            <div class="row" id="chemicalsContainer">
+                <!-- Cards injected -->
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="main-footer bg-color-1">
+        <!-- same footer as apparatus -->
+        <div class="footer-top">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget logo-widget">
+                            <div class="footer-logo">
+                                <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
+                            </div>
+                            <div class="text">
+                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
+                                <ul class="info clearfix">
+                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
+                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
+                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title"><h4>Quick Links</h4></div>
+                            <div class="widget-content">
+                                <ul class="links-list clearfix">
+                                    <li><a href="apparatus.html">Apparatus</a></li>
+                                    <li><a href="chemicals.html">Chemicals</a></li>
+                                    <li><a href="emergency.html">Emergency SOP</a></li>
+                                    <li><a href="videos.html">Simulations</a></li>
+                                    <li><a href="index.html#about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget subscribe-widget">
+                            <div class="widget-title"><h4>For Students</h4></div>
+                            <div class="widget-content">
+                                <p>Learn lab safety and management interactively.</p>
+                                <form action="#" method="post" class="subscribe-form">
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <button type="submit"><i class="icon-27"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom centred">
+            <div class="auto-container">
+                <div class="copyright">
+                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="chemicalDetailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chemical Details</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/nav-tool.js"></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+<script src="assets/js/script.js"></script>
+
+<script>
+window.addEventListener('load', () => { document.querySelector('.loader-wrap').style.display = 'none'; });
+
+const chemicalsData = [
+    { name: "Hydrochloric Acid (HCl)", category: "Acids", precaution: "Corrosive, causes burns. Use fume hood, wear gloves and goggles. Always add acid to water.", storage: "Acid cabinet, separate from bases, in ventilated area.", usage: "pH adjustment, cleaning metals, titration." },
+    { name: "Sulfuric Acid (H₂SO₄)", category: "Acids", precaution: "Extremely corrosive, produces heat when mixed with water. Always add acid to water. Use fume hood.", storage: "Acid resistant tray, away from organics.", usage: "Dehydrating agent, electrolyte in batteries, catalyst." },
+    { name: "Nitric Acid (HNO₃)", category: "Acids", precaution: "Strong oxidizer, corrosive. Use in fume hood, avoid contact with organics.", storage: "Cool, dark place, separate from flammables.", usage: "Nitration reactions, etching metals." },
+    { name: "Acetic Acid (CH₃COOH)", category: "Acids", precaution: "Irritant, flammable when concentrated. Use ventilation.", storage: "In flammables cabinet away from oxidizers.", usage: "Organic synthesis, vinegar substitute, buffer." },
+    { name: "Sodium Hydroxide (NaOH)", category: "Bases", precaution: "Causes severe burns, hygroscopic. Wear chemical-resistant gloves, eye protection.", storage: "In polyethylene bottles, away from acids, tightly closed.", usage: "Base for titrations, cleaning glassware, saponification." },
+    { name: "Potassium Hydroxide (KOH)", category: "Bases", precaution: "Similar to NaOH, very corrosive. Avoid dust inhalation.", storage: "Dry, cool place, in plastic containers.", usage: "Absorbent for CO₂, soap making." },
+    { name: "Aqueous Ammonia (NH₃)", category: "Bases", precaution: "Toxic, irritant. Use fume hood, avoid mixing with bleach.", storage: "Cool, ventilated area, tightly sealed.", usage: "Base for reactions, cleaning agent." },
+    { name: "Sodium Chloride (NaCl)", category: "Salts", precaution: "Generally safe, avoid large quantities in eyes.", storage: "Dry cabinet, any container.", usage: "Preparation of saline solutions, freezing point depression." },
+    { name: "Copper(II) Sulfate (CuSO₄)", category: "Salts", precaution: "Harmful if swallowed, irritant. Avoid ingestion.", storage: "In closed container, dry area.", usage: "Hydrate experiments, electroplating, fungicide." },
+    { name: "Silver Nitrate (AgNO₃)", category: "Salts", precaution: "Causes skin darkening, corrosive. Light sensitive.", storage: "Dark bottle, locked chemical store.", usage: "Halide testing, silver mirror reaction." },
+    { name: "Potassium Nitrate (KNO₃)", category: "Salts", precaution: "Oxidizer, keep away from flammables.", storage: "Cool, dry place, away from reducing agents.", usage: "Pyrotechnics, oxidizing agent." },
+    { name: "Phenolphthalein", category: "Indicators", precaution: "May be carcinogenic (in some forms). Avoid ingestion.", storage: "In dark bottle, away from acids.", usage: "pH indicator (colourless in acid, pink in base)." },
+    { name: "Methyl Orange", category: "Indicators", precaution: "Stains skin and clothes. Wear gloves.", storage: "In dropper bottle.", usage: "pH indicator (red in acid, yellow in base)." },
+    { name: "Universal Indicator", category: "Indicators", precaution: "Can stain, avoid contact with eyes.", storage: "Refrigerate if solution, keep sealed.", usage: "Rough pH measurement (colour change range)." },
+    { name: "Red Litmus Paper", category: "Indicators", precaution: "Non-hazardous, but avoid ingestion.", storage: "Dry, in original container.", usage: "Test for bases (turns blue)." },
+    { name: "Blue Litmus Paper", category: "Indicators", precaution: "Non-hazardous.", storage: "Dry, away from acids.", usage: "Test for acids (turns red)." },
+    { name: "Distilled Water", category: "Solvents", precaution: "Non-hazardous.", storage: "Room temperature, clean container.", usage: "Solvent, rinsing, preparing solutions." },
+    { name: "Ethanol (C₂H₅OH)", category: "Solvents", precaution: "Flammable, avoid open flames. Use in well-ventilated area.", storage: "Flammables cabinet, cool place.", usage: "Solvent, disinfectant, extraction." },
+    { name: "Methanol (CH₃OH)", category: "Solvents", precaution: "Toxic, can cause blindness. Avoid skin contact and inhalation.", storage: "Flammables cabinet, labelled toxic.", usage: "Solvent, fuel, denaturant." },
+    { name: "Acetone", category: "Solvents", precaution: "Highly flammable, irritant. Use ventilation.", storage: "Flammables cabinet, tightly closed.", usage: "Cleaning glassware, solvent for organic compounds." },
+    { name: "Hydrogen Peroxide (H₂O₂)", category: "Other", precaution: "Oxidizer, can cause burns. Store in dark bottle. Avoid contact with combustibles.", storage: "Cool, dark place, vented cap.", usage: "Disinfectant, bleaching agent." },
+    { name: "Potassium Permanganate (KMnO₄)", category: "Other", precaution: "Strong oxidizer, stains skin purple. Keep from organics.", storage: "In glass container, away from reducing agents.", usage: "Oxidizing agent, water treatment." },
+    { name: "Iodine Solution", category: "Other", precaution: "Toxic, stains. Use gloves.", storage: "Dark bottle, cool place.", usage: "Starch test, disinfectant." },
+    { name: "Calcium Carbonate (CaCO₃)", category: "Other", precaution: "Non-hazardous, but dust may irritate.", storage: "Dry area.", usage: "Antacid, CO₂ source, filler." },
+    { name: "Magnesium Ribbon", category: "Other", precaution: "Flammable, burns bright white. Keep away from flames.", storage: "Dry, covered, away from acids.", usage: "Reaction with acids, combustion demonstration." },
+    { name: "Zinc Granules", category: "Other", precaution: "May produce hydrogen with acids. Avoid inhalation of dust.", storage: "Dry container.", usage: "Reducing agent, hydrogen generation." },
+    { name: "Sulfur Powder", category: "Other", precaution: "Flammable, avoid sparks.", storage: "Cool, dry, away from oxidizers.", usage: "Alloy making, gunpowder." }
+];
+
+function renderCards(filterCategory = "all", searchTerm = "") {
+    const container = document.getElementById("chemicalsContainer");
+    container.innerHTML = "";
+    const filtered = chemicalsData.filter(item => {
+        const matchesCategory = (filterCategory === "all" || item.category === filterCategory);
+        const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+    if (filtered.length === 0) { container.innerHTML = '<div class="col-12 text-center"><p>No chemicals found.</p></div>'; return; }
+    filtered.forEach(item => {
+        const placeholderImg = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,15))}`;
+        const fullImg = `https://placehold.co/800x800?text=${encodeURIComponent(item.name)}`;
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6 col-sm-12";
+        col.innerHTML = `
+            <div class="chemical-card">
+                <a href="${fullImg}" data-fancybox="chemicals-gallery" data-caption="${item.name}">
+                    <img src="${placeholderImg}" alt="${item.name}" class="chemical-img">
+                </a>
+                <h4>${item.name}</h4>
+                <div class="category-badge">${item.category}</div>
+                <button class="btn-details" data-name="${item.name}" data-prec="${item.precaution}" data-store="${item.storage}" data-usage="${item.usage}">View Details</button>
+            </div>
+        `;
+        container.appendChild(col);
+    });
+    document.querySelectorAll(".btn-details").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.getElementById("modalBody").innerHTML = `
+                <h4>${this.getAttribute("data-name")}</h4><hr>
+                <p><strong>Precaution:</strong> ${this.getAttribute("data-prec")}</p>
+                <p><strong>Storage:</strong> ${this.getAttribute("data-store")}</p>
+                <p><strong>Usage:</strong> ${this.getAttribute("data-usage")}</p>
+            `;
+            $("#chemicalDetailModal").modal("show");
+        });
+    });
+    if ($.fancybox) { $.fancybox.defaults.buttons = ["zoom","slideShow","fullScreen","thumbs","close"]; $('[data-fancybox="chemicals-gallery"]').fancybox(); }
+}
+
+let currentCategory = "all", currentSearch = "";
+function update() { renderCards(currentCategory, currentSearch); }
+document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("click", function() {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+    currentCategory = this.getAttribute("data-category");
+    update();
+}));
+document.getElementById("searchInput").addEventListener("keyup", e => { currentSearch = e.target.value; update(); });
+renderCards();
+</script>
+
+</body>
+</html>
