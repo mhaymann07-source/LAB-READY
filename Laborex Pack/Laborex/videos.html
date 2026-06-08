@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>Lab-Ready | Emergency SOP & Simulation</title>
+<title>Lab-Ready | Simulation Videos</title>
 
 <!-- Fav Icon -->
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
@@ -25,8 +25,8 @@
 <link href="assets/css/responsive.css" rel="stylesheet">
 
 <style>
-/* Emergency custom styles */
-.emergency-grid {
+/* Custom styles for videos page */
+.videos-grid {
     padding: 40px 0 80px;
 }
 .filter-bar {
@@ -49,26 +49,24 @@
     background: #1a2b4c;
     color: #fff;
 }
-.emergency-card {
+.video-card {
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     overflow: hidden;
     text-align: center;
     padding: 25px 15px;
-    border-top: 4px solid #e74c3c;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-.emergency-card:hover {
+.video-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
-/* Video thumbnail inside card */
-.card-video {
+.card-thumb {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -76,13 +74,13 @@
     overflow: hidden;
     cursor: pointer;
 }
-.card-video img {
+.card-thumb img {
     width: 100%;
     height: auto;
     transition: transform 0.3s;
     display: block;
 }
-.card-video:hover img {
+.card-thumb:hover img {
     transform: scale(1.02);
 }
 .play-overlay {
@@ -104,46 +102,41 @@
     font-size: 24px;
     margin-left: 4px;
 }
-.card-video:hover .play-overlay {
+.card-thumb:hover .play-overlay {
     background: #e74c3c;
     transform: translate(-50%, -50%) scale(1.1);
 }
-.emergency-icon {
-    font-size: 56px;
-    color: #e74c3c;
-    margin-bottom: 15px;
-}
-.emergency-card h4 {
+.video-card h4 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 10px;
 }
-.emergency-badge {
+.category-badge {
     display: inline-block;
-    background: #fdecea;
-    color: #e74c3c;
+    background: #eef2f5;
+    color: #1a5f7a;
     font-size: 12px;
     padding: 4px 12px;
     border-radius: 20px;
     margin-bottom: 15px;
     font-weight: 600;
 }
-.emergency-card p {
+.video-card p {
     flex-grow: 1;
     margin-bottom: 20px;
 }
-.btn-emergency {
+.btn-watch {
     background: transparent;
-    border: 1px solid #e74c3c;
-    color: #e74c3c;
+    border: 1px solid #1a5f7a;
+    color: #1a5f7a;
     padding: 6px 20px;
     border-radius: 30px;
     font-weight: 600;
     transition: 0.3s;
     align-self: center;
 }
-.btn-emergency:hover {
-    background: #e74c3c;
+.btn-watch:hover {
+    background: #1a5f7a;
     color: #fff;
 }
 .loader-wrap {
@@ -180,27 +173,19 @@
     position: relative;
     z-index: 2;
 }
-/* Simulation modal */
-.sim-step-progress {
-    margin-bottom: 20px;
+/* Modal video */
+.modal-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
 }
-.progress {
-    height: 8px;
-    border-radius: 4px;
-}
-.step-content {
-    min-height: 200px;
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-}
-.step-description {
-    font-size: 18px;
-    line-height: 1.6;
-}
-.row > [class*="col-"] {
-    margin-bottom: 20px;
+.modal-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 </style>
 </head>
@@ -208,7 +193,7 @@
 
 <div class="boxed_wrapper">
 
-    <!-- preloader (auto-hide) -->
+    <!-- preloader -->
     <div class="loader-wrap">
         <div class="preloader">
             <div class="preloader-close">Preloader Close</div>
@@ -241,7 +226,7 @@
                 <form method="post" action="#">
                     <div class="form-group">
                         <fieldset>
-                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search emergency procedures..." required>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search videos..." required>
                             <input type="submit" value="Search Now!" class="theme-btn style-four">
                         </fieldset>
                     </div>
@@ -251,7 +236,7 @@
     </div>
     <!-- search-popup end -->
 
-    <!-- main header -->
+    <!-- main header (same as index) -->
     <header class="main-header style-four style-five">
         <div class="header-lower">
             <div class="outer-box">
@@ -270,8 +255,8 @@
                                 <li><a href="index.html">Home</a></li>
                                 <li><a href="apparatus.html">Apparatus</a></li>
                                 <li><a href="chemicals.html">Chemicals</a></li>
-                                <li class="current"><a href="emergency.html">Emergency SOP</a></li>
-                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="emergency.html">Emergency SOP</a></li>
+                                <li class="current"><a href="videos.html">Simulations</a></li>
                                 <li><a href="index.html#about">About</a></li>
                             </ul>
                         </div>
@@ -312,7 +297,7 @@
         </nav>
     </div>
 
-    <!-- Page Title / Hero with Video Background -->
+    <!-- Hero with video background -->
     <section class="page-title centred" style="position: relative;">
         <video class="video-background" autoplay loop muted playsinline>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-scientist-working-with-chemicals-in-a-lab-32852-large.mp4" type="video/mp4">
@@ -323,23 +308,23 @@
             <div class="content-box">
                 <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
                 <div class="title">
-                    <h1>Emergency SOP & Simulation</h1>
+                    <h1>Simulation Videos</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="index.html">Home</a></li>
-                    <li>Emergency SOP</li>
+                    <li>Simulations</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Section Heading & Description -->
-    <section class="emergency-grid">
+    <!-- Video library section -->
+    <section class="videos-grid">
         <div class="auto-container">
             <div class="sec-title centred">
-                <h6>Emergency Response</h6>
-                <h2>Step-by-Step SOPs <br />with Interactive Simulation</h2>
-                <p>Learn how to respond quickly and safely to laboratory emergencies. Select a situation below to view the checklist and practice the procedure interactively.</p>
+                <h6>Video Library</h6>
+                <h2>Watch & Learn</h2>
+                <p>Enhance your lab safety skills with step-by-step video guides. Click "Watch Video" to view the full procedure.</p>
             </div>
 
             <!-- Filter Bar -->
@@ -351,9 +336,9 @@
                 <button class="filter-btn" data-category="Medical">Medical</button>
             </div>
 
-            <!-- Emergency Cards Grid -->
-            <div class="row" id="emergencyCardsContainer">
-                <!-- Cards injected here -->
+            <!-- Video Cards Grid -->
+            <div class="row" id="videosContainer">
+                <!-- cards injected here -->
             </div>
         </div>
     </section>
@@ -423,27 +408,19 @@
     </button>
 </div>
 
-<!-- Modal for simulation wizard -->
-<div class="modal fade" id="simulationModal" tabindex="-1" role="dialog">
+<!-- Modal for video playback -->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background: #e74c3c; color: white;">
-                <h5 class="modal-title" id="modalTitle">Emergency Simulation</h5>
+            <div class="modal-header" style="background: #1a2b4c; color: white;">
+                <h5 class="modal-title" id="videoModalTitle">Watch Video</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="sim-step-progress">
-                    <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                    </div>
+                <div class="modal-video" id="videoEmbedContainer">
+                    <!-- iframe injected here -->
                 </div>
-                <div class="step-content" id="stepContent">
-                    <p class="step-description">Loading steps...</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="resetSimBtn">Reset</button>
-                <button type="button" class="btn btn-danger" id="nextStepBtn">Next Step <i class="fas fa-arrow-right"></i></button>
+                <p class="mt-3" id="videoModalDesc"></p>
             </div>
         </div>
     </div>
@@ -471,63 +448,80 @@ window.addEventListener('load', function() {
     if (preloader) preloader.style.display = 'none';
 });
 
-// Emergency data with categories, steps, and your YouTube links
-const emergencies = [
-    { id: "acidSpill", title: "Acid/Chemical Spill", category: "Chemical Spills", icon: "fa-exclamation-triangle", badge: "Corrosive", description: "Neutralize with sodium bicarbonate, contain spill, dispose safely.", videoId: "YumvyFljoZU", steps: ["Alert people nearby & evacuate area.", "Wear acid-resistant gloves, goggles, lab coat.", "Neutralize spill with sodium bicarbonate (baking soda).", "Scoop neutralized material into hazardous waste bag.", "Clean area with water and wipe dry.", "Dispose according to lab protocol."] },
-    { id: "skinSplash", title: "Chemical Splash on Skin", category: "Medical", icon: "fa-hand-holding-water", badge: "Irritant", description: "Immediately rinse with copious water for 15 minutes.", videoId: "sMwTYyQzzS0", steps: ["Immediately go to safety shower or nearest sink.", "Remove contaminated clothing while rinsing.", "Flush affected skin with gentle water for at least 15 minutes.", "Do not apply any ointment or neutralizing chemicals.", "Report incident to lab supervisor.", "Seek medical attention."] },
-    { id: "eyeSplash", title: "Chemical Splash in Eyes", category: "Medical", icon: "fa-eye", badge: "Emergency", description: "Use eyewash station for 15+ minutes, keep eyelids open.", videoId: "7RXExier0rA", steps: ["Immediately go to eyewash station.", "Hold eyelids open with fingers.", "Rinse eyes continuously for at least 15 minutes.", "Rotate eyes to ensure thorough rinsing.", "Remove contact lenses if present (if possible).", "Seek immediate medical evaluation."] },
-    { id: "fire", title: "Fire Emergency", category: "Fire & Burns", icon: "fa-fire", badge: "Flammable", description: "Activate alarm, smother small fires, evacuate if large.", videoId: "gRUpmf8QOWU", steps: ["Activate nearest fire alarm.", "If small fire: use fire blanket or dry sand to smother flames.", "Do NOT use water on flammable liquid fires.", "If fire grows, evacuate immediately.", "Call emergency services from safe location.", "Assemble at designated meeting point."] },
-    { id: "clothingFire", title: "Clothing on Fire", category: "Fire & Burns", icon: "fa-tshirt", badge: "Critical", description: "STOP, DROP, and ROLL. Use safety shower.", videoId: "KPfT2O358pE", steps: ["STOP moving immediately.", "DROP to the ground.", "ROLL over and over to smother flames.", "Use safety shower if available.", "Remove burned clothing (unless stuck to skin).", "Call for medical help."] },
-    { id: "toxicSpill", title: "Toxic Chemical Spill", category: "Chemical Spills", icon: "fa-skull-crossbones", badge: "Toxic", description: "Evacuate, ventilate, call emergency response.", videoId: "9uDQMz6wrvA", steps: ["Evacuate the area immediately.", "Close doors to contain spill if safe.", "Ventilate the area (open windows, turn on fume hood).", "Do not attempt cleanup unless trained.", "Call emergency response team.", "Seek medical attention if exposed."] },
-    { id: "brokenGlass", title: "Broken Glassware", category: "Physical Hazards", icon: "fa-glass-martini-alt", badge: "Physical hazard", description: "Use dustpan & brush, dispose in sharps container.", videoId: "rPNQH3usdzI", steps: ["Wear cut-resistant gloves.", "Use dustpan and brush – never hands.", "Place broken glass in designated sharps container.", "Clean area with damp paper towel to catch small fragments.", "Dispose of towels appropriately.", "Report incident to supervisor."] },
-    { id: "inhalation", title: "Chemical Inhalation", category: "Medical", icon: "fa-lungs", badge: "Toxic fume", description: "Move to fresh air immediately, administer oxygen if needed.", videoId: "uiB8qnlZTAM", steps: ["Move victim to fresh air immediately.", "Loosen tight clothing.", "If not breathing, give artificial respiration (only if trained).", "Administer oxygen if available.", "Keep victim warm and at rest.", "Seek immediate medical attention."] }
+// Video data (uses same YouTube IDs as emergency page)
+const videos = [
+    { title: "Acid/Chemical Spill Response", category: "Chemical Spills", videoId: "YumvyFljoZU", description: "Learn how to safely neutralize and clean up an acid or chemical spill in the laboratory." },
+    { title: "Chemical Splash on Skin", category: "Medical", videoId: "sMwTYyQzzS0", description: "Step-by-step procedure for rinsing chemicals off skin using safety shower or sink." },
+    { title: "Chemical Splash in Eyes", category: "Medical", videoId: "7RXExier0rA", description: "Proper use of eyewash station and first aid for chemical exposure to eyes." },
+    { title: "Fire Emergency", category: "Fire & Burns", videoId: "gRUpmf8QOWU", description: "How to respond to a lab fire – activate alarm, use extinguisher, evacuate." },
+    { title: "Clothing on Fire", category: "Fire & Burns", videoId: "KPfT2O358pE", description: "Stop, drop, and roll technique plus using safety shower for burning clothing." },
+    { title: "Toxic Chemical Spill", category: "Chemical Spills", videoId: "9uDQMz6wrvA", description: "Evacuation, ventilation, and emergency response for toxic chemical spills." },
+    { title: "Broken Glassware", category: "Physical Hazards", videoId: "rPNQH3usdzI", description: "Safe cleanup and disposal of broken glass using brush, dustpan, and sharps container." },
+    { title: "Chemical Inhalation", category: "Medical", videoId: "uiB8qnlZTAM", description: "First aid for inhaling toxic fumes – fresh air, oxygen, and seeking medical help." }
 ];
 
-// Helper to generate video URLs
-function getVideoThumb(videoId) {
+// Helper to get thumbnail and embed URL
+function getThumbUrl(videoId) {
     return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 }
-function getVideoEmbed(videoId) {
-    return `https://www.youtube.com/embed/${videoId}`;
+function getEmbedUrl(videoId) {
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 }
 
-// Render cards with filter, including video thumbnail
+// Render video cards with filter
 function renderCards(filterCategory = "all") {
-    const container = document.getElementById("emergencyCardsContainer");
+    const container = document.getElementById("videosContainer");
     container.innerHTML = "";
-    const filtered = emergencies.filter(item => filterCategory === "all" || item.category === filterCategory);
+    const filtered = videos.filter(v => filterCategory === "all" || v.category === filterCategory);
     if (filtered.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center"><p>No emergencies found.</p></div>';
+        container.innerHTML = '<div class="col-12 text-center"><p>No videos found.</p></div>';
         return;
     }
-    filtered.forEach(emerg => {
-        const thumbUrl = getVideoThumb(emerg.videoId);
-        const embedUrl = getVideoEmbed(emerg.videoId);
+    filtered.forEach(video => {
+        const thumbUrl = getThumbUrl(video.videoId);
+        const embedUrl = getEmbedUrl(video.videoId);
         const col = document.createElement("div");
         col.className = "col-lg-4 col-md-6 col-sm-12";
         col.innerHTML = `
-            <div class="emergency-card">
-                <div class="card-video" onclick="window.open('${embedUrl}', '_blank');">
-                    <img src="${thumbUrl}" alt="Video thumbnail for ${emerg.title}">
+            <div class="video-card">
+                <div class="card-thumb" data-video-id="${video.videoId}" data-title="${video.title}" data-desc="${video.description}">
+                    <img src="${thumbUrl}" alt="${video.title} thumbnail">
                     <div class="play-overlay">
                         <i class="fas fa-play"></i>
                     </div>
                 </div>
-                <div class="emergency-icon"><i class="fas ${emerg.icon}"></i></div>
-                <h4>${emerg.title}</h4>
-                <div class="emergency-badge">${emerg.badge}</div>
-                <p>${emerg.description}</p>
-                <button class="btn-emergency" data-id="${emerg.id}">View SOP & Simulate</button>
+                <h4>${video.title}</h4>
+                <div class="category-badge">${video.category}</div>
+                <p>${video.description}</p>
+                <button class="btn-watch" data-video-id="${video.videoId}" data-title="${video.title}" data-desc="${video.description}">Watch Video</button>
             </div>
         `;
         container.appendChild(col);
     });
-    // attach event listeners to detail buttons
-    document.querySelectorAll(".btn-emergency").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const id = this.getAttribute("data-id");
-            const emerg = emergencies.find(e => e.id === id);
-            if (emerg) startSimulation(emerg);
+    // attach click events to thumbnails and buttons
+    document.querySelectorAll(".card-thumb, .btn-watch").forEach(el => {
+        el.addEventListener("click", function(e) {
+            e.stopPropagation();
+            let videoId = this.getAttribute("data-video-id");
+            let title = this.getAttribute("data-title");
+            let desc = this.getAttribute("data-desc");
+            // if element is .card-thumb, its child might be clicked, but we use dataset
+            if (!videoId) {
+                // try parent or find from button
+                const btn = this.closest(".video-card")?.querySelector(".btn-watch");
+                if (btn) {
+                    videoId = btn.getAttribute("data-video-id");
+                    title = btn.getAttribute("data-title");
+                    desc = btn.getAttribute("data-desc");
+                }
+            }
+            if (videoId) {
+                document.getElementById("videoModalTitle").innerHTML = title;
+                document.getElementById("videoModalDesc").innerHTML = desc;
+                const embedHtml = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                document.getElementById("videoEmbedContainer").innerHTML = embedHtml;
+                $("#videoModal").modal("show");
+            }
         });
     });
 }
@@ -546,68 +540,9 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     });
 });
 
-// Simulation wizard
-let currentSim = null;
-let currentStep = 0;
-let totalSteps = 0;
-
-function startSimulation(emergency) {
-    currentSim = emergency;
-    currentStep = 0;
-    totalSteps = emergency.steps.length;
-    updateModalUI();
-    $("#simulationModal").modal("show");
-}
-
-function updateModalUI() {
-    if (!currentSim) return;
-    document.getElementById("modalTitle").innerHTML = `<i class="fas ${currentSim.icon}"></i> ${currentSim.title}`;
-    const stepContent = document.getElementById("stepContent");
-    if (currentStep < totalSteps) {
-        stepContent.innerHTML = `
-            <div class="step-description">
-                <strong>Step ${currentStep + 1} of ${totalSteps}</strong>
-                <p style="margin-top: 15px; font-size: 18px;">${currentSim.steps[currentStep]}</p>
-            </div>
-        `;
-        const percent = ((currentStep + 1) / totalSteps) * 100;
-        const progressBar = document.querySelector("#simulationModal .progress-bar");
-        progressBar.style.width = percent + "%";
-        progressBar.setAttribute("aria-valuenow", percent);
-        progressBar.innerText = Math.floor(percent) + "%";
-    } else {
-        stepContent.innerHTML = `
-            <div class="step-description text-center">
-                <i class="fas fa-check-circle" style="font-size: 48px; color: #28a745;"></i>
-                <h4>Simulation Complete!</h4>
-                <p>You have successfully learned the procedure for ${currentSim.title}.</p>
-                <p>Stay safe in the lab!</p>
-            </div>
-        `;
-        document.querySelector("#simulationModal .progress-bar").style.width = "100%";
-        document.querySelector("#simulationModal .progress-bar").innerText = "100%";
-    }
-}
-
-document.getElementById("nextStepBtn").addEventListener("click", function() {
-    if (!currentSim) return;
-    if (currentStep < totalSteps) {
-        currentStep++;
-        updateModalUI();
-    } else {
-        $("#simulationModal").modal("hide");
-    }
-});
-
-document.getElementById("resetSimBtn").addEventListener("click", function() {
-    if (!currentSim) return;
-    currentStep = 0;
-    updateModalUI();
-});
-
-$("#simulationModal").on("hidden.bs.modal", function() {
-    currentSim = null;
-    currentStep = 0;
+// Reset modal video when closed
+$("#videoModal").on("hidden.bs.modal", function() {
+    document.getElementById("videoEmbedContainer").innerHTML = "";
 });
 
 // Initial render
