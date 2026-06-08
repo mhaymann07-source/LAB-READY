@@ -25,12 +25,33 @@
 <link href="assets/css/responsive.css" rel="stylesheet">
 
 <style>
-/* Additional custom styles */
+/* Custom interactive styles */
 .btn-page-link {
     transition: all 0.3s ease;
+    display: inline-block;
 }
 .btn-page-link:hover {
     transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.service-block-one .inner-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-block-one .inner-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.banner-section .content-box h2 {
+    animation: fadeInUp 1s ease;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.feature-icon {
+    font-size: 48px;
+    color: #1a2b4c;
+    margin-bottom: 20px;
 }
 </style>
 </head>
@@ -71,7 +92,7 @@
                 <form method="post" action="#">
                     <div class="form-group">
                         <fieldset>
-                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search chemicals or apparatus..." required>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search apparatus, chemicals..." required>
                             <input type="submit" value="Search Now!" class="theme-btn style-four">
                         </fieldset>
                     </div>
@@ -81,7 +102,7 @@
     </div>
     <!-- search-popup end -->
 
-    <!-- main header -->
+    <!-- main header (multi-page navigation) -->
     <header class="main-header style-four style-five">
         <div class="header-lower">
             <div class="outer-box">
@@ -142,21 +163,31 @@
         </nav>
     </div>
 
-    <!-- banner-section / Home -->
+    <!-- banner-section with background image -->
     <section class="banner-section style-four style-five" id="home" style="background-image: url('assets/images/background/homepage1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
-        <div class="bg-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1;"></div>
+        <div class="bg-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); z-index: 1;"></div>
         <div class="pattern-layer" style="position: relative; z-index: 2;"></div>
         <div class="banner-carousel owl-theme owl-carousel owl-dots-none" style="position: relative; z-index: 2;">
-           <div class="slide-item" style="margin-top: 70px;">
+            <div class="slide-item" style="margin-top: 70px;">
                 <div class="auto-container">
                     <div class="row align-items-center clearfix">
-                        <div class="col-lg-8 col-md-12 col-sm-12 content-column">
+                        <div class="col-lg-7 col-md-12 col-sm-12 content-column">
                             <div class="content-box">
                                 <h2>Lab-Ready: <br>Interactive Lab Management & Safety</h2>
-                                <p>Your complete guide to laboratory apparatus, chemicals, and emergency procedures. Designed for students to learn lab safety and management interactively.</p>
+                                <p>Your complete guide to laboratory apparatus, chemicals, and emergency procedures. Designed for university students to learn lab safety and management interactively.</p>
                                 <div class="btn-box">
                                     <a href="apparatus.html" class="theme-btn-one">Explore Modules</a>
                                     <a href="emergency.html" class="banner-btn">Emergency SOP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 image-column">
+                            <div class="image-box">
+                                <figure class="image"><img src="assets/images/banner/apparatus-1.jpg" alt="Lab-Ready" style="width: 100%; max-width: 400px; height: auto; object-fit: cover; border-radius: 12px;"></figure>
+                                <div class="admin-box" style="margin-top: 20px;">
+                                    <figure class="admin-thumb"><img src="assets/images/banner/apparatus-2.jpg" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"></figure>
+                                    <h4>Interactive Modules</h4>
+                                    <p>Apparatus · Chemicals · Safety</p>
                                 </div>
                             </div>
                         </div>
@@ -219,8 +250,8 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                     <div class="image_block_8">
                         <div class="image-box">
-                            <figure class="image image-1"><img src="assets/images/banner/person-1.jpg" alt="Lab" style="width: 270px; height: 400px; object-fit: cover;"></figure>
-                            <figure class="image image-2 paroller"><img src="assets/images/banner/person-2.jpg" alt="Chemicals" style="width: 200px; height: 200px; object-fit: cover;"></figure>
+                            <figure class="image image-1"><img src="assets/images/banner/person-1.jpg" alt="Lab" style="width: 270px; height: 400px; object-fit: cover; border-radius: 12px;"></figure>
+                            <figure class="image image-2 paroller"><img src="assets/images/banner/person-2.jpg" alt="Chemicals" style="width: 200px; height: 200px; object-fit: cover; border-radius: 12px;"></figure>
                         </div>
                     </div>
                 </div>
@@ -249,16 +280,77 @@
         </div>
     </section>
 
+    <!-- Featured quick tips (interactive) -->
+    <section class="research-section bg-color-1" id="quicktips">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Quick Lab Tips</h6>
+                <h2>Did You Know?</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInLeft" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <div class="icon-box" style="font-size: 40px;">🧪</div>
+                            <h4>Always Add Acid to Water</h4>
+                            <p>When diluting acids, always pour acid into water (not water into acid) to prevent violent splashing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInUp" data-wow-delay="200ms">
+                        <div class="inner-box">
+                            <div class="icon-box" style="font-size: 40px;">🔥</div>
+                            <h4>Know Your Fire Extinguisher</h4>
+                            <p>Class B extinguishers (CO₂ or dry chemical) for flammable liquids. Never use water on chemical fires.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
+                    <div class="research-block-one wow fadeInRight" data-wow-delay="400ms">
+                        <div class="inner-box">
+                            <div class="icon-box" style="font-size: 40px;">👓</div>
+                            <h4>Safety Goggles Always</h4>
+                            <p>Even for "simple" experiments – protect your eyes from chemical splashes and broken glass.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Video Simulations Preview -->
-    <section class="research-section bg-color-1" id="simulations-preview">
+    <section class="events-section sec-pad bg-color-1" id="video-preview">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Watch & Learn</h6>
                 <h2>Interactive Simulation Videos</h2>
                 <p>Enhance your lab safety skills with step-by-step video guides.</p>
-                <div class="btn-box text-center" style="margin-top: 30px;">
-                    <a href="videos.html" class="theme-btn-one">View All Videos →</a>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 event-block">
+                    <div class="event-block-one wow fadeInUp" data-wow-delay="00ms">
+                        <div class="inner-box">
+                            <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
+                            <h4><a href="videos.html">Chemical Spill Response</a></h4>
+                            <p>Step-by-step demonstration of handling acid spills safely.</p>
+                            <div class="btn-box"><a href="videos.html" class="theme-btn-two">Watch Now →</a></div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 event-block">
+                    <div class="event-block-one wow fadeInUp" data-wow-delay="200ms">
+                        <div class="inner-box">
+                            <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
+                            <h4><a href="videos.html">Using Eyewash Station</a></h4>
+                            <p>Proper technique for flushing eyes after chemical splash.</p>
+                            <div class="btn-box"><a href="videos.html" class="theme-btn-two">Watch Now →</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="videos.html" class="theme-btn-one">View All Videos →</a>
             </div>
         </div>
     </section>
@@ -359,7 +451,7 @@
 <script src="assets/js/script.js"></script>
 
 <script>
-// Smooth scroll for anchor links on homepage only
+// Smooth scroll for anchor links
 $(document).ready(function(){
     $("a[href^='#about']").on('click', function(event) {
         if (this.hash !== "") {
