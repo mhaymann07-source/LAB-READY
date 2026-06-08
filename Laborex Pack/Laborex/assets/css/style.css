@@ -7267,6 +7267,61 @@ h4 a:hover{
 }
 
 
+/* Mobile fixes for Lab-Ready */
+@media (max-width: 767px) {
+    .container, .auto-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .col-lg-4, .col-md-6, .col-sm-12 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .sec-title h2 {
+        font-size: 24px;
+    }
+    .sec-title p {
+        font-size: 14px;
+    }
+    .filter-bar {
+        margin: 20px 0;
+    }
+    .filter-btn {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+    .card-video img {
+        max-height: 180px;
+        object-fit: cover;
+    }
+    .play-overlay {
+        width: 45px;
+        height: 45px;
+    }
+    .play-overlay i {
+        font-size: 18px;
+    }
+    .btn-emergency, .btn-watch, .btn-details {
+        padding: 5px 15px;
+        font-size: 13px;
+    }
+}
+@media (max-width: 480px) {
+    .page-title {
+        min-height: 250px;
+    }
+    .page-title h1 {
+        font-size: 24px;
+    }
+    .admin-box {
+        display: none;
+    }
+}
+
 /** research-style-two **/
 
 .research-style-two{
