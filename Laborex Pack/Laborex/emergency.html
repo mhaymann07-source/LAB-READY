@@ -149,36 +149,45 @@
 .loader-wrap {
     display: none;
 }
-/* Hero video background */
-.page-title {
+/* Buang video background – gunakan image static */
+.page-title.centred {
     position: relative;
-    overflow: hidden;
-    min-height: 450px;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 500px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    background-color: transparent !important;
 }
+
+/* Sembunyikan video jika masih ada */
 .page-title .video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+    display: none !important;
 }
+
+/* Overlay gelap – kawal transparency */
 .page-title .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.5);  /* Ubah nilai alpha (0-1) mengikut keperluan */
     z-index: 1;
 }
+
+/* Kandungan di atas overlay */
 .page-title .auto-container {
     position: relative;
     z-index: 2;
+}
+
+/* Teks putih */
+.page-title .title h1,
+.page-title .bread-crumb li,
+.page-title .bread-crumb li a {
+    color: #fff;
 }
 /* Simulation modal */
 .sim-step-progress {
@@ -313,11 +322,7 @@
     </div>
 
     <!-- Page Title / Hero with Video Background -->
-    <section class="page-title centred" style="position: relative;">
-        <video class="video-background" autoplay loop muted playsinline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-scientist-working-with-chemicals-in-a-lab-32852-large.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <section class="page-title centred" style="background-image: url('assets/images/banner/emergency.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="overlay"></div>
         <div class="auto-container">
             <div class="content-box">
