@@ -25,7 +25,7 @@
 <link href="assets/css/responsive.css" rel="stylesheet">
 
 <style>
-/* Custom styles */
+/* Custom styles (sama seperti sebelumnya) */
 .chemicals-grid {
     padding: 40px 0 80px;
 }
@@ -119,8 +119,6 @@
 .loader-wrap {
     display: none;
 }
-
-/* Page title with image background (bukan video) */
 .page-title {
     position: relative;
     overflow: hidden;
@@ -394,19 +392,37 @@
 <script src="assets/js/script.js"></script>
 
 <script>
-// Helper to convert chemical name to image filename
+// Helper to convert chemical name to image filename (supports all subscripts)
 function getChemicalImageFileName(name) {
-    return name
+    let processed = name
         .toLowerCase()
-        .replace(/[\(\)]/g, '')               // remove parentheses
-        .replace(/₂/g, '2')                   // subscript 2 → 2
-        .replace(/₃/g, '3')                   // subscript 3 → 3
-        .replace(/₄/g, '4')                   // subscript 4 → 4
-        .replace(/[^a-z0-9\s-]/g, '')         // remove other special characters
-        .replace(/\s+/g, '-')                 // spaces → hyphens
-        .replace(/-+/g, '-')                  // multiple hyphens → single
-        .replace(/^-|-$/g, '')                // trim hyphens
-        + '.jpg';
+        // Roman numerals in parentheses -> hyphen + roman (e.g., (ii) -> -ii)
+        .replace(/\(i\)/g, '-i')
+        .replace(/\(ii\)/g, '-ii')
+        .replace(/\(iii\)/g, '-iii')
+        .replace(/\(iv\)/g, '-iv')
+        // Remove any remaining parentheses
+        .replace(/[\(\)]/g, '')
+        // Convert subscript numbers to normal digits
+        .replace(/₀/g, '0')
+        .replace(/₁/g, '1')
+        .replace(/₂/g, '2')
+        .replace(/₃/g, '3')
+        .replace(/₄/g, '4')
+        .replace(/₅/g, '5')
+        .replace(/₆/g, '6')
+        .replace(/₇/g, '7')
+        .replace(/₈/g, '8')
+        .replace(/₉/g, '9')
+        // Remove any other special characters (keep only letters, numbers, spaces, hyphens)
+        .replace(/[^a-z0-9\s-]/g, '')
+        // Replace spaces with hyphens
+        .replace(/\s+/g, '-')
+        // Collapse multiple hyphens
+        .replace(/-+/g, '-')
+        // Trim leading/trailing hyphens
+        .replace(/^-|-$/g, '');
+    return processed + '.jpg';
 }
 
 window.addEventListener('load', () => { 
@@ -459,7 +475,7 @@ function renderCards(filterCategory = "all", searchTerm = "") {
     filtered.forEach(item => {
         const imageName = getChemicalImageFileName(item.name);
         const imgPath = `assets/images/chemicals/${imageName}`;
-        const fullImgPath = imgPath;  // same for fullscreen (or you can use a larger version)
+        const fullImgPath = imgPath;
         const fallbackPlaceholder = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,15))}`;
         
         const col = document.createElement("div");
@@ -476,7 +492,7 @@ function renderCards(filterCategory = "all", searchTerm = "") {
         `;
         container.appendChild(col);
     });
-    // attach detail button events
+    // Attach detail button events
     document.querySelectorAll(".btn-details").forEach(btn => {
         btn.addEventListener("click", function() {
             document.getElementById("modalBody").innerHTML = `
@@ -488,7 +504,7 @@ function renderCards(filterCategory = "all", searchTerm = "") {
             $("#chemicalDetailModal").modal("show");
         });
     });
-    // re-init fancybox
+    // Re-init fancybox
     if ($.fancybox) {
         $.fancybox.defaults.buttons = ["zoom","slideShow","fullScreen","thumbs","close"];
         $('[data-fancybox="chemicals-gallery"]').fancybox();
