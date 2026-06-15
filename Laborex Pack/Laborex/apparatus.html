@@ -38,12 +38,13 @@
     background: #f0f4f8;
     color: #1a2b4c;
     border: none;
-    padding: 8px 24px;
+    padding: 8px 12px;
     margin: 5px;
     border-radius: 30px;
     font-weight: 600;
     transition: 0.3s;
     cursor: pointer;
+    font-size: 13px;
 }
 .filter-btn.active, .filter-btn:hover {
     background: #1a2b4c;
@@ -288,11 +289,11 @@
         </div>
     </section>
 
-    <!-- Search & Filter -->
+    <!-- Search & Filter (updated categories) -->
     <section class="apparatus-grid">
         <div class="auto-container">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Search apparatus... (e.g., Beaker, Burette)">
+                <input type="text" id="searchInput" placeholder="🔍 Search apparatus... (e.g., Beaker, Spectrophotometer)">
             </div>
             <div class="filter-bar" id="filterBar">
                 <button class="filter-btn active" data-category="all">All</button>
@@ -301,6 +302,10 @@
                 <button class="filter-btn" data-category="Heating">Heating</button>
                 <button class="filter-btn" data-category="Measuring">Measuring</button>
                 <button class="filter-btn" data-category="Safety Equipment">Safety Equipment</button>
+                <button class="filter-btn" data-category="Spectroscopy">Spectroscopy</button>
+                <button class="filter-btn" data-category="Heating & Mixing">Heating & Mixing</button>
+                <button class="filter-btn" data-category="Measurement">Measurement</button>
+                <button class="filter-btn" data-category="Chromatography">Chromatography</button>
             </div>
             <div class="row" id="apparatusContainer">
                 <!-- Cards injected by JS -->
@@ -408,10 +413,10 @@
 function getImageFileName(name) {
     return name
         .toLowerCase()
-        .replace(/[\(\)]/g, '')               // remove parentheses
-        .replace(/[^a-z0-9]+/g, '-')          // replace spaces/special chars with hyphen
-        .replace(/^-|-$/g, '')                // remove leading/trailing hyphen
-        + '.jpg';                             // file extension – change to .png if needed
+        .replace(/[\(\)]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')
+        + '.jpg';
 }
 
 // Hide preloader after page load
@@ -420,8 +425,9 @@ window.addEventListener('load', function() {
     if (preloader) preloader.style.display = 'none';
 });
 
-// APPARATUS DATA (full list)
+// APPARATUS DATA (original + new items from client)
 const apparatusData = [
+    // ========== ORIGINAL GLASSWARE ==========
     { name: "Beaker", category: "Glassware", storage: "Stack upside down on drying rack.", usage: "Mixing, heating liquids. Not for precise volume.", type: "Borosilicate glass, plastic. Sizes: 50-1000mL." },
     { name: "Erlenmeyer Flask (Conical Flask)", category: "Glassware", storage: "On shelves, avoid rim chipping.", usage: "Swirling liquids, titration.", type: "Conical shape, narrow neck." },
     { name: "Volumetric Flask", category: "Glassware", storage: "Stoppered, upright in cabinet.", usage: "Precise solution preparation.", type: "Glass, single calibration mark." },
@@ -440,6 +446,7 @@ const apparatusData = [
     { name: "Crucible", category: "Glassware", storage: "With lid, in desiccator.", usage: "Heating solids to high temperatures.", type: "Porcelain, metal." },
     { name: "Desiccator", category: "Glassware", storage: "On bench with lid sealed.", usage: "Drying substances.", type: "Glass with airtight lid." },
     { name: "Distillation Apparatus", category: "Glassware", storage: "Disassembled in padded box.", usage: "Separating liquids by boiling point.", type: "Glass set with condenser." },
+    // ========== ORIGINAL SUPPORT & HANDLING ==========
     { name: "Retort Stand (Ring Stand)", category: "Support & Handling", storage: "Upright on shelf.", usage: "Supporting clamps and apparatus.", type: "Metal rod + heavy base." },
     { name: "Iron Ring", category: "Support & Handling", storage: "Hanging on pegboard.", usage: "Holding wire gauze or clay triangle.", type: "Cast iron with clamp." },
     { name: "Clamps and Holders", category: "Support & Handling", storage: "Organised by size.", usage: "Holding burettes, flasks.", type: "Metal with rubber grips." },
@@ -449,17 +456,20 @@ const apparatusData = [
     { name: "Spatula", category: "Support & Handling", storage: "In drawer or beaker.", usage: "Transferring solids.", type: "Stainless steel, porcelain." },
     { name: "Scoopula", category: "Support & Handling", storage: "In drawer.", usage: "Scooping powders.", type: "Metal." },
     { name: "Wire Gauze", category: "Support & Handling", storage: "Flat on shelf.", usage: "Supporting beakers on tripod.", type: "Metal mesh with ceramic centre." },
+    // ========== ORIGINAL HEATING ==========
     { name: "Bunsen Burner", category: "Heating", storage: "Securely on base, gas hose attached.", usage: "Heating, sterilizing, combustion.", type: "Adjustable air hole." },
     { name: "Hot Plate", category: "Heating", storage: "On bench, cord wrapped.", usage: "Heating liquids indirectly.", type: "Electric, ceramic top." },
     { name: "Water Bath", category: "Heating", storage: "Empty, dry.", usage: "Incubation at constant temperature.", type: "Electric or simple container." },
     { name: "Heating Mantle", category: "Heating", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, electric." },
     { name: "Drying Oven", category: "Heating", storage: "On bench, vented.", usage: "Drying glassware or samples.", type: "Electric, temperature controlled." },
+    // ========== ORIGINAL MEASURING ==========
     { name: "Analytical Balance", category: "Measuring", storage: "On vibration-free bench, levelled.", usage: "Precise mass measurement (0.0001g).", type: "Digital, enclosed draft shield." },
     { name: "Electronic Balance", category: "Measuring", storage: "On flat surface.", usage: "Mass measurement (0.01g - 0.1g).", type: "Digital." },
     { name: "Thermometer", category: "Measuring", storage: "In protective case.", usage: "Measuring temperature.", type: "Mercury, alcohol, digital." },
     { name: "pH Meter", category: "Measuring", storage: "Electrode stored in buffer.", usage: "Measuring pH of solutions.", type: "Electronic with probe." },
     { name: "Conductivity Meter", category: "Measuring", storage: "Electrode clean and dry.", usage: "Measuring electrical conductivity.", type: "Portable or benchtop." },
-    { name: "Spectrophotometer", category: "Measuring", storage: "Covered, dust-free.", usage: "Measuring light absorbance.", type: "UV-Vis, single beam." },
+    { name: "Spectrophotometer", category: "Measuring", storage: "Covered, dust-free.", usage: "Measuring light absorbance.", type: "UV-Vis, single beam." }, // moved to spectroscopy later
+    // ========== ORIGINAL SAFETY EQUIPMENT ==========
     { name: "Safety Goggles", category: "Safety Equipment", storage: "Clean, in case.", usage: "Protecting eyes from splashes.", type: "Chemical splash goggles." },
     { name: "Laboratory Coat", category: "Safety Equipment", storage: "Hanging.", usage: "Protecting skin and clothing.", type: "Cotton, polyester." },
     { name: "Chemical-Resistant Gloves", category: "Safety Equipment", storage: "Dry, away from sunlight.", usage: "Handling hazardous chemicals.", type: "Nitrile, neoprene." },
@@ -468,8 +478,52 @@ const apparatusData = [
     { name: "Eyewash Station", category: "Safety Equipment", storage: "Unobstructed, tested weekly.", usage: "Flushing eyes after chemical splash.", type: "Plumbed or portable." },
     { name: "Safety Shower", category: "Safety Equipment", storage: "Clear access.", usage: "Emergency body rinse.", type: "Plumbed." },
     { name: "First Aid Kit", category: "Safety Equipment", storage: "Visible, accessible.", usage: "Treating minor injuries.", type: "Wall-mounted box." },
-    { name: "Chemical Spill Kit", category: "Safety Equipment", storage: "Near chemical storage.", usage: "Containing and neutralising spills.", type: "Contains absorbents, neutralisers, PPE." }
+    { name: "Chemical Spill Kit", category: "Safety Equipment", storage: "Near chemical storage.", usage: "Containing and neutralising spills.", type: "Contains absorbents, neutralisers, PPE." },
+    // ========== NEW SAFETY ITEMS (mask, blanket, glove types) ==========
+    { name: "Face Mask", category: "Safety Equipment", storage: "Clean, dry area.", usage: "Protecting from inhalation of dust or vapours.", type: "Surgical, N95, reusable cloth." },
+    { name: "Fire Blanket", category: "Safety Equipment", storage: "Visible, accessible wall mount.", usage: "Smothering small fires or wrapping around person on fire.", type: "Wool, fiberglass." },
+    { name: "Nitrile Gloves", category: "Safety Equipment", storage: "Box, away from sunlight.", usage: "Chemical resistance, puncture resistant.", type: "Nitrile, powder-free." },
+    { name: "Vinyl Gloves", category: "Safety Equipment", storage: "Box, room temperature.", usage: "General protection, low chemical resistance.", type: "Vinyl, disposable." },
+    { name: "Latex Gloves", category: "Safety Equipment", storage: "Box, away from heat.", usage: "Good dexterity, allergen risk.", type: "Natural rubber latex." },
+
+    // ========== NEW SPECTROSCOPY INSTRUMENTS ==========
+    { name: "UV-Visible Spectrophotometer", category: "Spectroscopy", storage: "Covered, dust-free, away from vibrations.", usage: "Measuring absorbance/transmittance of UV and visible light.", type: "Double beam, single beam." },
+    { name: "Colorimeter", category: "Spectroscopy", storage: "Clean, dry, with calibration standards.", usage: "Measuring colour intensity for concentration analysis.", type: "Filter-based, LED." },
+    { name: "FTIR Spectrometer", category: "Spectroscopy", storage: "Dry environment (moisture sensitive).", usage: "Identifying functional groups via infrared absorption.", type: "Benchtop, portable." },
+    { name: "Atomic Absorption Spectrometer (AAS)", category: "Spectroscopy", storage: "Stable bench, with gas supply.", usage: "Quantitative metal analysis.", type: "Flame, graphite furnace." },
+    { name: "Flame Photometer", category: "Spectroscopy", storage: "Dust-free, with fuel gas connected.", usage: "Measuring alkali and alkaline earth metals.", type: "Single-channel, multi-channel." },
+    { name: "Gas Chromatograph (GC)", category: "Spectroscopy", storage: "Clean, with carrier gas supply.", usage: "Separating and analysing volatile compounds.", type: "With FID, TCD detector." },
+    { name: "High-Performance Liquid Chromatograph (HPLC)", category: "Spectroscopy", storage: "Stable bench, solvent bottles attached.", usage: "Separating and analysing non-volatile compounds.", type: "Isocratic, gradient." },
+    { name: "NMR Spectrometer", category: "Spectroscopy", storage: "Shielded room, cryogen filled.", usage: "Structural elucidation of organic compounds.", type: "300MHz, 400MHz, 600MHz." },
+    { name: "Mass Spectrometer (MS)", category: "Spectroscopy", storage: "Clean, vibration-free bench.", usage: "Determining molecular mass and structure.", type: "Quadrupole, TOF, ion trap." },
+
+    // ========== NEW HEATING & MIXING EQUIPMENT ==========
+    { name: "Hot Plate", category: "Heating & Mixing", storage: "On bench, cord wrapped.", usage: "Heating samples.", type: "Ceramic top, digital." },
+    { name: "Magnetic Stirrer", category: "Heating & Mixing", storage: "With stir bar stored nearby.", usage: "Stirring liquids using magnetic field.", type: "Single position, multi-position." },
+    { name: "Hotplate Stirrer", category: "Heating & Mixing", storage: "On bench, away from flammables.", usage: "Heating and stirring simultaneously.", type: "Combined unit." },
+    { name: "Heating Mantle", category: "Heating & Mixing", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, temperature controlled." },
+    { name: "Water Bath", category: "Heating & Mixing", storage: "Empty, dry, clean.", usage: "Controlled heating (up to 100°C).", type: "Digital, shaking." },
+    { name: "Oil Bath", category: "Heating & Mixing", storage: "Covered, with oil inside.", usage: "High‑temperature heating (>100°C).", type: "Silicone oil, mineral oil." },
+    { name: "Sand Bath", category: "Heating & Mixing", storage: "Sand filled container.", usage: "Uniform heating for irregular vessels.", type: "Simple metal pan with sand." },
+
+    // ========== NEW MEASUREMENT DEVICES (temperature, pH, conductivity, balances) ==========
+    { name: "Mercury Thermometer", category: "Measurement", storage: "In protective case, upright.", usage: "Accurate temperature measurement (mercury).", type: "Mercury-in-glass, various ranges." },
+    { name: "Digital Thermometer", category: "Measurement", storage: "With probe, clean.", usage: "Accurate temperature monitoring.", type: "Thermocouple, thermistor." },
+    { name: "Conductivity Meter", category: "Measurement", storage: "Electrode stored in water or dry (according to type).", usage: "Measuring electrical conductivity of solutions.", type: "Portable, benchtop." },
+    { name: "pH Meter", category: "Measurement", storage: "Electrode stored in buffer solution.", usage: "pH determination of solutions.", type: "Laboratory grade, portable." },
+    { name: "Analytical Balance", category: "Measurement", storage: "Vibration-free bench, levelled.", usage: "High-precision weighing (±0.0001 g).", type: "Enclosed draft shield." },
+    { name: "Electronic Balance", category: "Measurement", storage: "On flat surface.", usage: "Routine weighing (0.01g–0.1g).", type: "Digital, top-loading." },
+    { name: "Top-Loading Balance", category: "Measurement", storage: "On bench, calibrated.", usage: "General mass measurement (0.1g–0.01g).", type: "Digital, mechanical." },
+
+    // ========== NEW CHROMATOGRAPHY APPARATUS ==========
+    { name: "TLC Plate", category: "Chromatography", storage: "In closed container, away from moisture.", usage: "Thin Layer Chromatography – compound separation.", type: "Silica gel, alumina, cellulose." },
+    { name: "TLC Chamber", category: "Chromatography", storage: "Clean, with lid.", usage: "Solvent development for TLC plates.", type: "Glass or metal with lid." },
+    { name: "Chromatography Column", category: "Chromatography", storage: "Vertical, with stopcock closed.", usage: "Column chromatography – purification of compounds.", type: "Glass with frit, PTFE stopcock." },
+    { name: "UV Lamp", category: "Chromatography", storage: "In protective housing.", usage: "Visualising spots on TLC plates.", type: "254nm, 365nm dual wavelength." }
 ];
+
+// Remove duplicate spectrophotometer from Measuring if needed? we keep it separate; but we have a new UV-Vis spectrophotometer under Spectroscopy.
+// Also note the original Spectrophotometer under Measuring remains; but for consistency we keep both.
 
 function renderCards(filterCategory = "all", searchTerm = "") {
     const container = document.getElementById("apparatusContainer");
@@ -484,12 +538,10 @@ function renderCards(filterCategory = "all", searchTerm = "") {
         return;
     }
     filtered.forEach(item => {
-        // Generate local image path based on name
         const imageName = getImageFileName(item.name);
         const imgPath = `assets/images/apparatus/${imageName}`;
-        const fullImgPath = imgPath;  // same for fullscreen – you can change to a larger folder if needed
-        // Fallback placeholder if image doesn't exist (onerror will handle it)
-        const fallbackPlaceholder = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,15))}`;
+        const fullImgPath = imgPath;
+        const fallbackPlaceholder = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,20))}`;
         
         const col = document.createElement("div");
         col.className = "col-lg-4 col-md-6 col-sm-12";
