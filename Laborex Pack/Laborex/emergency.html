@@ -67,7 +67,7 @@
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
-/* Video thumbnail inside card */
+/* Single video thumbnail */
 .card-video {
     position: relative;
     width: 100%;
@@ -107,6 +107,102 @@
 .card-video:hover .play-overlay {
     background: #e74c3c;
     transform: translate(-50%, -50%) scale(1.1);
+}
+/* Carousel custom styling for Mercury Spill */
+.mercury-carousel {
+    margin-bottom: 20px;
+    position: relative;
+}
+.mercury-carousel .carousel-inner {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.mercury-carousel .carousel-item {
+    position: relative;
+    cursor: pointer;
+}
+.mercury-carousel .carousel-item img {
+    width: 100%;
+    height: auto;
+}
+.mercury-carousel .carousel-caption {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    padding: 5px;
+    font-size: 12px;
+    color: white;
+    z-index: 2;
+}
+
+.mercury-carousel .carousel-caption p {
+    color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* Badge label on video (top-left corner) */
+.video-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+/* IMPROVED CAROUSEL ARROWS FOR MERCURY SPILL */
+.mercury-carousel .carousel-control-prev,
+.mercury-carousel .carousel-control-next {
+    width: 10%;
+    opacity: 1;
+    z-index: 5;
+}
+.mercury-carousel .carousel-control-prev-icon,
+.mercury-carousel .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.65);
+    background-size: 55% 55%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+.mercury-carousel .carousel-control-prev-icon:hover,
+.mercury-carousel .carousel-control-next-icon:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+}
+/* Optional: adjust arrow position outward a bit (avoid overlapping image) */
+.mercury-carousel .carousel-control-prev {
+    left: -15px;
+}
+.mercury-carousel .carousel-control-next {
+    right: -15px;
+}
+/* Smaller arrows on mobile */
+@media (max-width: 576px) {
+    .mercury-carousel .carousel-control-prev-icon,
+    .mercury-carousel .carousel-control-next-icon {
+        width: 35px;
+        height: 35px;
+    }
+    .mercury-carousel .carousel-control-prev {
+        left: -5px;
+    }
+    .mercury-carousel .carousel-control-next {
+        right: -5px;
+    }
 }
 .emergency-icon {
     font-size: 56px;
@@ -149,7 +245,7 @@
 .loader-wrap {
     display: none;
 }
-/* Buang video background – gunakan image static */
+/* Page title with image background */
 .page-title.centred {
     position: relative;
     background-size: cover !important;
@@ -160,36 +256,28 @@
     align-items: center;
     background-color: transparent !important;
 }
-
-/* Sembunyikan video jika masih ada */
 .page-title .video-background {
     display: none !important;
 }
-
-/* Overlay gelap – kawal transparency */
 .page-title .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);  /* Ubah nilai alpha (0-1) mengikut keperluan */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-
-/* Kandungan di atas overlay */
 .page-title .auto-container {
     position: relative;
     z-index: 2;
 }
-
-/* Teks putih */
 .page-title .title h1,
 .page-title .bread-crumb li,
 .page-title .bread-crumb li a {
     color: #fff;
 }
-/* Simulation modal */
+/* Simulation modal (SOP steps) */
 .sim-step-progress {
     margin-bottom: 20px;
 }
@@ -210,6 +298,23 @@
 }
 .row > [class*="col-"] {
     margin-bottom: 20px;
+}
+/* Video modal (YouTube player) */
+.video-modal .modal-dialog {
+    max-width: 800px;
+}
+.video-modal .modal-body {
+    padding: 0;
+}
+.video-modal iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+}
+@media (max-width: 767px) {
+    .video-modal iframe {
+        height: 250px;
+    }
 }
 </style>
 </head>
@@ -321,7 +426,7 @@
         </nav>
     </div>
 
-    <!-- Page Title / Hero with Video Background -->
+    <!-- Page Title with Image Background -->
     <section class="page-title centred" style="background-image: url('assets/images/banner/emergency.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="overlay"></div>
         <div class="auto-container">
@@ -358,7 +463,7 @@
 
             <!-- Emergency Cards Grid -->
             <div class="row" id="emergencyCardsContainer">
-                <!-- Cards injected here -->
+                <!-- Cards injected by JS -->
             </div>
         </div>
     </section>
@@ -428,7 +533,7 @@
     </button>
 </div>
 
-<!-- Modal for simulation wizard -->
+<!-- Modal for simulation wizard (SOP steps) -->
 <div class="modal fade" id="simulationModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -449,6 +554,23 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="resetSimBtn">Reset</button>
                 <button type="button" class="btn btn-danger" id="nextStepBtn">Next Step <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for video playback (YouTube embed) -->
+<div class="modal fade video-modal" id="videoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #e74c3c; color: white;">
+                <h5 class="modal-title" id="videoModalTitle">Watch Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <div id="videoPlayerContainer">
+                    <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -476,7 +598,27 @@ window.addEventListener('load', function() {
     if (preloader) preloader.style.display = 'none';
 });
 
-// Emergency data with categories, steps, and your YouTube links
+// Helper to get video embed URL with autoplay
+function getVideoEmbedAutoplay(videoId) {
+    if (!videoId) return '';
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+}
+
+// Open video modal
+function openVideoModal(videoId, title) {
+    if (!videoId) return;
+    const embedUrl = getVideoEmbedAutoplay(videoId);
+    document.getElementById('videoIframe').src = embedUrl;
+    document.getElementById('videoModalTitle').innerText = title;
+    $('#videoModal').modal('show');
+}
+
+// Reset video modal when closed
+$('#videoModal').on('hidden.bs.modal', function() {
+    document.getElementById('videoIframe').src = '';
+});
+
+// Emergency data
 const emergencies = [
     { id: "acidSpill", title: "Acid/Chemical Spill", category: "Chemical Spills", icon: "fa-exclamation-triangle", badge: "Corrosive", description: "Neutralize with sodium bicarbonate, contain spill, dispose safely.", videoId: "YumvyFljoZU", steps: ["Alert people nearby & evacuate area.", "Wear acid-resistant gloves, goggles, lab coat.", "Neutralize spill with sodium bicarbonate (baking soda).", "Scoop neutralized material into hazardous waste bag.", "Clean area with water and wipe dry.", "Dispose according to lab protocol."] },
     { id: "skinSplash", title: "Chemical Splash on Skin", category: "Medical", icon: "fa-hand-holding-water", badge: "Irritant", description: "Immediately rinse with copious water for 15 minutes.", videoId: "sMwTYyQzzS0", steps: ["Immediately go to safety shower or nearest sink.", "Remove contaminated clothing while rinsing.", "Flush affected skin with gentle water for at least 15 minutes.", "Do not apply any ointment or neutralizing chemicals.", "Report incident to lab supervisor.", "Seek medical attention."] },
@@ -485,18 +627,15 @@ const emergencies = [
     { id: "clothingFire", title: "Clothing on Fire", category: "Fire & Burns", icon: "fa-tshirt", badge: "Critical", description: "STOP, DROP, and ROLL. Use safety shower.", videoId: "KPfT2O358pE", steps: ["STOP moving immediately.", "DROP to the ground.", "ROLL over and over to smother flames.", "Use safety shower if available.", "Remove burned clothing (unless stuck to skin).", "Call for medical help."] },
     { id: "toxicSpill", title: "Toxic Chemical Spill", category: "Chemical Spills", icon: "fa-skull-crossbones", badge: "Toxic", description: "Evacuate, ventilate, call emergency response.", videoId: "9uDQMz6wrvA", steps: ["Evacuate the area immediately.", "Close doors to contain spill if safe.", "Ventilate the area (open windows, turn on fume hood).", "Do not attempt cleanup unless trained.", "Call emergency response team.", "Seek medical attention if exposed."] },
     { id: "brokenGlass", title: "Broken Glassware", category: "Physical Hazards", icon: "fa-glass-martini-alt", badge: "Physical hazard", description: "Use dustpan & brush, dispose in sharps container.", videoId: "rPNQH3usdzI", steps: ["Wear cut-resistant gloves.", "Use dustpan and brush – never hands.", "Place broken glass in designated sharps container.", "Clean area with damp paper towel to catch small fragments.", "Dispose of towels appropriately.", "Report incident to supervisor."] },
-    { id: "inhalation", title: "Chemical Inhalation", category: "Medical", icon: "fa-lungs", badge: "Toxic fume", description: "Move to fresh air immediately, administer oxygen if needed.", videoId: "uiB8qnlZTAM", steps: ["Move victim to fresh air immediately.", "Loosen tight clothing.", "If not breathing, give artificial respiration (only if trained).", "Administer oxygen if available.", "Keep victim warm and at rest.", "Seek immediate medical attention."] }
+    { id: "inhalation", title: "Chemical Inhalation", category: "Medical", icon: "fa-lungs", badge: "Toxic fume", description: "Move to fresh air immediately, administer oxygen if needed.", videoId: "uiB8qnlZTAM", steps: ["Move victim to fresh air immediately.", "Loosen tight clothing.", "If not breathing, give artificial respiration (only if trained).", "Administer oxygen if available.", "Keep victim warm and at rest.", "Seek immediate medical attention."] },
+    // Mercury Spill with two videos
+    { id: "mercurySpill", title: "Mercury Spill", category: "Chemical Spills", icon: "fa-tint", badge: "Toxic", description: "Contain mercury droplets, use mercury vacuum or amalgamation, dispose as hazardous waste.", videos: [
+        { videoId: "T5LYWZcWEr4", label: "Small Spill (Lab Response)" },
+        { videoId: "QimNlohjkMc", label: "Large Spill (Professional Cleanup)" }
+    ], steps: ["Evacuate area and close doors.", "Wear nitrile gloves and face shield.", "Do NOT use a regular vacuum cleaner (spreads vapours).", "Use mercury spill kit: amalgamation powder or mercury vacuum.", "Collect mercury beads with sticky tape or suction device.", "Place all contaminated materials in sealed hazardous waste container.", "Ventilate the area for at least 24 hours.", "Report incident and seek medical evaluation if exposure suspected."] }
 ];
 
-// Helper to generate video URLs
-function getVideoThumb(videoId) {
-    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-}
-function getVideoEmbed(videoId) {
-    return `https://www.youtube.com/embed/${videoId}`;
-}
-
-// Render cards with filter, including video thumbnail
+// Render cards
 function renderCards(filterCategory = "all") {
     const container = document.getElementById("emergencyCardsContainer");
     container.innerHTML = "";
@@ -505,19 +644,61 @@ function renderCards(filterCategory = "all") {
         container.innerHTML = '<div class="col-12 text-center"><p>No emergencies found.</p></div>';
         return;
     }
-    filtered.forEach(emerg => {
-        const thumbUrl = getVideoThumb(emerg.videoId);
-        const embedUrl = getVideoEmbed(emerg.videoId);
-        const col = document.createElement("div");
-        col.className = "col-lg-4 col-md-6 col-sm-12";
-        col.innerHTML = `
-            <div class="emergency-card">
-                <div class="card-video" onclick="window.open('${embedUrl}', '_blank');">
+    filtered.forEach((emerg, idx) => {
+        const hasCarousel = emerg.videos && Array.isArray(emerg.videos) && emerg.videos.length > 1;
+        let videoHtml = '';
+        
+        if (hasCarousel) {
+            const carouselId = `carouselMercury_${idx}`;
+            let itemsHtml = '';
+            emerg.videos.forEach((vid, vidIdx) => {
+                const thumbUrl = `https://img.youtube.com/vi/${vid.videoId}/mqdefault.jpg`;
+                const activeClass = vidIdx === 0 ? 'active' : '';
+                itemsHtml += `
+                    <div class="carousel-item ${activeClass}" data-video-id="${vid.videoId}" data-video-label="${vid.label}">
+                        <img src="${thumbUrl}" alt="Video thumbnail for ${vid.label}" class="d-block w-100">
+                        <div class="video-badge">${vid.label}</div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <p>${vid.label}</p>
+                        </div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                `;
+            });
+            videoHtml = `
+                <div id="${carouselId}" class="carousel slide mercury-carousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        ${itemsHtml}
+                    </div>
+                    <a class="carousel-control-prev" href="#${carouselId}" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#${carouselId}" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            `;
+        } else {
+            const thumbUrl = `https://img.youtube.com/vi/${emerg.videoId}/mqdefault.jpg`;
+            videoHtml = `
+                <div class="card-video" data-video-id="${emerg.videoId}" data-video-title="${emerg.title}">
                     <img src="${thumbUrl}" alt="Video thumbnail for ${emerg.title}">
                     <div class="play-overlay">
                         <i class="fas fa-play"></i>
                     </div>
                 </div>
+            `;
+        }
+        
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6 col-sm-12";
+        col.innerHTML = `
+            <div class="emergency-card">
+                ${videoHtml}
                 <div class="emergency-icon"><i class="fas ${emerg.icon}"></i></div>
                 <h4>${emerg.title}</h4>
                 <div class="emergency-badge">${emerg.badge}</div>
@@ -526,8 +707,33 @@ function renderCards(filterCategory = "all") {
             </div>
         `;
         container.appendChild(col);
+        
+        // Attach video click handlers
+        if (!hasCarousel) {
+            const videoDiv = col.querySelector('.card-video');
+            if (videoDiv && videoDiv.dataset.videoId) {
+                videoDiv.addEventListener('click', () => {
+                    openVideoModal(videoDiv.dataset.videoId, videoDiv.dataset.videoTitle || emerg.title);
+                });
+            }
+        } else {
+            const carouselElement = col.querySelector(`.carousel`);
+            const items = carouselElement.querySelectorAll('.carousel-item');
+            items.forEach(item => {
+                const videoId = item.dataset.videoId;
+                const videoLabel = item.dataset.videoLabel;
+                if (videoId) {
+                    item.style.cursor = 'pointer';
+                    item.addEventListener('click', (e) => {
+                        if (e.target.closest('.carousel-control-prev') || e.target.closest('.carousel-control-next')) return;
+                        openVideoModal(videoId, `${emerg.title} - ${videoLabel}`);
+                    });
+                }
+            });
+        }
     });
-    // attach event listeners to detail buttons
+    
+    // SOP simulation buttons
     document.querySelectorAll(".btn-emergency").forEach(btn => {
         btn.addEventListener("click", function() {
             const id = this.getAttribute("data-id");
@@ -539,9 +745,7 @@ function renderCards(filterCategory = "all") {
 
 // Filter logic
 let currentCategory = "all";
-function updateDisplay() {
-    renderCards(currentCategory);
-}
+function updateDisplay() { renderCards(currentCategory); }
 document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.addEventListener("click", function() {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
