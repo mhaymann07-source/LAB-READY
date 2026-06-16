@@ -1,713 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>Lab-Ready | Lab Safety Quiz</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lab-Ready | Lab Safety Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Inter',sans-serif;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#0d1117;
+            padding:30px 20px;
+            position:relative;
+        }
 
-<!-- Fav Icon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+        /* ===== BACKGROUND BINTANG ===== */
+        .bg-stars {
+            position:fixed; top:0; left:0; width:100%; height:100%; z-index:0;
+            background:linear-gradient(135deg, #0a0f1a, #141e2b, #1a2a3a);
+            overflow:hidden;
+        }
+        .star {
+            position:absolute;
+            border-radius:50%;
+            background:#fff;
+            will-change:transform;
+            animation:twinkle linear infinite;
+            opacity:0.15;
+        }
+        .star:nth-child(1) { left:5%; top:8%; width:2px; height:2px; animation-duration:10s; animation-delay:0s; }
+        .star:nth-child(2) { left:12%; top:22%; width:3px; height:3px; animation-duration:14s; animation-delay:1.5s; }
+        .star:nth-child(3) { left:20%; top:45%; width:2px; height:2px; animation-duration:8s; animation-delay:3s; }
+        .star:nth-child(4) { left:28%; top:10%; width:4px; height:4px; animation-duration:18s; animation-delay:0.5s; }
+        .star:nth-child(5) { left:35%; top:65%; width:2px; height:2px; animation-duration:12s; animation-delay:2s; }
+        .star:nth-child(6) { left:42%; top:30%; width:3px; height:3px; animation-duration:9s; animation-delay:4s; }
+        .star:nth-child(7) { left:50%; top:80%; width:2px; height:2px; animation-duration:15s; animation-delay:1s; }
+        .star:nth-child(8) { left:58%; top:15%; width:3px; height:3px; animation-duration:11s; animation-delay:3.5s; }
+        .star:nth-child(9) { left:65%; top:50%; width:2px; height:2px; animation-duration:13s; animation-delay:0.8s; }
+        .star:nth-child(10) { left:72%; top:70%; width:4px; height:4px; animation-duration:20s; animation-delay:2.5s; }
+        .star:nth-child(11) { left:78%; top:25%; width:2px; height:2px; animation-duration:9s; animation-delay:4.5s; }
+        .star:nth-child(12) { left:85%; top:55%; width:3px; height:3px; animation-duration:16s; animation-delay:1.2s; }
+        .star:nth-child(13) { left:92%; top:35%; width:2px; height:2px; animation-duration:10s; animation-delay:3s; }
+        .star:nth-child(14) { left:8%; top:85%; width:3px; height:3px; animation-duration:12s; animation-delay:0.3s; }
+        .star:nth-child(15) { left:18%; top:55%; width:2px; height:2px; animation-duration:14s; animation-delay:2.2s; }
+        .star:nth-child(16) { left:30%; top:75%; width:4px; height:4px; animation-duration:17s; animation-delay:4s; }
+        .star:nth-child(17) { left:45%; top:5%; width:2px; height:2px; animation-duration:8s; animation-delay:1.8s; }
+        .star:nth-child(18) { left:55%; top:90%; width:3px; height:3px; animation-duration:13s; animation-delay:3.3s; }
+        .star:nth-child(19) { left:68%; top:45%; width:2px; height:2px; animation-duration:11s; animation-delay:0.7s; }
+        .star:nth-child(20) { left:80%; top:10%; width:3px; height:3px; animation-duration:19s; animation-delay:2.8s; }
+        .star:nth-child(21) { left:90%; top:80%; width:2px; height:2px; animation-duration:9s; animation-delay:4.2s; }
+        .star:nth-child(22) { left:3%; top:40%; width:3px; height:3px; animation-duration:15s; animation-delay:1.6s; }
+        .star:nth-child(23) { left:48%; top:40%; width:2px; height:2px; animation-duration:10s; animation-delay:3.7s; }
+        .star:nth-child(24) { left:62%; top:68%; width:3px; height:3px; animation-duration:14s; animation-delay:0.4s; }
+        .star:nth-child(25) { left:75%; top:88%; width:2px; height:2px; animation-duration:12s; animation-delay:2.1s; }
+        .star:nth-child(26) { left:88%; top:50%; width:3px; height:3px; animation-duration:16s; animation-delay:3.9s; }
+        .star:nth-child(27) { left:95%; top:15%; width:2px; height:2px; animation-duration:9s; animation-delay:1.3s; }
+        .star:nth-child(28) { left:38%; top:95%; width:3px; height:3px; animation-duration:13s; animation-delay:2.7s; }
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        @keyframes twinkle {
+            0% { transform:translateY(0) scale(0.3); opacity:0.05; }
+            50% { transform:translateY(-35px) scale(1.2); opacity:0.7; }
+            100% { transform:translateY(0) scale(0.3); opacity:0.05; }
+        }
 
-<!-- Stylesheets -->
-<link href="assets/css/font-awesome-all.css" rel="stylesheet">
-<link href="assets/css/flaticon.css" rel="stylesheet">
-<link href="assets/css/owl.css" rel="stylesheet">
-<link href="assets/css/bootstrap.css" rel="stylesheet">
-<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
-<link href="assets/css/animate.css" rel="stylesheet">
-<link href="assets/css/color.css" rel="stylesheet">
-<link href="assets/css/style.css" rel="stylesheet">
-<link href="assets/css/responsive.css" rel="stylesheet">
+        /* ===== LOGO ===== */
+        .logo-top-right { position:fixed; top:550px; right:56px; z-index:50; max-height:50px; pointer-events:none; }
+        .logo-top-right img { max-height:50px; width:auto; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+        .logo-watermark { position:fixed; bottom:30px; right:40px; z-index:2; font-size:14px; font-weight:700; color:rgba(255,255,255,0.1); letter-spacing:2px; text-transform:uppercase; pointer-events:none; }
 
-<style>
-/* ====== Base styles ====== */
-.loader-wrap { display: none; }
+        /* ===== OVERLAY (Start & Exit) ===== */
+        .confirmation-overlay, .exit-overlay, .confirm-overlay {
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.6);
+            z-index:100;
+            display:flex; align-items:center; justify-content:center;
+            animation:fadeIn 0.3s ease;
+        }
+        .exit-overlay, .confirm-overlay { z-index:200; display:none; }
+        .exit-overlay.active, .confirm-overlay.active { display:flex; }
+        .confirmation-box, .exit-box, .confirm-box {
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(12px);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:24px;
+            padding:40px 45px 35px;
+            max-width:460px;
+            width:90%;
+            text-align:center;
+            box-shadow:0 20px 50px rgba(0,0,0,0.5);
+            animation:scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .confirmation-box .icon, .exit-box .icon, .confirm-box .icon { font-size:56px; margin-bottom:12px; }
+        .confirmation-box h2, .exit-box h2, .confirm-box h2 { color:#fff; font-size:24px; font-weight:700; margin-bottom:8px; }
+        .confirmation-box p, .exit-box p, .confirm-box p { color:rgba(255,255,255,0.6); font-size:15px; line-height:1.6; margin-bottom:25px; }
+        .btn-group { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+        .btn-confirm, .btn-leave, .btn-confirm-action { padding:12px 36px; border:none; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s ease; }
+        .btn-confirm { background:#22b6af; color:#fff; }
+        .btn-confirm:hover { transform:scale(1.03); box-shadow:0 6px 24px rgba(34,182,175,0.3); }
+        .btn-leave { background:#e74c3c; color:#fff; }
+        .btn-leave:hover { transform:scale(1.03); box-shadow:0 6px 24px rgba(231,76,60,0.3); }
+        .btn-cancel, .btn-stay, .btn-cancel-action { padding:12px 30px; border:2px solid rgba(255,255,255,0.15); border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s ease; background:transparent; color:rgba(255,255,255,0.7); }
+        .btn-cancel:hover, .btn-stay:hover, .btn-cancel-action:hover { border-color:rgba(255,255,255,0.4); color:#fff; background:rgba(255,255,255,0.05); }
+        .btn-confirm-action { background:#22b6af; color:#fff; }
+        .btn-confirm-action:hover { transform:scale(1.03); box-shadow:0 6px 24px rgba(34,182,175,0.3); }
 
-/* ====== Page title with image background ====== */
-.page-title.centred {
-    position: relative;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    min-height: 350px;
-    display: flex;
-    align-items: center;
-    background-color: transparent !important;
-}
-.page-title .video-background { display: none !important; }
-.page-title .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-.page-title .auto-container { position: relative; z-index: 2; }
-.page-title .title h1,
-.page-title .bread-crumb li,
-.page-title .bread-crumb li a { color: #fff; }
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        @keyframes scaleIn { from{transform:scale(0.95); opacity:0;} to{transform:scale(1); opacity:1;} }
 
-/* ====== Quiz Container ====== */
-.quiz-section {
-    padding: 60px 0 100px;
-    background: #f8fafb;
-}
-.quiz-card {
-    max-width: 820px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 20px;
-    padding: 40px 45px 35px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.04);
-}
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.quiz-header .question-counter {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a5f7a;
-}
-.quiz-header .score-display {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a5f7a;
-}
-.progress-track {
-    width: 100%;
-    height: 6px;
-    background: #e9ecef;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    overflow: hidden;
-}
-.progress-fill {
-    height: 100%;
-    background: #1a5f7a;
-    border-radius: 10px;
-    transition: width 0.5s ease;
-    width: 0%;
-}
-.quiz-question {
-    font-size: 22px;
-    font-weight: 700;
-    color: #142441;
-    margin-bottom: 30px;
-    line-height: 1.5;
-}
-.quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-.quiz-option {
-    padding: 16px 22px;
-    border: 2px solid #e9ecef;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #142441;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    background: #fff;
-    text-align: left;
-}
-.quiz-option:hover:not(.correct):not(.wrong) {
-    border-color: #1a5f7a;
-    background: #f0f7fa;
-    transform: translateX(4px);
-}
-.quiz-option.correct {
-    border-color: #28a745;
-    background: #e8f5e9;
-    color: #1e7e34;
-}
-.quiz-option.correct::after {
-    content: " ✓";
-    color: #28a745;
-    font-weight: 700;
-}
-.quiz-option.wrong {
-    border-color: #dc3545;
-    background: #fde8ea;
-    color: #a71d2a;
-}
-.quiz-option.wrong::after {
-    content: " ✗";
-    color: #dc3545;
-    font-weight: 700;
-}
-.quiz-option.disabled {
-    cursor: default;
-    opacity: 0.7;
-}
-.quiz-option.disabled:hover {
-    transform: none;
-    border-color: #e9ecef;
-    background: #fff;
-}
-.quiz-option.show-correct {
-    border-color: #28a745;
-    background: #e8f5e9;
-}
-.quiz-footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
-    border-top: 1px solid #e9ecef;
-    padding-top: 24px;
-}
-.btn-next {
-    padding: 12px 40px;
-    background: #1a5f7a;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn-next:hover { background: #0d4055; transform: translateY(-2px); }
-.btn-next:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-}
+        /* ===== REVIEW OVERLAY ===== */
+        .review-overlay {
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.7);
+            backdrop-filter:blur(8px);
+            z-index:150;
+            display:none;
+            align-items:center; justify-content:center;
+            animation:fadeIn 0.3s ease;
+            padding:20px;
+        }
+        .review-overlay.active { display:flex; }
+        .review-box {
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(16px);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:24px;
+            padding:30px 35px;
+            max-width:700px;
+            width:100%;
+            max-height:80vh;
+            overflow-y:auto;
+            box-shadow:0 20px 50px rgba(0,0,0,0.5);
+            animation:scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .review-box h2 { color:#fff; font-size:24px; font-weight:700; margin-bottom:20px; text-align:center; }
+        .review-item {
+            display:flex; align-items:center; gap:12px;
+            padding:12px 16px;
+            margin-bottom:8px;
+            border-radius:12px;
+            background:rgba(255,255,255,0.04);
+            border-left:3px solid rgba(255,255,255,0.1);
+            transition:0.2s;
+        }
+        .review-item .qnum { color:rgba(255,255,255,0.5); font-size:14px; font-weight:600; min-width:30px; }
+        .review-item .qtext { flex:1; color:rgba(255,255,255,0.85); font-size:14px; }
+        .review-item .status { font-size:20px; }
+        .review-item .status.correct { color:#28a745; }
+        .review-item .status.wrong { color:#dc3545; }
+        .review-item .status.unanswered { color:rgba(255,255,255,0.2); }
+        .review-item .user-answer { font-size:12px; color:rgba(255,255,255,0.4); margin-left:auto; }
+        .review-close {
+            display:block; margin:20px auto 0;
+            padding:10px 30px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:50px;
+            color:#fff;
+            font-size:14px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        .review-close:hover { background:rgba(255,255,255,0.15); }
 
-/* ====== Results ====== */
-.quiz-results {
-    text-align: center;
-    padding: 20px 0 10px;
-}
-.quiz-results .result-icon {
-    font-size: 72px;
-    margin-bottom: 15px;
-}
-.quiz-results h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #142441;
-    margin-bottom: 8px;
-}
-.quiz-results .result-score {
-    font-size: 48px;
-    font-weight: 800;
-    color: #1a5f7a;
-    margin-bottom: 10px;
-}
-.quiz-results .result-message {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 25px;
-}
-.btn-try-again {
-    padding: 12px 40px;
-    background: #1a5f7a;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn-try-again:hover { background: #0d4055; transform: translateY(-2px); }
+        /* ===== FEEDBACK POPUP ===== */
+        .feedback-popup {
+            position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+            z-index:300;
+            font-size:100px;
+            pointer-events:none;
+            animation:popInOut 0.7s ease forwards;
+            text-shadow:0 8px 30px rgba(0,0,0,0.5);
+        }
+        @keyframes popInOut {
+            0% { transform:translate(-50%,-50%) scale(0) rotate(-15deg); opacity:0; }
+            35% { transform:translate(-50%,-50%) scale(1.2) rotate(5deg); opacity:1; }
+            70% { transform:translate(-50%,-50%) scale(1) rotate(0deg); opacity:1; }
+            100% { transform:translate(-50%,-50%) scale(1.4) rotate(0deg); opacity:0; }
+        }
 
-/* ====== Responsive ====== */
-@media (max-width: 768px) {
-    .quiz-card { padding: 28px 20px; }
-    .quiz-question { font-size: 18px; }
-    .quiz-option { font-size: 15px; padding: 14px 18px; }
-    .quiz-results .result-score { font-size: 36px; }
-}
-@media (max-width: 480px) {
-    .quiz-card { padding: 20px 16px; }
-    .quiz-header { flex-direction: column; gap: 6px; align-items: flex-start; }
-    .btn-next { width: 100%; }
-}
-</style>
+        /* ===== QUIZ WRAPPER ===== */
+        .quiz-wrapper { position:relative; z-index:10; width:100%; max-width:720px; padding:10px 0; }
+
+        /* ===== HEADER BUTTONS ===== */
+        .btn-home {
+            position:fixed; top:20px; left:20px; z-index:50;
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:50px;
+            padding:10px 18px;
+            color:#fff; font-size:13px; font-weight:600;
+            display:flex; align-items:center; gap:8px;
+            cursor:pointer;
+            transition:all 0.2s ease;
+            text-decoration:none;
+            font-family:'Inter',sans-serif;
+        }
+        .btn-home:hover { background:rgba(255,255,255,0.12); transform:translateX(-3px); }
+
+        .header-actions {
+            position:fixed; top:20px; right:20px; z-index:50;
+            display:flex; gap:10px;
+            align-items:center;
+        }
+        .header-actions button {
+            background:rgba(255,255,255,0.06);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:50%;
+            width:40px; height:40px;
+            color:rgba(255,255,255,0.7);
+            font-size:16px;
+            cursor:pointer;
+            transition:all 0.2s ease;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .header-actions button:hover {
+            background:rgba(255,255,255,0.12);
+            color:#fff;
+            transform:scale(1.05);
+        }
+        .header-actions button.danger:hover { background:rgba(231,76,60,0.2); border-color:#e74c3c; color:#e74c3c; }
+
+        /* ===== MUSIC CONTROL ===== */
+        .music-control {
+            position:fixed; bottom:20px; left:20px; z-index:50;
+            display:flex; align-items:center; gap:10px;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:60px;
+            padding:6px 14px 6px 10px;
+            box-shadow:0 4px 20px rgba(0,0,0,0.2);
+        }
+        .music-control button { background:none; border:none; color:rgba(255,255,255,0.6); font-size:16px; cursor:pointer; padding:4px; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; transition:0.2s; }
+        .music-control button:hover { background:rgba(255,255,255,0.08); color:#fff; }
+        .music-control .upload-label { color:rgba(255,255,255,0.4); font-size:12px; cursor:pointer; padding:2px 10px; border-radius:30px; border:1px dashed rgba(255,255,255,0.15); transition:0.2s; }
+        .music-control .upload-label:hover { border-color:rgba(255,255,255,0.3); color:#fff; }
+        .music-control input[type="file"] { display:none; }
+        .music-control .status-dot { width:6px; height:6px; border-radius:50%; background:#22b6af; display:inline-block; animation:pulse 1.5s infinite; }
+        @keyframes pulse { 0%{opacity:0.3; transform:scale(0.8);} 50%{opacity:1; transform:scale(1.2);} 100%{opacity:0.3; transform:scale(0.8);} }
+
+        /* ===== QUIZ CARD ===== */
+        .quiz-card {
+            background:rgba(255,255,255,0.04);
+            backdrop-filter:blur(16px);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:24px;
+            padding:32px 38px 30px;
+            box-shadow:0 20px 50px rgba(0,0,0,0.3);
+            animation:scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+            margin:8px 0;
+            contain:layout style paint;
+        }
+
+        .quiz-header {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:4px; flex-wrap:wrap; gap:6px;
+        }
+        .quiz-header .question-counter { color:rgba(255,255,255,0.5); font-size:13px; font-weight:500; }
+        .quiz-header .right-group { display:flex; align-items:center; gap:12px; }
+        .quiz-header .score-display { color:rgba(255,255,255,0.7); font-size:13px; font-weight:600; }
+        .quiz-header .score-display span { color:#22b6af; }
+        .quiz-header .high-score { color:rgba(255,215,0,0.5); font-size:12px; font-weight:500; }
+        .quiz-header .high-score i { color:#ffd700; }
+
+        .progress-track { width:100%; height:3px; background:rgba(255,255,255,0.08); border-radius:10px; margin-bottom:24px; overflow:hidden; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,#22b6af,#1a5f7a); border-radius:10px; transition:width 0.5s ease; width:0%; }
+
+        .quiz-question { color:#fff; font-size:22px; font-weight:700; margin-bottom:20px; line-height:1.4; }
+        .question-image { margin-bottom:18px; text-align:center; }
+        .question-image img { max-width:100%; max-height:180px; border-radius:12px; background:rgba(255,255,255,0.03); padding:4px; border:1px solid rgba(255,255,255,0.05); object-fit:contain; }
+
+        .quiz-options { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+        .quiz-option {
+            padding:14px 18px;
+            border:2px solid rgba(255,255,255,0.08);
+            border-radius:12px;
+            font-size:15px;
+            font-weight:500;
+            color:rgba(255,255,255,0.9);
+            cursor:pointer;
+            transition:all 0.2s ease;
+            background:rgba(255,255,255,0.03);
+            text-align:left;
+            font-family:'Inter',sans-serif;
+            position:relative;
+        }
+        .quiz-option .key-hint {
+            position:absolute; right:14px; top:50%; transform:translateY(-50%);
+            color:rgba(255,255,255,0.12); font-size:11px; font-weight:700;
+            background:rgba(255,255,255,0.04); padding:1px 8px; border-radius:30px;
+            border:1px solid rgba(255,255,255,0.04);
+        }
+        .quiz-option:hover:not(.disabled) { border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); transform:translateX(4px); }
+        .quiz-option.correct { border-color:#28a745; background:rgba(40,167,69,0.15); color:#6fda8a; }
+        .quiz-option.correct::after { content:" ✓"; color:#28a745; font-weight:700; }
+        .quiz-option.wrong { border-color:#dc3545; background:rgba(220,53,69,0.15); color:#f5a3a3; }
+        .quiz-option.wrong::after { content:" ✗"; color:#dc3545; font-weight:700; }
+        .quiz-option.disabled { cursor:default; opacity:0.5; }
+        .quiz-option.disabled:hover { transform:none; border-color:rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); }
+
+        .explanation-box {
+            margin:8px 0 18px 0;
+            padding:12px 16px;
+            border-radius:12px;
+            background:rgba(255,255,255,0.04);
+            border-left:3px solid #22b6af;
+            color:rgba(255,255,255,0.8);
+            font-size:14px;
+            line-height:1.5;
+            animation:fadeIn 0.3s ease;
+            display:none;
+        }
+        .explanation-box.show { display:block; }
+        .explanation-box .ex-title { font-weight:700; color:#22b6af; margin-right:6px; }
+        .explanation-box .ex-title.wrong-title { color:#e74c3c; }
+
+        .quiz-footer { display:flex; justify-content:flex-end; border-top:1px solid rgba(255,255,255,0.05); padding-top:18px; }
+        .btn-next { padding:12px 38px; background:#22b6af; color:#fff; border:none; border-radius:50px; font-weight:700; font-size:15px; cursor:pointer; transition:all 0.2s ease; font-family:'Inter',sans-serif; }
+        .btn-next:hover:not(:disabled) { transform:scale(1.02); box-shadow:0 4px 20px rgba(34,182,175,0.25); }
+        .btn-next:disabled { opacity:0.25; cursor:not-allowed; transform:none; }
+
+        /* ===== RESULTS ===== */
+        .quiz-results { text-align:center; padding:8px 0; }
+        .quiz-results .result-icon { font-size:64px; margin-bottom:8px; }
+        .quiz-results h2 { color:#fff; font-size:28px; font-weight:800; margin-bottom:4px; }
+        .quiz-results .result-score { font-size:44px; font-weight:900; color:#22b6af; margin-bottom:2px; }
+        .quiz-results .best-score { color:rgba(255,215,0,0.5); font-size:14px; margin-bottom:10px; }
+        .quiz-results .best-score i { color:#ffd700; margin-right:4px; }
+        .quiz-results .result-message { color:rgba(255,255,255,0.7); font-size:17px; margin-bottom:20px; }
+        .quiz-results .result-bar { width:100%; max-width:280px; height:6px; background:rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; margin:0 auto 10px; }
+        .quiz-results .result-bar-fill { height:100%; border-radius:10px; transition:width 0.8s ease; width:0%; }
+        .quiz-results .btn-group-result { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+        .btn-try-again { padding:12px 38px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:#fff; border-radius:50px; font-weight:600; font-size:15px; cursor:pointer; transition:all 0.2s ease; font-family:'Inter',sans-serif; }
+        .btn-try-again:hover { background:rgba(255,255,255,0.12); transform:scale(1.02); }
+        .btn-done { padding:12px 38px; background:#22b6af; border:none; color:#fff; border-radius:50px; font-weight:600; font-size:15px; cursor:pointer; transition:all 0.2s ease; font-family:'Inter',sans-serif; }
+        .btn-done:hover { transform:scale(1.02); box-shadow:0 4px 20px rgba(34,182,175,0.3); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width:600px) {
+            .quiz-card { padding:24px 18px; }
+            .quiz-question { font-size:19px; }
+            .quiz-option { font-size:14px; padding:12px 14px; }
+            .confirmation-box, .exit-box, .confirm-box { padding:30px 20px; }
+            .confirmation-box h2, .exit-box h2, .confirm-box h2 { font-size:20px; }
+            .btn-home { padding:8px 14px; font-size:12px; top:14px; left:14px; }
+            .btn-home span { display:none; }
+            .header-actions { top:14px; right:14px; gap:8px; }
+            .header-actions button { width:34px; height:34px; font-size:14px; }
+            .music-control { bottom:14px; left:14px; padding:4px 10px 4px 8px; gap:6px; }
+            .music-control .upload-label { font-size:10px; padding:1px 8px; }
+            .logo-top-right { top:10px; right:12px; max-height:30px; }
+            .logo-top-right img { max-height:30px; }
+            .feedback-popup { font-size:70px; }
+            .question-image img { max-height:120px; }
+            .review-box { padding:20px; }
+            .review-item { padding:10px 12px; flex-wrap:wrap; }
+        }
+        @media (max-width:400px) {
+            .quiz-card { padding:16px 12px; }
+            .quiz-question { font-size:17px; }
+            .btn-next, .btn-done, .btn-try-again { width:100%; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="boxed_wrapper">
+    <!-- ===== BACKGROUND BINTANG ===== -->
+    <div class="bg-stars">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div>
+    </div>
 
-    <!-- preloader -->
-    <div class="loader-wrap">
-        <div class="preloader">
-            <div class="preloader-close">Preloader Close</div>
-            <div id="handle-preloader" class="handle-preloader">
-                <div class="animation-preloader">
-                    <div class="spinner"></div>
-                    <div class="txt-loading">
-                        <span data-text-preloader="Q" class="letters-loading">Q</span>
-                        <span data-text-preloader="u" class="letters-loading">u</span>
-                        <span data-text-preloader="i" class="letters-loading">i</span>
-                        <span data-text-preloader="z" class="letters-loading">z</span>
-                    </div>
-                </div>  
+    <!-- ===== LOGO ===== -->
+    <div class="logo-top-right"><img src="assets/images/lab-ready3.png" alt="Lab-Ready" /></div>
+    <div class="logo-watermark">Lab-Ready ✦ Quiz</div>
+
+    <!-- ===== HOME BUTTON ===== -->
+    <div class="btn-home" id="homeBtn"><i class="fas fa-arrow-left"></i><span>Back to Home</span></div>
+
+    <!-- ===== HEADER ACTIONS (Review, Reset, Stop) ===== -->
+    <div class="header-actions">
+        <button id="reviewBtn" title="Review Answers"><i class="fas fa-list-ul"></i></button>
+        <button id="resetBtn" title="Reset Quiz"><i class="fas fa-sync-alt"></i></button>
+        <button id="stopBtn" title="Stop Quiz" class="danger"><i class="fas fa-power-off"></i></button>
+    </div>
+
+    <!-- ===== MUSIC CONTROL ===== -->
+    <div class="music-control">
+        <button id="musicToggle"><i class="fas fa-music" id="musicIcon"></i></button>
+        <span class="status-dot" id="musicDot"></span>
+        <label class="upload-label" for="musicUpload"><i class="fas fa-upload"></i> Upload MP3</label>
+        <input type="file" id="musicUpload" accept="audio/*">
+    </div>
+
+    <!-- ===== QUIZ WRAPPER ===== -->
+    <div class="quiz-wrapper" id="quizWrapper"><div class="quiz-card" id="quizCard"></div></div>
+
+    <!-- ===== OVERLAYS ===== -->
+    <!-- Start Confirmation -->
+    <div class="confirmation-overlay" id="confirmationOverlay">
+        <div class="confirmation-box">
+            <div class="icon">🧪</div>
+            <h2>Ready to Test Your Knowledge?</h2>
+            <p>You'll answer <strong>10 questions</strong> about lab safety, apparatus, and chemicals.<br>Take your time and good luck!</p>
+            <div class="btn-group">
+                <button class="btn-confirm" id="confirmStart">Start Quiz 🚀</button>
+                <button class="btn-cancel" id="cancelStart">Maybe Later</button>
             </div>
         </div>
     </div>
-    <!-- preloader end -->
 
-    <!-- search-popup -->
-    <div id="search-popup" class="search-popup">
-        <div class="close-search"><span>x</span></div>
-        <div class="popup-inner">
-            <div class="overlay-layer"></div>
-            <div class="search-form">
-                <form method="post" action="#">
-                    <div class="form-group">
-                        <fieldset>
-                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search..." required>
-                            <input type="submit" value="Search Now!" class="theme-btn style-four">
-                        </fieldset>
-                    </div>
-                </form>
+    <!-- Exit to Home -->
+    <div class="exit-overlay" id="exitOverlay">
+        <div class="exit-box">
+            <div class="icon">⚠️</div>
+            <h2>Leave Quiz?</h2>
+            <p>Your progress will be lost if you go back to Home. Are you sure?</p>
+            <div class="btn-group">
+                <button class="btn-leave" id="confirmLeave">Leave Anyway</button>
+                <button class="btn-stay" id="cancelLeave">Stay Here</button>
             </div>
         </div>
     </div>
-    <!-- search-popup end -->
 
-    <!-- main header (updated with Quiz link) -->
-    <header class="main-header style-four style-five">
-        <div class="header-lower">
-            <div class="outer-box">
-                <div class="logo-box">
-                    <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
-                </div>
-                <div class="menu-area clearfix">
-                    <div class="mobile-nav-toggler">
-                        <i class="icon-bar"></i>
-                        <i class="icon-bar"></i>
-                        <i class="icon-bar"></i>
-                    </div>
-                    <nav class="main-menu navbar-expand-md navbar-light">
-                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                            <ul class="navigation scroll-nav clearfix">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="apparatus.html">Apparatus</a></li>
-                                <li><a href="chemicals.html">Chemicals</a></li>
-                                <li><a href="emergency.html">Emergency SOP</a></li>
-                                <li class="current"><a href="quiz.html">Quiz</a></li>
-                                <li><a href="videos.html">Simulations</a></li>
-                                <li><a href="index.html#about">About</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-                <ul class="menu-right-content clearfix">
-                    <li class="search-btn">
-                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
-                    </li>
-                    <li class="btn-box">
-                        <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
-                    </li>
-                </ul>
+    <!-- Generic Confirmation (Reset / Stop) -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <div class="icon" id="confirmIcon">⚠️</div>
+            <h2 id="confirmTitle">Confirm</h2>
+            <p id="confirmMessage">Are you sure?</p>
+            <div class="btn-group">
+                <button class="btn-confirm-action" id="confirmAction">Confirm</button>
+                <button class="btn-cancel-action" id="confirmCancel">Cancel</button>
             </div>
         </div>
-        <div class="sticky-header">
-            <div class="auto-container">
-                <div class="outer-box clearfix">
-                    <div class="menu-area pull-left"><nav class="main-menu clearfix"></nav></div>
-                    <ul class="menu-right-content pull-right clearfix">
-                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
-                        <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="menu-backdrop"></div>
-        <div class="close-btn"><i class="fas fa-times"></i></div>
-        <nav class="menu-box">
-            <div class="nav-logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></div>
-            <div class="menu-outer"></div>
-        </nav>
     </div>
 
-    <!-- Page Title -->
-    <section class="page-title centred" style="background-image: url('assets/images/banner/quiz-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="overlay"></div>
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
-                <div class="title">
-                    <h1>Lab Safety Quiz</h1>
-                </div>
-                <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Quiz</li>
-                </ul>
-            </div>
+    <!-- Review Modal -->
+    <div class="review-overlay" id="reviewOverlay">
+        <div class="review-box">
+            <h2>📋 Review Answers</h2>
+            <div id="reviewList"></div>
+            <button class="review-close" id="closeReview">Close</button>
         </div>
-    </section>
+    </div>
 
-    <!-- Quiz Section -->
-    <section class="quiz-section" id="quizSection">
-        <div class="auto-container">
-            <div class="quiz-card" id="quizCard">
-                <!-- Dynamic content will be injected by JS -->
-            </div>
-        </div>
-    </section>
+    <!-- ============================================================ -->
+    <script>
+        // ============================================================
+        // AUDIO & MUSIC
+        // ============================================================
+        let audioCtx = null;
+        let bgInterval = null;
+        let isMusicPlaying = false;
+        let customAudio = null;
+        let isUsingCustomAudio = false;
 
-    <!-- footer -->
-    <footer class="main-footer bg-color-1">
-        <div class="footer-top">
-            <div class="auto-container">
-                <div class="row clearfix">
-                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
-                        <div class="footer-widget logo-widget">
-                            <div class="footer-logo">
-                                <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
-                            </div>
-                            <div class="text">
-                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
-                                <ul class="info clearfix">
-                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
-                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
-                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
-                        <div class="footer-widget links-widget ml-70">
-                            <div class="widget-title"><h4>Quick Links</h4></div>
-                            <div class="widget-content">
-                                <ul class="links-list clearfix">
-                                    <li><a href="apparatus.html">Apparatus</a></li>
-                                    <li><a href="chemicals.html">Chemicals</a></li>
-                                    <li><a href="emergency.html">Emergency SOP</a></li>
-                                    <li><a href="quiz.html">Quiz</a></li>
-                                    <li><a href="videos.html">Simulations</a></li>
-                                    <li><a href="index.html#about">About</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
-                        <div class="footer-widget subscribe-widget">
-                            <div class="widget-title"><h4>For Students</h4></div>
-                            <div class="widget-content">
-                                <p>Learn lab safety and management interactively.</p>
-                                <form action="#" method="post" class="subscribe-form">
-                                    <div class="form-group">
-                                        <input type="email" name="email" placeholder="Your Email" required="">
-                                        <button type="submit"><i class="icon-27"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom centred">
-            <div class="auto-container">
-                <div class="copyright">
-                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <button class="scroll-top scroll-to-target" data-target="html">
-        <span class="fal fa-angle-up"></span>
-    </button>
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/owl.js"></script>
-<script src="assets/js/wow.js"></script>
-<script src="assets/js/validation.js"></script>
-<script src="assets/js/jquery.fancybox.js"></script>
-<script src="assets/js/appear.js"></script>
-<script src="assets/js/isotope.js"></script>
-<script src="assets/js/jquery.nice-select.min.js"></script>
-<script src="assets/js/nav-tool.js"></script>
-<script src="assets/js/jquery.paroller.min.js"></script>
-<script src="assets/js/pagenav.js"></script>
-<script src="assets/js/script.js"></script>
-
-<script>
-// Hide preloader after page load
-window.addEventListener('load', function() {
-    var preloader = document.querySelector('.loader-wrap');
-    if (preloader) preloader.style.display = 'none';
-});
-
-// ===== QUIZ DATA =====
-const quizData = [
-    {
-        question: "When diluting acids, what is the correct procedure?",
-        options: [
-            "Add water to acid slowly",
-            "Add acid to water slowly",
-            "Mix both simultaneously",
-            "Add acid to water quickly"
-        ],
-        correct: 1,
-        explanation: "Always add acid to water (not water to acid) to prevent violent splashing and exothermic reactions."
-    },
-    {
-        question: "What type of fire extinguisher should be used on a chemical fire involving flammable liquids?",
-        options: [
-            "Class A (water)",
-            "Class B (CO₂ or dry chemical)",
-            "Class C (electrical)",
-            "Class D (metal)"
-        ],
-        correct: 1,
-        explanation: "Class B extinguishers (CO₂ or dry chemical) are for flammable liquids. Never use water on chemical fires."
-    },
-    {
-        question: "What is the minimum time you should rinse your eyes at the eyewash station after a chemical splash?",
-        options: [
-            "5 minutes",
-            "10 minutes",
-            "15 minutes",
-            "30 minutes"
-        ],
-        correct: 2,
-        explanation: "Rinse eyes for at least 15 minutes at the eyewash station. Hold eyelids open and rotate eyes for thorough rinsing."
-    },
-    {
-        question: "Which apparatus is used to measure precise volumes of liquids in titrations?",
-        options: [
-            "Beaker",
-            "Graduated cylinder",
-            "Burette",
-            "Erlenmeyer flask"
-        ],
-        correct: 2,
-        explanation: "A burette is used for precise volume dispensing in titrations. It has a stopcock for controlled flow."
-    },
-    {
-        question: "What should you do first if your clothing catches fire in the lab?",
-        options: [
-            "Run to the safety shower",
-            "Stop, drop, and roll",
-            "Yell for help",
-            "Remove your clothes immediately"
-        ],
-        correct: 1,
-        explanation: "STOP, DROP, and ROLL to smother the flames. Then use the safety shower if available."
-    },
-    {
-        question: "Which of the following is a strong acid commonly found in laboratories?",
-        options: [
-            "Acetic acid (CH₃COOH)",
-            "Carbonic acid (H₂CO₃)",
-            "Hydrochloric acid (HCl)",
-            "Boric acid (H₃BO₃)"
-        ],
-        correct: 2,
-        explanation: "Hydrochloric acid (HCl) is a strong acid. Acetic, carbonic, and boric acids are weak acids."
-    },
-    {
-        question: "What PPE should you wear when handling corrosive chemicals?",
-        options: [
-            "Safety goggles only",
-            "Lab coat only",
-            "Gloves, goggles, and lab coat",
-            "Face shield only"
-        ],
-        correct: 2,
-        explanation: "Always wear chemical-resistant gloves, safety goggles, and a lab coat when handling corrosive chemicals."
-    },
-    {
-        question: "What is the proper way to dispose of broken glassware?",
-        options: [
-            "Place in regular trash bin",
-            "Use dustpan and brush, then dispose in sharps container",
-            "Leave it on the bench",
-            "Wash it and reuse"
-        ],
-        correct: 1,
-        explanation: "Use a dustpan and brush (never hands), then place broken glass in a designated sharps container."
-    },
-    {
-        question: "What does a pH meter measure?",
-        options: [
-            "Temperature of a solution",
-            "Concentration of salt",
-            "Acidity or alkalinity of a solution",
-            "Volume of a liquid"
-        ],
-        correct: 2,
-        explanation: "A pH meter measures the acidity or alkalinity (pH) of a solution."
-    },
-    {
-        question: "If you spill a toxic chemical on the floor, what should you do FIRST?",
-        options: [
-            "Clean it up immediately",
-            "Evacuate the area and close doors",
-            "Call the police",
-            "Open the windows"
-        ],
-        correct: 1,
-        explanation: "First, evacuate the area and close doors to contain the spill. Only trained personnel should attempt cleanup."
-    }
-];
-
-// ===== QUIZ LOGIC =====
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
-let correctAnswers = 0;
-let totalQuestions = quizData.length;
-
-const quizCard = document.getElementById('quizCard');
-
-function renderQuiz() {
-    if (currentQuestion >= totalQuestions) {
-        showResults();
-        return;
-    }
-
-    const q = quizData[currentQuestion];
-    let optionsHtml = '';
-    q.options.forEach((opt, idx) => {
-        optionsHtml += `
-            <div class="quiz-option" data-opt-index="${idx}" onclick="selectOption(this, ${idx})">
-                ${opt}
-            </div>
-        `;
-    });
-
-    quizCard.innerHTML = `
-        <div class="quiz-header">
-            <span class="question-counter">Question ${currentQuestion + 1} of ${totalQuestions}</span>
-            <span class="score-display">✅ ${score} correct</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-fill" style="width: ${((currentQuestion) / totalQuestions) * 100}%;"></div>
-        </div>
-        <div class="quiz-question">${q.question}</div>
-        <div class="quiz-options" id="optionsContainer">
-            ${optionsHtml}
-        </div>
-        <div class="quiz-footer">
-            <button class="btn-next" id="nextBtn" disabled onclick="nextQuestion()">
-                ${currentQuestion === totalQuestions - 1 ? 'See Results' : 'Next →'}
-            </button>
-        </div>
-    `;
-    
-    answered = false;
-}
-
-function selectOption(el, idx) {
-    if (answered) return;
-    
-    const q = quizData[currentQuestion];
-    const allOptions = document.querySelectorAll('.quiz-option');
-    const isCorrect = idx === q.correct;
-    
-    // Disable all options
-    allOptions.forEach(opt => opt.classList.add('disabled'));
-    
-    // Highlight correct and wrong answers
-    allOptions.forEach((opt, i) => {
-        if (i === q.correct) {
-            opt.classList.add('correct');
-        } else if (i === idx && !isCorrect) {
-            opt.classList.add('wrong');
+        function initAudio() {
+            if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            return audioCtx;
         }
-    });
-    
-    // If selected option is correct, show correct; if wrong, show wrong
-    if (isCorrect) {
-        score++;
-        correctAnswers++;
-    }
-    
-    answered = true;
-    document.getElementById('nextBtn').disabled = false;
-}
 
-function nextQuestion() {
-    currentQuestion++;
-    // Update progress before rendering next question
-    const progressFill = document.querySelector('.progress-fill');
-    if (progressFill) {
-        progressFill.style.width = `${(currentQuestion / totalQuestions) * 100}%`;
-    }
-    renderQuiz();
-}
+        function playBeep(freq, duration, type='sine', volume=0.15) {
+            try {
+                const ctx = initAudio();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(volume, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + duration);
+            } catch(e) {}
+        }
 
-function showResults() {
-    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
-    let emoji, message, color;
-    
-    if (percentage >= 90) {
-        emoji = '🎉';
-        message = 'Excellent! You\'re a lab safety expert!';
-        color = '#28a745';
-    } else if (percentage >= 70) {
-        emoji = '😊';
-        message = 'Good job! Keep learning to become an expert.';
-        color = '#1a5f7a';
-    } else if (percentage >= 50) {
-        emoji = '📚';
-        message = 'Not bad! Review the topics and try again.';
-        color = '#f39c12';
-    } else {
-        emoji = '🤔';
-        message = 'Keep studying! Lab safety is important. Try again!';
-        color = '#e74c3c';
-    }
-    
-    quizCard.innerHTML = `
-        <div class="quiz-results">
-            <div class="result-icon">${emoji}</div>
-            <h2>Quiz Complete!</h2>
-            <div class="result-score">${correctAnswers} / ${totalQuestions}</div>
-            <div class="result-message">${message}</div>
-            <div style="margin-bottom: 20px;">
-                <div style="width: 100%; height: 8px; background: #e9ecef; border-radius: 10px; overflow: hidden; max-width: 300px; margin: 0 auto;">
-                    <div style="width: ${percentage}%; height: 100%; background: ${color}; border-radius: 10px;"></div>
+        function playCorrectSound() {
+            playBeep(523,0.12,'sine',0.15);
+            setTimeout(()=>playBeep(659,0.12,'sine',0.15),120);
+            setTimeout(()=>playBeep(784,0.2,'sine',0.15),240);
+        }
+        function playWrongSound() {
+            playBeep(300,0.25,'sawtooth',0.08);
+            setTimeout(()=>playBeep(250,0.3,'sawtooth',0.08),250);
+        }
+        function playCompleteSound() {
+            [523,587,659,784,880,784,880].forEach((n,i)=>setTimeout(()=>playBeep(n,0.15,'sine',0.12),i*120));
+        }
+
+        function startBgMusic() {
+            if(bgInterval || (isUsingCustomAudio && customAudio && !customAudio.paused)) return;
+            let idx=0;
+            const notes=[440,554,659,440,554,659,784,880];
+            bgInterval = setInterval(()=>{
+                try {
+                    const ctx=initAudio();
+                    if(ctx.state==='suspended') ctx.resume();
+                    const osc=ctx.createOscillator();
+                    const gain=ctx.createGain();
+                    osc.type='sine';
+                    osc.frequency.setValueAtTime(notes[idx%notes.length], ctx.currentTime);
+                    gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime+0.25);
+                    idx++;
+                } catch(e){}
+            },340);
+            isMusicPlaying=true;
+            updateMusicUI();
+        }
+
+        function stopBgMusic() {
+            if(bgInterval) { clearInterval(bgInterval); bgInterval=null; }
+            isMusicPlaying=false;
+            updateMusicUI();
+        }
+
+        function toggleMusic() {
+            if(isUsingCustomAudio && customAudio) {
+                if(customAudio.paused) { customAudio.play().catch(()=>{}); isMusicPlaying=true; }
+                else { customAudio.pause(); isMusicPlaying=false; }
+                updateMusicUI();
+                return;
+            }
+            if(isMusicPlaying) stopBgMusic();
+            else startBgMusic();
+        }
+
+        function updateMusicUI() {
+            const icon=document.getElementById('musicIcon');
+            const dot=document.getElementById('musicDot');
+            if(isMusicPlaying) {
+                icon.className='fas fa-music';
+                dot.style.background='#22b6af';
+                dot.style.animation='pulse 1.5s infinite';
+            } else {
+                icon.className='fas fa-volume-mute';
+                dot.style.background='rgba(255,255,255,0.2)';
+                dot.style.animation='none';
+            }
+        }
+
+        document.getElementById('musicUpload').addEventListener('change', function(e) {
+            const file=e.target.files[0];
+            if(!file) return;
+            const url=URL.createObjectURL(file);
+            if(customAudio) { customAudio.pause(); customAudio.src=url; }
+            else { customAudio=new Audio(url); customAudio.loop=true; customAudio.volume=0.25; }
+            stopBgMusic();
+            customAudio.play().then(()=>{
+                isUsingCustomAudio=true;
+                isMusicPlaying=true;
+                updateMusicUI();
+                document.querySelector('.upload-label').innerHTML='<i class="fas fa-check"></i> Custom';
+                setTimeout(()=>document.querySelector('.upload-label').innerHTML='<i class="fas fa-upload"></i> Upload MP3',3000);
+            }).catch(()=>{});
+        });
+        document.getElementById('musicToggle').addEventListener('click', toggleMusic);
+
+        // ============================================================
+        // QUIZ DATA (10 soalan)
+        // ============================================================
+        const baseQuizData = [
+            {
+                question: "When diluting acids, what is the correct procedure?",
+                options: ["Add water to acid slowly", "Add acid to water slowly", "Mix both simultaneously", "Add acid to water quickly"],
+                correct: 1,
+                image: null,
+                explanation: "Always add acid to water (not water to acid) to prevent violent splashing."
+            },
+            {
+                question: "What type of fire extinguisher should be used on flammable liquid fires?",
+                options: ["Class A (water)", "Class B (CO₂ or dry chemical)", "Class C (electrical)", "Class D (metal)"],
+                correct: 1,
+                image: null,
+                explanation: "Class B extinguishers are for flammable liquids. Never use water on chemical fires."
+            },
+            {
+                question: "How long should you rinse your eyes at the eyewash station after a chemical splash?",
+                options: ["5 minutes", "10 minutes", "15 minutes", "30 minutes"],
+                correct: 2,
+                image: null,
+                explanation: "Rinse eyes for at least 15 minutes at the eyewash station."
+            },
+            {
+                question: "Which apparatus is used for precise volume dispensing in titrations?",
+                options: ["Beaker", "Graduated cylinder", "Burette", "Erlenmeyer flask"],
+                correct: 2,
+                image: null,
+                explanation: "A burette is used for precise volume dispensing in titrations."
+            },
+            {
+                question: "What should you do first if your clothing catches fire?",
+                options: ["Run to safety shower", "Stop, drop, and roll", "Yell for help", "Remove clothes immediately"],
+                correct: 1,
+                image: null,
+                explanation: "STOP, DROP, and ROLL to smother the flames."
+            },
+            {
+                question: "Which of these is a strong acid commonly used in labs?",
+                options: ["Acetic acid (CH₃COOH)", "Carbonic acid (H₂CO₃)", "Hydrochloric acid (HCl)", "Boric acid (H₃BO₃)"],
+                correct: 2,
+                image: null,
+                explanation: "Hydrochloric acid (HCl) is a strong acid."
+            },
+            {
+                question: "What PPE should you wear when handling corrosive chemicals?",
+                options: ["Safety goggles only", "Lab coat only", "Gloves, goggles, and lab coat", "Face shield only"],
+                correct: 2,
+                image: null,
+                explanation: "Always wear gloves, goggles, and a lab coat when handling corrosive chemicals."
+            },
+            {
+                question: "How should you dispose of broken glassware?",
+                options: ["Regular trash bin", "Sharps container after using dustpan", "Leave on bench", "Wash and reuse"],
+                correct: 1,
+                image: null,
+                explanation: "Use a dustpan and brush, then dispose in a sharps container."
+            },
+            {
+                question: "What does a pH meter measure?",
+                options: ["Temperature", "Salt concentration", "Acidity or alkalinity", "Liquid volume"],
+                correct: 2,
+                image: null,
+                explanation: "A pH meter measures the acidity or alkalinity (pH) of a solution."
+            },
+            {
+                question: "What is the FIRST step in a toxic chemical spill?",
+                options: ["Clean it up immediately", "Evacuate the area and close doors", "Call the police", "Open windows"],
+                correct: 1,
+                image: null,
+                explanation: "First, evacuate the area and close doors to contain the spill."
+            }
+        ];
+
+        function getPlaceholderSVG() {
+            return `data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200' viewBox='0 0 600 200'%3E%3Crect width='600' height='200' fill='%231a2f3a' rx='10'/%3E%3Ctext x='300' y='90' font-family='Inter, sans-serif' font-size='24' fill='%234a6a7a' text-anchor='middle'%3E🧪 Lab-Ready Quiz %3C/text%3E%3Ctext x='300' y='130' font-family='Inter, sans-serif' font-size='14' fill='%233a5a6a' text-anchor='middle'%3EPress 1-4 or click to answer%3C/text%3E%3C/svg%3E`;
+        }
+
+        function shuffleArray(arr) {
+            for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+            return arr;
+        }
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        let shuffledQuestions = []; // array of question objects (shuffled order)
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let totalQuestions = 10; // fixed
+        let answered = false;
+        let quizStarted = false;
+        let userAnswers = []; // array per question index in shuffled order: { selected: null|int, correct: null|bool }
+
+        function getHighScore() { return parseInt(localStorage.getItem('labready_quiz_high')||'0',10); }
+        function setHighScore(v) { localStorage.setItem('labready_quiz_high', String(v)); }
+
+        // ============================================================
+        // DOM refs
+        // ============================================================
+        const quizCard = document.getElementById('quizCard');
+        const confOverlay = document.getElementById('confirmationOverlay');
+        const confirmStart = document.getElementById('confirmStart');
+        const cancelStart = document.getElementById('cancelStart');
+        const homeBtn = document.getElementById('homeBtn');
+        const exitOverlay = document.getElementById('exitOverlay');
+        const confirmLeave = document.getElementById('confirmLeave');
+        const cancelLeave = document.getElementById('cancelLeave');
+        const confirmOverlay = document.getElementById('confirmOverlay');
+        const confirmAction = document.getElementById('confirmAction');
+        const confirmCancel = document.getElementById('confirmCancel');
+        const confirmIcon = document.getElementById('confirmIcon');
+        const confirmTitle = document.getElementById('confirmTitle');
+        const confirmMessage = document.getElementById('confirmMessage');
+        const reviewOverlay = document.getElementById('reviewOverlay');
+        const reviewList = document.getElementById('reviewList');
+        const closeReview = document.getElementById('closeReview');
+        const reviewBtn = document.getElementById('reviewBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        // ============================================================
+        // GENERIC CONFIRMATION
+        // ============================================================
+        let confirmCallback = null;
+
+        function showConfirm(icon, title, message, confirmText, onConfirm) {
+            confirmIcon.textContent = icon;
+            confirmTitle.textContent = title;
+            confirmMessage.textContent = message;
+            confirmAction.textContent = confirmText;
+            confirmOverlay.classList.add('active');
+            confirmCallback = onConfirm;
+        }
+
+        confirmAction.addEventListener('click', function() {
+            confirmOverlay.classList.remove('active');
+            if (confirmCallback) {
+                confirmCallback();
+                confirmCallback = null;
+            }
+        });
+
+        confirmCancel.addEventListener('click', function() {
+            confirmOverlay.classList.remove('active');
+            confirmCallback = null;
+        });
+
+        // ============================================================
+        // REVIEW
+        // ============================================================
+        function renderReview() {
+            let html = '';
+            shuffledQuestions.forEach((q, idx) => {
+                const ans = userAnswers[idx];
+                let statusClass = 'unanswered';
+                let statusIcon = '⏳';
+                let answerText = 'Not answered';
+                if (ans && ans.selected !== null) {
+                    if (ans.correct) {
+                        statusClass = 'correct';
+                        statusIcon = '✅';
+                    } else {
+                        statusClass = 'wrong';
+                        statusIcon = '❌';
+                    }
+                    const selectedOpt = q.options[ans.selected];
+                    const correctOpt = q.options[q.correct];
+                    answerText = `Your: ${selectedOpt} | Correct: ${correctOpt}`;
+                }
+                html += `
+                    <div class="review-item">
+                        <span class="qnum">#${idx+1}</span>
+                        <span class="qtext">${q.question.length > 50 ? q.question.substring(0,50)+'...' : q.question}</span>
+                        <span class="status ${statusClass}">${statusIcon}</span>
+                        <span class="user-answer">${answerText}</span>
+                    </div>
+                `;
+            });
+            reviewList.innerHTML = html;
+        }
+
+        reviewBtn.addEventListener('click', function() {
+            if (!quizStarted || shuffledQuestions.length === 0) return;
+            renderReview();
+            reviewOverlay.classList.add('active');
+        });
+
+        closeReview.addEventListener('click', function() {
+            reviewOverlay.classList.remove('active');
+        });
+        reviewOverlay.addEventListener('click', function(e) {
+            if (e.target === reviewOverlay) reviewOverlay.classList.remove('active');
+        });
+
+        // ============================================================
+        // RESET
+        // ============================================================
+        function resetQuiz() {
+            showConfirm('🔄', 'Reset Quiz?', 'This will shuffle the questions and start a new quiz. Your current progress will be lost.', 'Reset', function() {
+                // Shuffle the base data
+                shuffledQuestions = shuffleArray([...baseQuizData]);
+                // Reset state
+                currentQuestionIndex = 0;
+                score = 0;
+                correctAnswers = 0;
+                userAnswers = shuffledQuestions.map(() => ({ selected: null, correct: null }));
+                answered = false;
+                startBgMusic();
+                renderQuiz();
+            });
+        }
+
+        resetBtn.addEventListener('click', function() {
+            if (!quizStarted) return;
+            resetQuiz();
+        });
+
+        // ============================================================
+        // STOP (reload page)
+        // ============================================================
+        function stopQuiz() {
+            showConfirm('⏹️', 'Stop Quiz?', 'The page will reload and all progress will be lost.', 'Stop', function() {
+                location.reload();
+            });
+        }
+
+        stopBtn.addEventListener('click', function() {
+            if (!quizStarted) return;
+            stopQuiz();
+        });
+
+        // ============================================================
+        // START / EXIT
+        // ============================================================
+        confirmStart.addEventListener('click', function() {
+            confOverlay.style.display = 'none';
+            quizStarted = true;
+            // Shuffle questions initially
+            shuffledQuestions = shuffleArray([...baseQuizData]);
+            userAnswers = shuffledQuestions.map(() => ({ selected: null, correct: null }));
+            totalQuestions = shuffledQuestions.length;
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            initAudio().resume().catch(()=>{});
+            startBgMusic();
+            renderQuiz();
+        });
+        cancelStart.addEventListener('click', function(){ window.location.href='index.html'; });
+
+        homeBtn.addEventListener('click', function(e){ e.preventDefault(); exitOverlay.classList.add('active'); });
+        confirmLeave.addEventListener('click', function(){ window.location.href='index.html'; });
+        cancelLeave.addEventListener('click', function(){ exitOverlay.classList.remove('active'); });
+        exitOverlay.addEventListener('click', function(e){ if(e.target===exitOverlay) exitOverlay.classList.remove('active'); });
+
+        // ============================================================
+        // FEEDBACK POPUP
+        // ============================================================
+        function showFeedbackPopup(isCorrect) {
+            const popup=document.createElement('div');
+            popup.className='feedback-popup';
+            popup.textContent=isCorrect?'✅':'❌';
+            document.body.appendChild(popup);
+            setTimeout(()=>popup.remove(),700);
+        }
+
+        // ============================================================
+        // RENDER QUIZ
+        // ============================================================
+        function renderQuiz() {
+            if (currentQuestionIndex >= totalQuestions) {
+                showResults();
+                return;
+            }
+            const q = shuffledQuestions[currentQuestionIndex];
+            // Shuffle options for this question
+            const shuffled = q.options.map((opt, idx) => ({ opt, idx }));
+            shuffleArray(shuffled);
+            const currentOptions = shuffled.map(item => item.opt);
+            const currentCorrectIndex = shuffled.findIndex(item => item.idx === q.correct);
+
+            let optionsHtml = '';
+            const keys = ['1','2','3','4'];
+            currentOptions.forEach((opt, idx) => {
+                optionsHtml += `<div class="quiz-option" data-opt-index="${idx}" onclick="selectOption(this, ${idx})">${opt}<span class="key-hint">${keys[idx]}</span></div>`;
+            });
+
+            const imgSrc = q.image || getPlaceholderSVG();
+            const imageHtml = `<div class="question-image"><img src="${imgSrc}" alt="Question visual" loading="lazy" /></div>`;
+            const highScore = getHighScore();
+
+            quizCard.innerHTML = `
+                <div class="quiz-header">
+                    <span class="question-counter">Question ${currentQuestionIndex+1} of ${totalQuestions}</span>
+                    <div class="right-group">
+                        <span class="score-display">✅ <span id="scoreCount">${score}</span></span>
+                        <span class="high-score"><i class="fas fa-trophy"></i> ${highScore}</span>
+                    </div>
                 </div>
-                <p style="margin-top: 8px; font-weight: 600; color: ${color};">${percentage}%</p>
-            </div>
-            <button class="btn-try-again" onclick="resetQuiz()">🔄 Try Again</button>
-        </div>
-    `;
-}
+                <div class="progress-track"><div class="progress-fill" style="width:${(currentQuestionIndex/totalQuestions)*100}%;"></div></div>
+                ${imageHtml}
+                <div class="quiz-question">${q.question}</div>
+                <div class="quiz-options" id="optionsContainer">${optionsHtml}</div>
+                <div class="explanation-box" id="explanationBox"></div>
+                <div class="quiz-footer">
+                    <button class="btn-next" id="nextBtn" disabled onclick="nextQuestion()">
+                        ${currentQuestionIndex === totalQuestions-1 ? 'See Results 🏆' : 'Next →'}
+                    </button>
+                </div>
+            `;
 
-function resetQuiz() {
-    currentQuestion = 0;
-    score = 0;
-    correctAnswers = 0;
-    answered = false;
-    renderQuiz();
-}
+            answered = false;
+            document.getElementById('explanationBox').classList.remove('show');
+            document.getElementById('explanationBox').innerHTML = '';
 
-// Initial render
-renderQuiz();
-</script>
+            // Store current correct index for selection
+            window._currentCorrectIndex = currentCorrectIndex;
+            window._currentOptions = currentOptions;
+        }
 
+        // ============================================================
+        // SELECT OPTION
+        // ============================================================
+        function selectOption(el, idx) {
+            if (answered || !quizStarted) return;
+            const q = shuffledQuestions[currentQuestionIndex];
+            const allOptions = document.querySelectorAll('.quiz-option');
+            const isCorrect = idx === window._currentCorrectIndex;
+
+            allOptions.forEach(opt => opt.classList.add('disabled'));
+            allOptions.forEach((opt, i) => {
+                if (i === window._currentCorrectIndex) opt.classList.add('correct');
+                else if (i === idx && !isCorrect) opt.classList.add('wrong');
+            });
+
+            if (isCorrect) { playCorrectSound(); score++; correctAnswers++; }
+            else playWrongSound();
+            showFeedbackPopup(isCorrect);
+
+            // Store answer
+            userAnswers[currentQuestionIndex] = { selected: idx, correct: isCorrect };
+
+            const scoreEl = document.getElementById('scoreCount');
+            if (scoreEl) scoreEl.textContent = score;
+
+            const expBox = document.getElementById('explanationBox');
+            const title = isCorrect ? '✅ Correct!' : '❌ Incorrect';
+            const titleClass = isCorrect ? '' : 'wrong-title';
+            expBox.innerHTML = `<span class="ex-title ${titleClass}">${title}</span> ${q.explanation}`;
+            expBox.classList.add('show');
+
+            answered = true;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // ============================================================
+        // NEXT
+        // ============================================================
+        function nextQuestion() {
+            currentQuestionIndex++;
+            renderQuiz();
+        }
+
+        // ============================================================
+        // RESULTS
+        // ============================================================
+        function showResults() {
+            stopBgMusic();
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            let emoji, message, color;
+            if (percentage >= 90) { emoji='🎉'; message='Excellent! You\'re a lab safety expert!'; color='#28a745'; playCompleteSound(); }
+            else if (percentage >= 70) { emoji='😊'; message='Good job! Keep learning to become an expert.'; color='#22b6af'; }
+            else if (percentage >= 50) { emoji='📚'; message='Not bad! Review the topics and try again.'; color='#f39c12'; }
+            else { emoji='🤔'; message='Keep studying! Lab safety is important. Try again!'; color='#e74c3c'; }
+
+            let highScore = getHighScore();
+            let isNewBest = false;
+            if (correctAnswers > highScore) { setHighScore(correctAnswers); highScore = correctAnswers; isNewBest = true; }
+
+            quizCard.innerHTML = `
+                <div class="quiz-results">
+                    <div class="result-icon">${emoji}</div>
+                    <h2>Quiz Complete!</h2>
+                    <div class="result-score">${correctAnswers} / ${totalQuestions}</div>
+                    ${isNewBest ? '<div class="best-score"><i class="fas fa-star" style="color:#ffd700;"></i> 🎊 New Best Score!</div>' : `<div class="best-score"><i class="fas fa-trophy"></i> Best: ${highScore}</div>`}
+                    <div class="result-bar"><div class="result-bar-fill" style="width:${percentage}%; background:${color};"></div></div>
+                    <div class="result-message">${message} (${percentage}%)</div>
+                    <div class="btn-group-result">
+                        <button class="btn-try-again" onclick="resetQuiz()">🔄 Try Again</button>
+                        <button class="btn-done" onclick="window.location.href='index.html'">🏠 Done</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============================================================
+        // KEYBOARD
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            if (!answered && quizStarted && !e.repeat) {
+                const key = parseInt(e.key, 10);
+                if (key >= 1 && key <= 4) {
+                    const options = document.querySelectorAll('.quiz-option:not(.disabled)');
+                    if (options[key - 1]) options[key - 1].click();
+                }
+            }
+            if (e.key === 'Enter') {
+                const nextBtn = document.getElementById('nextBtn');
+                if (nextBtn && !nextBtn.disabled) nextBtn.click();
+            }
+            if (e.key === 'Escape') {
+                if (exitOverlay.classList.contains('active')) exitOverlay.classList.remove('active');
+                if (confirmOverlay.classList.contains('active')) confirmOverlay.classList.remove('active');
+                if (reviewOverlay.classList.contains('active')) reviewOverlay.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        confOverlay.style.display = 'flex';
+        document.addEventListener('click', function(){ initAudio(); }, { once:true });
+
+        console.log('🧪 Lab-Ready Quiz (dengan Review, Reset, Stop) loaded!');
+    </script>
 </body>
 </html>

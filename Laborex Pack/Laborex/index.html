@@ -124,6 +124,23 @@
     display: none !important;
 }
 
+/* ====== Section Backgrounds ====== */
+.bg-white {
+    background: #ffffff;
+}
+.bg-light-gray {
+    background: #f8fafc;
+}
+.bg-soft-blue {
+    background: #f0f4f8;
+}
+.bg-lighter-blue {
+    background: #e8f0f8;
+}
+.bg-dark-teal {
+    background: #1a5f7a;
+}
+
 /* ====== Introduction ====== */
 .intro-feature-item {
     text-align: center;
@@ -167,7 +184,7 @@
 .about-fixed-row {
     display: flex;
     align-items: stretch;
-    height: 420px;           /* fixed height – adjust as needed */
+    height: 420px;
     gap: 40px;
 }
 @media (max-width: 991px) {
@@ -178,13 +195,12 @@
     }
 }
 
-/* Each column takes exactly 50% width minus half the gap */
 .about-fixed-row .image-column,
 .about-fixed-row .content-column {
     flex: 0 0 calc(50% - 20px);
     max-width: calc(50% - 20px);
     height: 100%;
-    overflow: hidden;        /* prevents any content from spilling out */
+    overflow: hidden;
 }
 @media (max-width: 991px) {
     .about-fixed-row .image-column,
@@ -205,12 +221,12 @@
 .about-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;       /* crops image to fill container without stretching */
+    object-fit: cover;
     display: block;
 }
 @media (max-width: 991px) {
     .about-image-wrapper {
-        height: 300px;        /* fallback height on mobile */
+        height: 300px;
     }
 }
 
@@ -235,47 +251,17 @@
     }
 }
 
-/* ====== Quick Tips – Continuous Marquee with Drag ====== */
+/* ====== Quick Tips – Auto-scroll Carousel ====== */
 .quick-tips-carousel {
     padding: 60px 0 80px;
-    overflow: hidden;
 }
 .quick-tips-carousel .sec-title {
     margin-bottom: 40px;
 }
-.continuous-slider-wrapper {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    cursor: grab;
-    user-select: none;
-    -webkit-user-select: none;
+.quick-tips-carousel-owl .slider-tip-item {
+    padding: 10px 5px;
 }
-.continuous-slider-wrapper:active {
-    cursor: grabbing;
-}
-.continuous-slider-track {
-    display: flex;
-    width: max-content;
-    transition: transform 0s linear;
-    will-change: transform;
-}
-.continuous-slider-wrapper.playing .continuous-slider-track {
-    animation: scrollTicker linear infinite;
-}
-.continuous-slider-wrapper:hover .continuous-slider-track {
-    animation-play-state: paused;
-}
-@keyframes scrollTicker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-.slider-tip-item {
-    flex: 0 0 260px;
-    margin: 0 10px;
-    padding: 10px 0;
-}
-.slider-tip-item .inner-box {
+.quick-tips-carousel-owl .slider-tip-item .inner-box {
     padding: 30px 20px;
     min-height: 260px;
     background: #fff;
@@ -289,46 +275,106 @@
     text-align: center;
     height: 100%;
 }
-.slider-tip-item .inner-box .icon-box {
+.quick-tips-carousel-owl .slider-tip-item .inner-box .icon-box {
     font-size: 48px;
     display: block;
     margin-bottom: 18px;
     line-height: 1.2;
     transition: transform 0.3s ease;
 }
-.slider-tip-item .inner-box h4 {
+.quick-tips-carousel-owl .slider-tip-item .inner-box h4 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 8px;
 }
-.slider-tip-item .inner-box p {
+.quick-tips-carousel-owl .slider-tip-item .inner-box p {
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 0;
     color: #555;
 }
-.slider-tip-item .inner-box:hover {
+.quick-tips-carousel-owl .slider-tip-item .inner-box:hover {
     transform: scale(1.05) translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
     z-index: 10;
 }
-.slider-tip-item .inner-box:hover .icon-box {
+.quick-tips-carousel-owl .slider-tip-item .inner-box:hover .icon-box {
     transform: scale(1.1);
 }
 
-@media (max-width: 992px) {
-    .slider-tip-item { flex: 0 0 280px; margin: 0 8px; }
+/* Owl Carousel custom dots */
+.quick-tips-carousel-owl .owl-dots {
+    margin-top: 30px;
+    text-align: center;
 }
+.quick-tips-carousel-owl .owl-dots .owl-dot {
+    display: inline-block;
+    margin: 0 6px;
+}
+.quick-tips-carousel-owl .owl-dots .owl-dot span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    display: block;
+    transition: 0.3s;
+}
+.quick-tips-carousel-owl .owl-dots .owl-dot.active span {
+    background: #1a5f7a;
+    width: 30px;
+    border-radius: 30px;
+}
+
 @media (max-width: 768px) {
-    .slider-tip-item { flex: 0 0 260px; margin: 0 6px; }
-    .slider-tip-item .inner-box { padding: 25px 16px; min-height: 230px; }
-    .slider-tip-item .inner-box .icon-box { font-size: 40px; }
-    .slider-tip-item .inner-box h4 { font-size: 18px; }
-    .slider-tip-item .inner-box p { font-size: 14px; }
+    .quick-tips-carousel-owl .slider-tip-item .inner-box {
+        padding: 25px 16px;
+        min-height: 230px;
+    }
+    .quick-tips-carousel-owl .slider-tip-item .inner-box .icon-box {
+        font-size: 40px;
+    }
+    .quick-tips-carousel-owl .slider-tip-item .inner-box h4 {
+        font-size: 18px;
+    }
+    .quick-tips-carousel-owl .slider-tip-item .inner-box p {
+        font-size: 14px;
+    }
 }
 @media (max-width: 480px) {
-    .slider-tip-item { flex: 0 0 240px; margin: 0 5px; }
-    .slider-tip-item .inner-box { padding: 20px 14px; min-height: 200px; }
+    .quick-tips-carousel-owl .slider-tip-item .inner-box {
+        padding: 20px 14px;
+        min-height: 200px;
+    }
+}
+
+/* ====== Video Preview Section ====== */
+.events-section .event-block-one .inner-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.events-section .event-block-one .inner-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* ====== CTA Section – dark teal ====== */
+.cta-style-two.bg-dark-teal .inner-box {
+    padding: 60px 80px;
+    border-radius: 16px;
+}
+.cta-style-two.bg-dark-teal .text h2 {
+    color: #fff;
+}
+.cta-style-two.bg-dark-teal .banner-btn-two {
+    background: #fff;
+    color: #1a5f7a;
+}
+.cta-style-two.bg-dark-teal .banner-btn-two:hover {
+    background: #e8f0f8;
+}
+@media (max-width: 768px) {
+    .cta-style-two.bg-dark-teal .inner-box {
+        padding: 40px 30px;
+    }
 }
 </style>
 </head>
@@ -398,8 +444,7 @@
                                 <li class="current"><a href="index.html">Home</a></li>
                                 <li><a href="apparatus.html">Apparatus</a></li>
                                 <li><a href="chemicals.html">Chemicals</a></li>
-                                <li><a href="emergency.html">Emergency SOP</a></li>
-                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="emergency.html">Emergency SOP & Simulation</a></li>
                                 <li><a href="#about">About</a></li>
                             </ul>
                         </div>
@@ -484,7 +529,7 @@
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
                             <div class="content-box">
                                 <h2>Emergency SOP & Simulation</h2>
-                                <p>Step-by-step procedures for 8 lab emergencies – acid spills, fires, chemical splashes. Interactive simulation with checklists.</p>
+                                <p>Step-by-step procedures for 9 lab emergencies – acid spills, fires, chemical splashes. Interactive simulation with checklists.</p>
                                 <div class="btn-box">
                                     <a href="emergency.html" class="theme-btn-one">View SOPs</a>
                                     <a href="emergency.html" class="banner-btn">Start Simulation</a>
@@ -500,11 +545,11 @@
                     <div class="row align-items-center clearfix">
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
                             <div class="content-box">
-                                <h2>Simulation Videos</h2>
+                                <h2>Interactive Simulation Videos</h2>
                                 <p>Watch video guides and practice lab safety procedures. Learn at your own pace with step-by-step demonstrations.</p>
                                 <div class="btn-box">
-                                    <a href="videos.html" class="theme-btn-one">Watch Videos</a>
-                                    <a href="videos.html" class="banner-btn">Explore Library</a>
+                                    <a href="emergency.html" class="theme-btn-one">Watch Videos</a>
+                                    <a href="emergency.html" class="banner-btn">Explore Library</a>
                                 </div>
                             </div>
                         </div>
@@ -515,7 +560,7 @@
     </section>
 
     <!-- INTRODUCTION -->
-    <section class="about-style-two sec-pad" style="padding: 80px 0;">
+    <section class="about-style-two sec-pad bg-white" style="padding: 80px 0;">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Welcome to Lab‑Ready</h6>
@@ -543,7 +588,7 @@
     </section>
 
     <!-- MODULES -->
-    <section class="service-section alternat-2" id="modules">
+    <section class="service-section alternat-2 bg-light-gray" id="modules">
         <div class="pattern-layer"></div>
         <div class="auto-container">
             <div class="sec-title centred">
@@ -585,8 +630,8 @@
         </div>
     </section>
 
-    <!-- ABOUT – Fixed Height Columns with Gap (FIXED) -->
-    <section class="about-style-two sec-pad" id="about">
+    <!-- ABOUT -->
+    <section class="about-style-two sec-pad bg-white" id="about">
         <div class="auto-container">
             <div class="row about-fixed-row">
                 <div class="image-column">
@@ -621,24 +666,23 @@
         </div>
     </section>
 
-    <!-- QUICK TIPS – Continuous Marquee with Drag -->
-    <section class="quick-tips-carousel research-section bg-color-1">
+    <!-- QUICK TIPS -->
+    <section class="quick-tips-carousel research-section bg-lighter-blue">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Quick Lab Tips</h6>
                 <h2>Did You Know?</h2>
             </div>
-        </div>
-
-        <div class="continuous-slider-wrapper playing" id="sliderWrapper">
-            <div class="continuous-slider-track" id="sliderTrack">
-                <!-- The tips are injected by JavaScript for duplication -->
+            <div class="quick-tips-owl-wrap">
+                <div class="quick-tips-carousel-owl owl-carousel owl-theme" id="tipsCarousel">
+                    <!-- Tips will be injected by JavaScript -->
+                </div>
             </div>
         </div>
     </section>
 
     <!-- VIDEO PREVIEW -->
-    <section class="events-section sec-pad bg-color-1">
+    <section class="events-section sec-pad bg-soft-blue">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Watch & Learn</h6>
@@ -650,9 +694,9 @@
                     <div class="event-block-one wow fadeInUp">
                         <div class="inner-box">
                             <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
-                            <h4><a href="videos.html">Chemical Spill Response</a></h4>
+                            <h4><a href="emergency.html">Chemical Spill Response</a></h4>
                             <p>Step-by-step demonstration of handling acid spills safely.</p>
-                            <div class="btn-box"><a href="videos.html" class="theme-btn-two">Watch Now →</a></div>
+                            <div class="btn-box"><a href="emergency.html" class="theme-btn-two">Watch Now →</a></div>
                         </div>
                     </div>
                 </div>
@@ -660,28 +704,28 @@
                     <div class="event-block-one wow fadeInUp">
                         <div class="inner-box">
                             <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
-                            <h4><a href="videos.html">Using Eyewash Station</a></h4>
+                            <h4><a href="emergency.html">Using Eyewash Station</a></h4>
                             <p>Proper technique for flushing eyes after chemical splash.</p>
-                            <div class="btn-box"><a href="videos.html" class="theme-btn-two">Watch Now →</a></div>
+                            <div class="btn-box"><a href="emergency.html" class="theme-btn-two">Watch Now →</a></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center" style="margin-top: 40px;">
-                <a href="videos.html" class="theme-btn-one">View All Videos →</a>
+                <a href="emergency.html" class="theme-btn-one">View All Videos →</a>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta-style-two bg-color-4">
+    <section class="cta-style-two bg-dark-teal">
         <div class="auto-container">
             <div class="inner-box clearfix">
                 <div class="text pull-left">
                     <h2>Interactive Simulation<br />Practice Emergency Response</h2>
                 </div>
                 <div class="btn-box pull-right">
-                    <a href="videos.html" class="banner-btn-two">Start Simulation</a>
+                    <a href="emergency.html" class="banner-btn-two">Start Simulation</a>
                 </div>
             </div>
         </div>
@@ -714,8 +758,7 @@
                                 <ul class="links-list clearfix">
                                     <li><a href="apparatus.html">Apparatus</a></li>
                                     <li><a href="chemicals.html">Chemicals</a></li>
-                                    <li><a href="emergency.html">Emergency SOP</a></li>
-                                    <li><a href="videos.html">Simulations</a></li>
+                                    <li><a href="emergency.html">Emergency SOP & Simulation</a></li>
                                     <li><a href="#about">About</a></li>
                                 </ul>
                             </div>
@@ -769,8 +812,9 @@
 <script src="assets/js/script.js"></script>
 
 <script>
-// Banner carousel
 $(document).ready(function(){
+
+    // ===== BANNER CAROUSEL =====
     if ($('.banner-carousel').length) {
         $('.banner-carousel').trigger('destroy.owl.carousel');
         $('.banner-carousel').owlCarousel({
@@ -793,7 +837,7 @@ $(document).ready(function(){
         });
     }
 
-    // ----- Continuous Marquee with Drag (Quick Tips) -----
+    // ===== QUICK TIPS – AUTO-SCROLL CAROUSEL =====
     var tipsData = [
         { icon: '🧪', title: 'Always Add Acid to Water', desc: 'When diluting acids, always pour acid into water (not water into acid) to prevent violent splashing.' },
         { icon: '🔥', title: 'Know Your Fire Extinguisher', desc: 'Class B extinguishers (CO₂ or dry chemical) for flammable liquids. Never use water on chemical fires.' },
@@ -819,88 +863,27 @@ $(document).ready(function(){
         `;
     }
 
-    var track = document.getElementById('sliderTrack');
+    var carouselContainer = $('#tipsCarousel');
     var html = '';
     tipsData.forEach(function(tip) { html += buildTipHTML(tip); });
-    tipsData.forEach(function(tip) { html += buildTipHTML(tip); });
-    track.innerHTML = html;
+    carouselContainer.html(html);
 
-    var wrapper = document.getElementById('sliderWrapper');
-    var isDragging = false;
-    var startX = 0;
-    var currentTranslate = 0;
-    var itemCount = tipsData.length;
-    var duration = Math.max(20, itemCount * 2.5);
-
-    wrapper.style.setProperty('animation-duration', duration + 's');
-
-    wrapper.addEventListener('mousedown', startDrag);
-    wrapper.addEventListener('touchstart', startDrag, { passive: true });
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('touchmove', drag, { passive: true });
-    document.addEventListener('mouseup', endDrag);
-    document.addEventListener('touchend', endDrag);
-
-    function startDrag(e) {
-        var clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-        startX = clientX;
-        isDragging = true;
-        wrapper.classList.remove('playing');
-        var style = window.getComputedStyle(track);
-        var matrix = style.transform;
-        if (matrix !== 'none') {
-            var values = matrix.match(/matrix.*\((.+)\)/);
-            if (values) {
-                var vals = values[1].split(', ');
-                var tx = parseFloat(vals[4]) || 0;
-                currentTranslate = tx;
-            } else {
-                currentTranslate = 0;
-            }
-        } else {
-            currentTranslate = 0;
+    carouselContainer.owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        autoplayHoverPause: true,
+        smartSpeed: 600,
+        responsive: {
+            0: { items: 1 },
+            600: { items: 2 },
+            992: { items: 3 }
         }
-        track.style.animation = 'none';
-        track.style.transform = 'translateX(' + currentTranslate + 'px)';
-    }
-
-    function drag(e) {
-        if (!isDragging) return;
-        var clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-        var delta = clientX - startX;
-        var newX = currentTranslate + delta;
-        track.style.transform = 'translateX(' + newX + 'px)';
-    }
-
-    function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        var style = window.getComputedStyle(track);
-        var matrix = style.transform;
-        var tx = 0;
-        if (matrix !== 'none') {
-            var values = matrix.match(/matrix.*\((.+)\)/);
-            if (values) {
-                var vals = values[1].split(', ');
-                tx = parseFloat(vals[4]) || 0;
-            }
-        }
-        track.style.transform = '';
-        track.style.animation = '';
-        void track.offsetWidth;
-        track.style.animation = 'scrollTicker ' + duration + 's linear infinite';
-        wrapper.classList.add('playing');
-    }
-
-    wrapper.addEventListener('mouseenter', function() {
-        if (!isDragging) wrapper.classList.remove('playing');
-    });
-    wrapper.addEventListener('mouseleave', function() {
-        if (!isDragging) wrapper.classList.add('playing');
     });
 
-    wrapper.classList.add('playing');
-    track.style.animation = 'scrollTicker ' + duration + 's linear infinite';
 });
 </script>
 
