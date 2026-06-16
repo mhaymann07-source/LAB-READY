@@ -25,7 +25,7 @@
 <link href="assets/css/responsive.css" rel="stylesheet">
 
 <style>
-/* Additional custom styles */
+/* ====== Base & existing styles ====== */
 .btn-page-link {
     transition: all 0.3s ease;
 }
@@ -43,7 +43,7 @@
     display: none;
 }
 
-/* Ensure banner carousel slide images have zoom effect on active */
+/* ====== Banner ====== */
 .banner-carousel .slide-item {
     position: relative;
     overflow: hidden;
@@ -77,45 +77,16 @@
     background: rgba(0,0,0,0.6);
     z-index: 1;
 }
-
-/* Mobile fixes */
-@media (max-width: 767px) {
-    .container, .auto-container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    .sec-title h2 {
-        font-size: 24px;
-    }
-    .content-box h2 {
-        font-size: 28px;
-    }
-    .banner-section .image-column {
-        display: none;
-    }
-    .service-block {
-        margin-bottom: 20px;
-    }
-    .footer-column {
-        margin-bottom: 30px;
-    }
-}
-
-/* Fix for banner section – override style-five padding and image box */
 .banner-section.style-four.style-five {
-    padding: 0 !important;          /* Remove huge padding */
+    padding: 0 !important;
     position: relative;
     overflow: hidden;
 }
-
-/* Ensure each slide fills the entire banner area */
 .banner-section .banner-carousel .slide-item {
-    min-height: 750px;              /* Adjust as needed */
+    min-height: 750px;
     display: flex;
     align-items: center;
 }
-
-/* Background image wrapper covers entire slide */
 .banner-section .banner-carousel .slide-item .bg-img {
     position: absolute;
     top: 0;
@@ -126,8 +97,6 @@
     background-position: center;
     z-index: 0;
 }
-
-/* Dark overlay for readability */
 .banner-section .banner-carousel .slide-item:before {
     content: '';
     position: absolute;
@@ -138,14 +107,10 @@
     background: rgba(0,0,0,0.55);
     z-index: 1;
 }
-
-/* Content stays above overlay */
 .banner-section .banner-carousel .auto-container {
     position: relative;
     z-index: 2;
 }
-
-/* Remove the extra image‑box styling that hides or misplaces images */
 .banner-section.style-five .image-box {
     padding: 0 !important;
     margin: 0 !important;
@@ -159,13 +124,219 @@
     display: none !important;
 }
 
+/* ====== Introduction ====== */
+.intro-feature-item {
+    text-align: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.intro-feature-item:hover {
+    transform: translateY(-5px);
+}
+.intro-feature-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: inline-block;
+    background: #f0f4f8;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    border-radius: 50%;
+    color: #1a5f7a;
+    transition: 0.3s;
+}
+.intro-feature-item:hover .intro-feature-icon {
+    background: #1a5f7a;
+    color: #fff;
+}
+.intro-feature-item h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.intro-feature-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ====== About Section – Fixed Height Columns with Gap ====== */
+.about-style-two .auto-container {
+    max-width: 1320px;
+    padding: 0 20px;
+}
+
+.about-fixed-row {
+    display: flex;
+    align-items: stretch;
+    height: 420px;           /* fixed height – adjust as needed */
+    gap: 40px;
+}
+@media (max-width: 991px) {
+    .about-fixed-row {
+        height: auto;
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+/* Each column takes exactly 50% width minus half the gap */
+.about-fixed-row .image-column,
+.about-fixed-row .content-column {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    height: 100%;
+    overflow: hidden;        /* prevents any content from spilling out */
+}
+@media (max-width: 991px) {
+    .about-fixed-row .image-column,
+    .about-fixed-row .content-column {
+        flex: 0 0 100%;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.about-image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+}
+.about-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* crops image to fill container without stretching */
+    display: block;
+}
+@media (max-width: 991px) {
+    .about-image-wrapper {
+        height: 300px;        /* fallback height on mobile */
+    }
+}
+
+.about-content-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 20px 0;
+}
+@media (max-width: 991px) {
+    .about-content-wrapper {
+        height: auto;
+        padding: 20px 0;
+    }
+}
+.about-content-wrapper .content-box {
+    padding-right: 20px;
+}
+@media (max-width: 991px) {
+    .about-content-wrapper .content-box {
+        padding-right: 0;
+    }
+}
+
+/* ====== Quick Tips – Continuous Marquee with Drag ====== */
+.quick-tips-carousel {
+    padding: 60px 0 80px;
+    overflow: hidden;
+}
+.quick-tips-carousel .sec-title {
+    margin-bottom: 40px;
+}
+.continuous-slider-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.continuous-slider-wrapper:active {
+    cursor: grabbing;
+}
+.continuous-slider-track {
+    display: flex;
+    width: max-content;
+    transition: transform 0s linear;
+    will-change: transform;
+}
+.continuous-slider-wrapper.playing .continuous-slider-track {
+    animation: scrollTicker linear infinite;
+}
+.continuous-slider-wrapper:hover .continuous-slider-track {
+    animation-play-state: paused;
+}
+@keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.slider-tip-item {
+    flex: 0 0 260px;
+    margin: 0 10px;
+    padding: 10px 0;
+}
+.slider-tip-item .inner-box {
+    padding: 30px 20px;
+    min-height: 260px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+.slider-tip-item .inner-box .icon-box {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 18px;
+    line-height: 1.2;
+    transition: transform 0.3s ease;
+}
+.slider-tip-item .inner-box h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.slider-tip-item .inner-box p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: #555;
+}
+.slider-tip-item .inner-box:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    z-index: 10;
+}
+.slider-tip-item .inner-box:hover .icon-box {
+    transform: scale(1.1);
+}
+
+@media (max-width: 992px) {
+    .slider-tip-item { flex: 0 0 280px; margin: 0 8px; }
+}
+@media (max-width: 768px) {
+    .slider-tip-item { flex: 0 0 260px; margin: 0 6px; }
+    .slider-tip-item .inner-box { padding: 25px 16px; min-height: 230px; }
+    .slider-tip-item .inner-box .icon-box { font-size: 40px; }
+    .slider-tip-item .inner-box h4 { font-size: 18px; }
+    .slider-tip-item .inner-box p { font-size: 14px; }
+}
+@media (max-width: 480px) {
+    .slider-tip-item { flex: 0 0 240px; margin: 0 5px; }
+    .slider-tip-item .inner-box { padding: 20px 14px; min-height: 200px; }
+}
 </style>
 </head>
 <body>
 
 <div class="boxed_wrapper">
 
-    <!-- preloader (auto-hide via script.js) -->
+    <!-- preloader -->
     <div class="loader-wrap">
         <div class="preloader">
             <div class="preloader-close">Preloader Close</div>
@@ -208,7 +379,7 @@
     </div>
     <!-- search-popup end -->
 
-    <!-- main header (multi-page navigation) -->
+    <!-- main header -->
     <header class="main-header style-four style-five">
         <div class="header-lower">
             <div class="outer-box">
@@ -269,10 +440,9 @@
         </nav>
     </div>
 
-    <!-- MULTI-SLIDE BANNER SECTION with zoom and fade -->
+    <!-- MULTI‑SLIDE BANNER -->
     <section class="banner-section style-four style-five">
         <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-            <!-- Slide 1: Apparatus -->
             <div class="slide-item">
                 <div class="bg-img" style="background-image: url('assets/images/banner/apparatus-4.jpg');"></div>
                 <div class="auto-container">
@@ -287,15 +457,9 @@
                                 </div>
                             </div>
                         </div>
-                  <!--     <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                            <div class="image-box">
-                             <figure class="image"><img src="assets/images/banner/apparatus-1.jpg" alt="Apparatus" style="max-width: 400px; border-radius: 12px;"></figure>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
-            <!-- Slide 2: Chemicals -->
             <div class="slide-item">
                 <div class="bg-img" style="background-image: url('assets/images/banner/apparatus-5.jpg');"></div>
                 <div class="auto-container">
@@ -310,15 +474,9 @@
                                 </div>
                             </div>
                         </div>
-           <!--           <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/banner/chemicals-1.jpg" alt="Chemicals" style="max-width: 400px; border-radius: 12px;"></figure>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
-            <!-- Slide 3: Emergency SOP -->
             <div class="slide-item">
                 <div class="bg-img" style="background-image: url('assets/images/banner/apparatus-6.jpg');"></div>
                 <div class="auto-container">
@@ -333,15 +491,9 @@
                                 </div>
                             </div>
                         </div>
-                  <!--      <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/banner/emergency-1.jpg" alt="Emergency" style="max-width: 400px; border-radius: 12px;"></figure>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
-            <!-- Slide 4: Simulation Videos -->
             <div class="slide-item">
                 <div class="bg-img" style="background-image: url('assets/images/banner/apparatus-7.jpg');"></div>
                 <div class="auto-container">
@@ -356,18 +508,41 @@
                                 </div>
                             </div>
                         </div>
-                 <!--       <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/banner/videos-1.jpg" alt="Videos" style="max-width: 400px; border-radius: 12px;"></figure>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modules Section (3 cards) – unchanged -->
+    <!-- INTRODUCTION -->
+    <section class="about-style-two sec-pad" style="padding: 80px 0;">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>Welcome to Lab‑Ready</h6>
+                <h2>Your Interactive Guide to <br />Lab Management & Safety</h2>
+                <p style="max-width: 800px; margin: 20px auto 0;">Lab‑Ready is an interactive web platform designed specifically for university students to learn essential laboratory skills. From apparatus and chemicals to emergency procedures – everything you need is here.</p>
+            </div>
+            <div class="row clearfix" style="margin-top: 40px;">
+                <div class="col-lg-4 col-md-6 col-sm-12 intro-feature-item">
+                    <div class="intro-feature-icon"><i class="icon-5"></i></div>
+                    <h4>40+ Apparatus</h4>
+                    <p>Detailed information on storage, usage, and types for every piece of equipment.</p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 intro-feature-item">
+                    <div class="intro-feature-icon"><i class="icon-6"></i></div>
+                    <h4>70+ Chemicals</h4>
+                    <p>Safety precautions, storage conditions, and typical uses – fully categorised.</p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 intro-feature-item">
+                    <div class="intro-feature-icon"><i class="icon-8"></i></div>
+                    <h4>Emergency SOPs</h4>
+                    <p>Step‑by‑step procedures with interactive simulations for 9 lab emergencies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULES -->
     <section class="service-section alternat-2" id="modules">
         <div class="pattern-layer"></div>
         <div class="auto-container">
@@ -410,35 +585,34 @@
         </div>
     </section>
 
-    <!-- About section (unchanged) -->
+    <!-- ABOUT – Fixed Height Columns with Gap (FIXED) -->
     <section class="about-style-two sec-pad" id="about">
         <div class="auto-container">
-            <div class="row align-items-center clearfix">
-                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                    <div class="image_block_8">
-                        <div class="image-box">
-                            <figure class="image image-1"><img src="assets/images/banner/person-1.jpg" alt="Lab" style="width: 100%; max-width: 270px; height: auto; border-radius: 12px;"></figure>
-                            <figure class="image image-2 paroller"><img src="assets/images/banner/person-2.jpg" alt="Chemicals" style="width: 100%; max-width: 200px; height: auto; border-radius: 12px;"></figure>
-                        </div>
+            <div class="row about-fixed-row">
+                <div class="image-column">
+                    <div class="about-image-wrapper">
+                        <img src="assets/images/banner/apparatus-1.jpg" alt="Laboratory equipment">
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                    <div class="content_block_1">
-                        <div class="content-box">
-                            <div class="sec-title">
-                                <h6>Lab-Ready Project</h6>
-                                <h2>Interactive Web for Lab Management & Safety</h2>
-                            </div>
-                            <div class="bold-text">
-                                <p>This interactive website helps students understand laboratory apparatus, chemical handling, and emergency response — all in one place.</p>
-                            </div>
-                            <div class="text">
-                                <p>Designed based on real chemistry curriculum needs. Improve lab safety knowledge and management skills.</p>
-                                <ul class="list-style-one clearfix">
-                                    <li>Apparatus storage & usage</li>
-                                    <li>Chemical hazard & precaution</li>
-                                    <li>Emergency simulation & SOP</li>
-                                </ul>
+                <div class="content-column">
+                    <div class="about-content-wrapper">
+                        <div class="content_block_1 w-100">
+                            <div class="content-box">
+                                <div class="sec-title">
+                                    <h6>Lab-Ready Project</h6>
+                                    <h2>Interactive Web for Lab Management & Safety</h2>
+                                </div>
+                                <div class="bold-text">
+                                    <p>This interactive website helps students understand laboratory apparatus, chemical handling, and emergency response — all in one place.</p>
+                                </div>
+                                <div class="text">
+                                    <p>Designed based on real chemistry curriculum needs. Improve lab safety knowledge and management skills.</p>
+                                    <ul class="list-style-one clearfix">
+                                        <li>Apparatus storage & usage</li>
+                                        <li>Chemical hazard & precaution</li>
+                                        <li>Emergency simulation & SOP</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -447,46 +621,23 @@
         </div>
     </section>
 
-    <!-- Quick Tips (unchanged) -->
-    <section class="research-section bg-color-1">
+    <!-- QUICK TIPS – Continuous Marquee with Drag -->
+    <section class="quick-tips-carousel research-section bg-color-1">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Quick Lab Tips</h6>
                 <h2>Did You Know?</h2>
             </div>
-            <div class="row clearfix">
-                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-one wow fadeInLeft">
-                        <div class="inner-box">
-                            <div class="icon-box" style="font-size: 40px;">🧪</div>
-                            <h4>Always Add Acid to Water</h4>
-                            <p>When diluting acids, always pour acid into water (not water into acid) to prevent violent splashing.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-one wow fadeInUp">
-                        <div class="inner-box">
-                            <div class="icon-box" style="font-size: 40px;">🔥</div>
-                            <h4>Know Your Fire Extinguisher</h4>
-                            <p>Class B extinguishers (CO₂ or dry chemical) for flammable liquids. Never use water on chemical fires.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-one wow fadeInRight">
-                        <div class="inner-box">
-                            <div class="icon-box" style="font-size: 40px;">👓</div>
-                            <h4>Safety Goggles Always</h4>
-                            <p>Even for "simple" experiments – protect your eyes from chemical splashes and broken glass.</p>
-                        </div>
-                    </div>
-                </div>
+        </div>
+
+        <div class="continuous-slider-wrapper playing" id="sliderWrapper">
+            <div class="continuous-slider-track" id="sliderTrack">
+                <!-- The tips are injected by JavaScript for duplication -->
             </div>
         </div>
     </section>
 
-    <!-- Video Preview (unchanged) -->
+    <!-- VIDEO PREVIEW -->
     <section class="events-section sec-pad bg-color-1">
         <div class="auto-container">
             <div class="sec-title centred">
@@ -522,7 +673,7 @@
         </div>
     </section>
 
-    <!-- CTA section (unchanged) -->
+    <!-- CTA -->
     <section class="cta-style-two bg-color-4">
         <div class="auto-container">
             <div class="inner-box clearfix">
@@ -536,7 +687,7 @@
         </div>
     </section>
 
-    <!-- footer (unchanged) -->
+    <!-- FOOTER -->
     <footer class="main-footer bg-color-1">
         <div class="footer-top">
             <div class="auto-container">
@@ -601,7 +752,7 @@
     </button>
 </div>
 
-<!-- Scripts (same as before) -->
+<!-- Scripts -->
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -618,20 +769,19 @@
 <script src="assets/js/script.js"></script>
 
 <script>
+// Banner carousel
 $(document).ready(function(){
     if ($('.banner-carousel').length) {
-        // Destroy existing owl instance
         $('.banner-carousel').trigger('destroy.owl.carousel');
-        // Re-init dengan autoplay lebih lama
         $('.banner-carousel').owlCarousel({
             loop: true,
             margin: 0,
             nav: true,
             animateOut: 'fadeOut',
             animateIn: 'fadeIn',
-            smartSpeed: 1000,        // kelajuan fade (ms) – biar 1 saat
+            smartSpeed: 1000,
             autoplay: true,
-            autoplayTimeout: 10000,  // 10 saat setiap slide (Ubah angka ini)
+            autoplayTimeout: 10000,
             autoplayHoverPause: false,
             navText: [ '<span class="icon-19"></span>', '<span class="icon-18"></span>' ],
             responsive: {
@@ -642,6 +792,115 @@ $(document).ready(function(){
             }
         });
     }
+
+    // ----- Continuous Marquee with Drag (Quick Tips) -----
+    var tipsData = [
+        { icon: '🧪', title: 'Always Add Acid to Water', desc: 'When diluting acids, always pour acid into water (not water into acid) to prevent violent splashing.' },
+        { icon: '🔥', title: 'Know Your Fire Extinguisher', desc: 'Class B extinguishers (CO₂ or dry chemical) for flammable liquids. Never use water on chemical fires.' },
+        { icon: '👓', title: 'Safety Goggles Always', desc: 'Even for "simple" experiments – protect your eyes from chemical splashes and broken glass.' },
+        { icon: '🧤', title: 'Choose the Right Gloves', desc: 'Nitrile for chemicals, latex for biological, vinyl for light tasks. Never use damaged gloves.' },
+        { icon: '🧯', title: 'Know Your Exits', desc: 'Always locate the nearest fire exit, eyewash station, and safety shower before starting any experiment.' },
+        { icon: '🗑️', title: 'Dispose Waste Properly', desc: 'Separate chemical waste by type – acids, bases, organic solvents, and heavy metals. Never mix incompatible waste.' },
+        { icon: '📋', title: 'Label Everything', desc: 'Always label containers with chemical name, concentration, date, and your initials. Never use unlabelled bottles.' },
+        { icon: '🧬', title: 'Never Pipette by Mouth', desc: 'Use a pipette filler or automatic pipette. Mouth pipetting is extremely dangerous and strictly prohibited.' },
+        { icon: '🌡️', title: 'Check Temperature Limits', desc: 'Know the boiling and flash points of chemicals. Never heat flammable liquids without a water bath.' },
+        { icon: '📞', title: 'Emergency Contacts', desc: 'Keep emergency numbers (fire, medical, lab supervisor) visible near your workstation at all times.' }
+    ];
+
+    function buildTipHTML(tip) {
+        return `
+            <div class="slider-tip-item">
+                <div class="inner-box">
+                    <div class="icon-box">${tip.icon}</div>
+                    <h4>${tip.title}</h4>
+                    <p>${tip.desc}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    var track = document.getElementById('sliderTrack');
+    var html = '';
+    tipsData.forEach(function(tip) { html += buildTipHTML(tip); });
+    tipsData.forEach(function(tip) { html += buildTipHTML(tip); });
+    track.innerHTML = html;
+
+    var wrapper = document.getElementById('sliderWrapper');
+    var isDragging = false;
+    var startX = 0;
+    var currentTranslate = 0;
+    var itemCount = tipsData.length;
+    var duration = Math.max(20, itemCount * 2.5);
+
+    wrapper.style.setProperty('animation-duration', duration + 's');
+
+    wrapper.addEventListener('mousedown', startDrag);
+    wrapper.addEventListener('touchstart', startDrag, { passive: true });
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag, { passive: true });
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+
+    function startDrag(e) {
+        var clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+        startX = clientX;
+        isDragging = true;
+        wrapper.classList.remove('playing');
+        var style = window.getComputedStyle(track);
+        var matrix = style.transform;
+        if (matrix !== 'none') {
+            var values = matrix.match(/matrix.*\((.+)\)/);
+            if (values) {
+                var vals = values[1].split(', ');
+                var tx = parseFloat(vals[4]) || 0;
+                currentTranslate = tx;
+            } else {
+                currentTranslate = 0;
+            }
+        } else {
+            currentTranslate = 0;
+        }
+        track.style.animation = 'none';
+        track.style.transform = 'translateX(' + currentTranslate + 'px)';
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+        var clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+        var delta = clientX - startX;
+        var newX = currentTranslate + delta;
+        track.style.transform = 'translateX(' + newX + 'px)';
+    }
+
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        var style = window.getComputedStyle(track);
+        var matrix = style.transform;
+        var tx = 0;
+        if (matrix !== 'none') {
+            var values = matrix.match(/matrix.*\((.+)\)/);
+            if (values) {
+                var vals = values[1].split(', ');
+                tx = parseFloat(vals[4]) || 0;
+            }
+        }
+        track.style.transform = '';
+        track.style.animation = '';
+        void track.offsetWidth;
+        track.style.animation = 'scrollTicker ' + duration + 's linear infinite';
+        wrapper.classList.add('playing');
+    }
+
+    wrapper.addEventListener('mouseenter', function() {
+        if (!isDragging) wrapper.classList.remove('playing');
+    });
+    wrapper.addEventListener('mouseleave', function() {
+        if (!isDragging) wrapper.classList.add('playing');
+    });
+
+    wrapper.classList.add('playing');
+    track.style.animation = 'scrollTicker ' + duration + 's linear infinite';
 });
 </script>
 

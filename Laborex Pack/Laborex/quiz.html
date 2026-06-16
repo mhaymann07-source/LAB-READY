@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Lab-Ready | Lab Safety Quiz</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/color.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+<style>
+/* ====== Base styles ====== */
+.loader-wrap { display: none; }
+
+/* ====== Page title with image background ====== */
+.page-title.centred {
+    position: relative;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    background-color: transparent !important;
+}
+.page-title .video-background { display: none !important; }
+.page-title .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+.page-title .auto-container { position: relative; z-index: 2; }
+.page-title .title h1,
+.page-title .bread-crumb li,
+.page-title .bread-crumb li a { color: #fff; }
+
+/* ====== Quiz Container ====== */
+.quiz-section {
+    padding: 60px 0 100px;
+    background: #f8fafb;
+}
+.quiz-card {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 45px 35px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.quiz-header .question-counter {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a5f7a;
+}
+.quiz-header .score-display {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a5f7a;
+}
+.progress-track {
+    width: 100%;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: #1a5f7a;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+.quiz-question {
+    font-size: 22px;
+    font-weight: 700;
+    color: #142441;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+.quiz-option {
+    padding: 16px 22px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #142441;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: #fff;
+    text-align: left;
+}
+.quiz-option:hover:not(.correct):not(.wrong) {
+    border-color: #1a5f7a;
+    background: #f0f7fa;
+    transform: translateX(4px);
+}
+.quiz-option.correct {
+    border-color: #28a745;
+    background: #e8f5e9;
+    color: #1e7e34;
+}
+.quiz-option.correct::after {
+    content: " ✓";
+    color: #28a745;
+    font-weight: 700;
+}
+.quiz-option.wrong {
+    border-color: #dc3545;
+    background: #fde8ea;
+    color: #a71d2a;
+}
+.quiz-option.wrong::after {
+    content: " ✗";
+    color: #dc3545;
+    font-weight: 700;
+}
+.quiz-option.disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+.quiz-option.disabled:hover {
+    transform: none;
+    border-color: #e9ecef;
+    background: #fff;
+}
+.quiz-option.show-correct {
+    border-color: #28a745;
+    background: #e8f5e9;
+}
+.quiz-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid #e9ecef;
+    padding-top: 24px;
+}
+.btn-next {
+    padding: 12px 40px;
+    background: #1a5f7a;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-next:hover { background: #0d4055; transform: translateY(-2px); }
+.btn-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ====== Results ====== */
+.quiz-results {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+.quiz-results .result-icon {
+    font-size: 72px;
+    margin-bottom: 15px;
+}
+.quiz-results h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #142441;
+    margin-bottom: 8px;
+}
+.quiz-results .result-score {
+    font-size: 48px;
+    font-weight: 800;
+    color: #1a5f7a;
+    margin-bottom: 10px;
+}
+.quiz-results .result-message {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 25px;
+}
+.btn-try-again {
+    padding: 12px 40px;
+    background: #1a5f7a;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-try-again:hover { background: #0d4055; transform: translateY(-2px); }
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    .quiz-card { padding: 28px 20px; }
+    .quiz-question { font-size: 18px; }
+    .quiz-option { font-size: 15px; padding: 14px 18px; }
+    .quiz-results .result-score { font-size: 36px; }
+}
+@media (max-width: 480px) {
+    .quiz-card { padding: 20px 16px; }
+    .quiz-header { flex-direction: column; gap: 6px; align-items: flex-start; }
+    .btn-next { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="loader-wrap">
+        <div class="preloader">
+            <div class="preloader-close">Preloader Close</div>
+            <div id="handle-preloader" class="handle-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner"></div>
+                    <div class="txt-loading">
+                        <span data-text-preloader="Q" class="letters-loading">Q</span>
+                        <span data-text-preloader="u" class="letters-loading">u</span>
+                        <span data-text-preloader="i" class="letters-loading">i</span>
+                        <span data-text-preloader="z" class="letters-loading">z</span>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- search-popup -->
+    <div id="search-popup" class="search-popup">
+        <div class="close-search"><span>x</span></div>
+        <div class="popup-inner">
+            <div class="overlay-layer"></div>
+            <div class="search-form">
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <fieldset>
+                            <input type="search" class="form-control" name="search-input" value="" placeholder="Search..." required>
+                            <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- search-popup end -->
+
+    <!-- main header (updated with Quiz link) -->
+    <header class="main-header style-four style-five">
+        <div class="header-lower">
+            <div class="outer-box">
+                <div class="logo-box">
+                    <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt="Lab-Ready"></a></figure>
+                </div>
+                <div class="menu-area clearfix">
+                    <div class="mobile-nav-toggler">
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                        <i class="icon-bar"></i>
+                    </div>
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                            <ul class="navigation scroll-nav clearfix">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="apparatus.html">Apparatus</a></li>
+                                <li><a href="chemicals.html">Chemicals</a></li>
+                                <li><a href="emergency.html">Emergency SOP</a></li>
+                                <li class="current"><a href="quiz.html">Quiz</a></li>
+                                <li><a href="videos.html">Simulations</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <ul class="menu-right-content clearfix">
+                    <li class="search-btn">
+                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                    </li>
+                    <li class="btn-box">
+                        <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box clearfix">
+                    <div class="menu-area pull-left"><nav class="main-menu clearfix"></nav></div>
+                    <ul class="menu-right-content pull-right clearfix">
+                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></div>
+            <div class="menu-outer"></div>
+        </nav>
+    </div>
+
+    <!-- Page Title -->
+    <section class="page-title centred" style="background-image: url('assets/images/banner/quiz-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="overlay"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="shape" style="background-image: url(assets/images/shape/shape-63.png);"></div>
+                <div class="title">
+                    <h1>Lab Safety Quiz</h1>
+                </div>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Quiz</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quizSection">
+        <div class="auto-container">
+            <div class="quiz-card" id="quizCard">
+                <!-- Dynamic content will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="main-footer bg-color-1">
+        <div class="footer-top">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget logo-widget">
+                            <div class="footer-logo">
+                                <figure class="logo"><a href="index.html"><img src="assets/images/lab-ready3.png" alt=""></a></figure>
+                            </div>
+                            <div class="text">
+                                <p>Lab-Ready: Interactive web for laboratory management and safety education.</p>
+                                <ul class="info clearfix">
+                                    <li><i class="icon-26"></i>Virtual Lab Assistant</li>
+                                    <li><i class="icon-24"></i>Emergency: <a href="tel:999">999</a></li>
+                                    <li><i class="icon-25"></i><a href="mailto:info@lab-ready.edu">info@lab-ready.edu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title"><h4>Quick Links</h4></div>
+                            <div class="widget-content">
+                                <ul class="links-list clearfix">
+                                    <li><a href="apparatus.html">Apparatus</a></li>
+                                    <li><a href="chemicals.html">Chemicals</a></li>
+                                    <li><a href="emergency.html">Emergency SOP</a></li>
+                                    <li><a href="quiz.html">Quiz</a></li>
+                                    <li><a href="videos.html">Simulations</a></li>
+                                    <li><a href="index.html#about">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                        <div class="footer-widget subscribe-widget">
+                            <div class="widget-title"><h4>For Students</h4></div>
+                            <div class="widget-content">
+                                <p>Learn lab safety and management interactively.</p>
+                                <form action="#" method="post" class="subscribe-form">
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Your Email" required="">
+                                        <button type="submit"><i class="icon-27"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom centred">
+            <div class="auto-container">
+                <div class="copyright">
+                    <p>Lab-Ready © 2025 | Pembangunan Laman Web Interaktif bagi Pengurusan dan Keselamatan Makmal</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/nav-tool.js"></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+<script src="assets/js/pagenav.js"></script>
+<script src="assets/js/script.js"></script>
+
+<script>
+// Hide preloader after page load
+window.addEventListener('load', function() {
+    var preloader = document.querySelector('.loader-wrap');
+    if (preloader) preloader.style.display = 'none';
+});
+
+// ===== QUIZ DATA =====
+const quizData = [
+    {
+        question: "When diluting acids, what is the correct procedure?",
+        options: [
+            "Add water to acid slowly",
+            "Add acid to water slowly",
+            "Mix both simultaneously",
+            "Add acid to water quickly"
+        ],
+        correct: 1,
+        explanation: "Always add acid to water (not water to acid) to prevent violent splashing and exothermic reactions."
+    },
+    {
+        question: "What type of fire extinguisher should be used on a chemical fire involving flammable liquids?",
+        options: [
+            "Class A (water)",
+            "Class B (CO₂ or dry chemical)",
+            "Class C (electrical)",
+            "Class D (metal)"
+        ],
+        correct: 1,
+        explanation: "Class B extinguishers (CO₂ or dry chemical) are for flammable liquids. Never use water on chemical fires."
+    },
+    {
+        question: "What is the minimum time you should rinse your eyes at the eyewash station after a chemical splash?",
+        options: [
+            "5 minutes",
+            "10 minutes",
+            "15 minutes",
+            "30 minutes"
+        ],
+        correct: 2,
+        explanation: "Rinse eyes for at least 15 minutes at the eyewash station. Hold eyelids open and rotate eyes for thorough rinsing."
+    },
+    {
+        question: "Which apparatus is used to measure precise volumes of liquids in titrations?",
+        options: [
+            "Beaker",
+            "Graduated cylinder",
+            "Burette",
+            "Erlenmeyer flask"
+        ],
+        correct: 2,
+        explanation: "A burette is used for precise volume dispensing in titrations. It has a stopcock for controlled flow."
+    },
+    {
+        question: "What should you do first if your clothing catches fire in the lab?",
+        options: [
+            "Run to the safety shower",
+            "Stop, drop, and roll",
+            "Yell for help",
+            "Remove your clothes immediately"
+        ],
+        correct: 1,
+        explanation: "STOP, DROP, and ROLL to smother the flames. Then use the safety shower if available."
+    },
+    {
+        question: "Which of the following is a strong acid commonly found in laboratories?",
+        options: [
+            "Acetic acid (CH₃COOH)",
+            "Carbonic acid (H₂CO₃)",
+            "Hydrochloric acid (HCl)",
+            "Boric acid (H₃BO₃)"
+        ],
+        correct: 2,
+        explanation: "Hydrochloric acid (HCl) is a strong acid. Acetic, carbonic, and boric acids are weak acids."
+    },
+    {
+        question: "What PPE should you wear when handling corrosive chemicals?",
+        options: [
+            "Safety goggles only",
+            "Lab coat only",
+            "Gloves, goggles, and lab coat",
+            "Face shield only"
+        ],
+        correct: 2,
+        explanation: "Always wear chemical-resistant gloves, safety goggles, and a lab coat when handling corrosive chemicals."
+    },
+    {
+        question: "What is the proper way to dispose of broken glassware?",
+        options: [
+            "Place in regular trash bin",
+            "Use dustpan and brush, then dispose in sharps container",
+            "Leave it on the bench",
+            "Wash it and reuse"
+        ],
+        correct: 1,
+        explanation: "Use a dustpan and brush (never hands), then place broken glass in a designated sharps container."
+    },
+    {
+        question: "What does a pH meter measure?",
+        options: [
+            "Temperature of a solution",
+            "Concentration of salt",
+            "Acidity or alkalinity of a solution",
+            "Volume of a liquid"
+        ],
+        correct: 2,
+        explanation: "A pH meter measures the acidity or alkalinity (pH) of a solution."
+    },
+    {
+        question: "If you spill a toxic chemical on the floor, what should you do FIRST?",
+        options: [
+            "Clean it up immediately",
+            "Evacuate the area and close doors",
+            "Call the police",
+            "Open the windows"
+        ],
+        correct: 1,
+        explanation: "First, evacuate the area and close doors to contain the spill. Only trained personnel should attempt cleanup."
+    }
+];
+
+// ===== QUIZ LOGIC =====
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let correctAnswers = 0;
+let totalQuestions = quizData.length;
+
+const quizCard = document.getElementById('quizCard');
+
+function renderQuiz() {
+    if (currentQuestion >= totalQuestions) {
+        showResults();
+        return;
+    }
+
+    const q = quizData[currentQuestion];
+    let optionsHtml = '';
+    q.options.forEach((opt, idx) => {
+        optionsHtml += `
+            <div class="quiz-option" data-opt-index="${idx}" onclick="selectOption(this, ${idx})">
+                ${opt}
+            </div>
+        `;
+    });
+
+    quizCard.innerHTML = `
+        <div class="quiz-header">
+            <span class="question-counter">Question ${currentQuestion + 1} of ${totalQuestions}</span>
+            <span class="score-display">✅ ${score} correct</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" style="width: ${((currentQuestion) / totalQuestions) * 100}%;"></div>
+        </div>
+        <div class="quiz-question">${q.question}</div>
+        <div class="quiz-options" id="optionsContainer">
+            ${optionsHtml}
+        </div>
+        <div class="quiz-footer">
+            <button class="btn-next" id="nextBtn" disabled onclick="nextQuestion()">
+                ${currentQuestion === totalQuestions - 1 ? 'See Results' : 'Next →'}
+            </button>
+        </div>
+    `;
+    
+    answered = false;
+}
+
+function selectOption(el, idx) {
+    if (answered) return;
+    
+    const q = quizData[currentQuestion];
+    const allOptions = document.querySelectorAll('.quiz-option');
+    const isCorrect = idx === q.correct;
+    
+    // Disable all options
+    allOptions.forEach(opt => opt.classList.add('disabled'));
+    
+    // Highlight correct and wrong answers
+    allOptions.forEach((opt, i) => {
+        if (i === q.correct) {
+            opt.classList.add('correct');
+        } else if (i === idx && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+    
+    // If selected option is correct, show correct; if wrong, show wrong
+    if (isCorrect) {
+        score++;
+        correctAnswers++;
+    }
+    
+    answered = true;
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    // Update progress before rendering next question
+    const progressFill = document.querySelector('.progress-fill');
+    if (progressFill) {
+        progressFill.style.width = `${(currentQuestion / totalQuestions) * 100}%`;
+    }
+    renderQuiz();
+}
+
+function showResults() {
+    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+    let emoji, message, color;
+    
+    if (percentage >= 90) {
+        emoji = '🎉';
+        message = 'Excellent! You\'re a lab safety expert!';
+        color = '#28a745';
+    } else if (percentage >= 70) {
+        emoji = '😊';
+        message = 'Good job! Keep learning to become an expert.';
+        color = '#1a5f7a';
+    } else if (percentage >= 50) {
+        emoji = '📚';
+        message = 'Not bad! Review the topics and try again.';
+        color = '#f39c12';
+    } else {
+        emoji = '🤔';
+        message = 'Keep studying! Lab safety is important. Try again!';
+        color = '#e74c3c';
+    }
+    
+    quizCard.innerHTML = `
+        <div class="quiz-results">
+            <div class="result-icon">${emoji}</div>
+            <h2>Quiz Complete!</h2>
+            <div class="result-score">${correctAnswers} / ${totalQuestions}</div>
+            <div class="result-message">${message}</div>
+            <div style="margin-bottom: 20px;">
+                <div style="width: 100%; height: 8px; background: #e9ecef; border-radius: 10px; overflow: hidden; max-width: 300px; margin: 0 auto;">
+                    <div style="width: ${percentage}%; height: 100%; background: ${color}; border-radius: 10px;"></div>
+                </div>
+                <p style="margin-top: 8px; font-weight: 600; color: ${color};">${percentage}%</p>
+            </div>
+            <button class="btn-try-again" onclick="resetQuiz()">🔄 Try Again</button>
+        </div>
+    `;
+}
+
+function resetQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    correctAnswers = 0;
+    answered = false;
+    renderQuiz();
+}
+
+// Initial render
+renderQuiz();
+</script>
+
+</body>
+</html>
