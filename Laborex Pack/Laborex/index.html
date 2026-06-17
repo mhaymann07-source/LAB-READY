@@ -146,6 +146,9 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 .bg-light-gray {
     background: #f8fafc;
 }
+.bg-mid-gray {
+    background: #eef2f5;
+}
 .bg-soft-blue {
     background: #f0f4f8;
 }
@@ -196,7 +199,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 .about-fixed-row {
     display: flex;
     align-items: stretch;
-    height: 420px;
+    height: 600px;
     gap: 40px;
 }
 @media (max-width: 991px) {
@@ -260,6 +263,62 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 @media (max-width: 991px) {
     .about-content-wrapper .content-box {
         padding-right: 0;
+    }
+}
+
+/* ====== LAB ATTIRE – Gambar di Kanan (Foreground) ====== */
+.lab-attire-section .auto-container {
+    position: relative;
+    overflow: visible;
+}
+.lab-attire-section .attire-foreground-image {
+    position: absolute;
+    right: -5%;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 600px;
+    z-index: 10;
+    pointer-events: none;
+}
+.lab-attire-section .attire-foreground-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.lab-attire-section .attire-content {
+    padding: 20px 20px 20px 0;
+}
+.lab-attire-section .attire-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+@media (max-width: 991px) {
+    .lab-attire-section .attire-foreground-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 60%;
+        margin: 0 auto 30px;
+        pointer-events: auto;
+    }
+    .lab-attire-section .row {
+        flex-direction: column-reverse;
+    }
+    .lab-attire-section .attire-content {
+        padding: 0;
+    }
+}
+@media (max-width: 576px) {
+    .lab-attire-section .attire-foreground-image {
+        width: 80%;
+    }
+}
+@media (max-width: 400px) {
+    .lab-attire-section .attire-foreground-image {
+        width: 90%;
     }
 }
 
@@ -643,6 +702,43 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
         font-size: 20px;
     }
 }
+
+/* ================================================================ */
+/* ====== FOOTER – Background Image + Overlay ====== */
+.main-footer.footer-with-bg {
+    background-image: url('assets/images/local/local-2.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: transparent !important;
+}
+.main-footer.footer-with-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 0;
+}
+.main-footer.footer-with-bg .footer-top,
+.main-footer.footer-with-bg .footer-bottom {
+    position: relative;
+    z-index: 1;
+}
+.main-footer.footer-with-bg .footer-widget .text p,
+.main-footer.footer-with-bg .footer-widget .text ul.info li,
+.main-footer.footer-with-bg .footer-widget .text ul.info li a,
+.main-footer.footer-with-bg .widget-title h4,
+.main-footer.footer-with-bg .links-list li a,
+.main-footer.footer-with-bg .subscribe-widget p,
+.main-footer.footer-with-bg .copyright p {
+    color: #fff;
+}
+.main-footer.footer-with-bg .footer-widget .text ul.info li i {
+    color: #22b6af;
+}
+.main-footer.footer-with-bg .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
 </style>
 </head>
 <body>
@@ -779,7 +875,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 
             <!-- SLIDE 2: APPARATUS -->
             <div class="slide-item">
-                <div class="bg-img" style="background-image: url('assets/images/banner/banner2.png');"></div>
+                <div class="bg-img" style="background-image: url('assets/images/local/local-2.png');"></div>
                 <div class="auto-container">
                     <div class="row align-items-center clearfix">
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
@@ -798,7 +894,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 
             <!-- SLIDE 3: CHEMICALS -->
             <div class="slide-item">
-                <div class="bg-img" style="background-image: url('assets/images/banner/banner6.png');"></div>
+                <div class="bg-img" style="background-image: url('assets/images/local/local-3.png');"></div>
                 <div class="auto-container">
                     <div class="row align-items-center clearfix">
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
@@ -817,7 +913,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 
             <!-- SLIDE 4: EMERGENCY SOP & SIMULATION -->
             <div class="slide-item">
-                <div class="bg-img" style="background-image: url('assets/images/banner/banner7.png');"></div>
+                <div class="bg-img" style="background-image: url('assets/images/local/local-4.png');"></div>
                 <div class="auto-container">
                     <div class="row align-items-center clearfix">
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
@@ -909,15 +1005,14 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
     </section>
 
     <!-- ============================================================ -->
-    <!-- ABOUT – Updated with Local Context -->
+    <!-- ABOUT – Updated with Local Context (bg-white) -->
     <!-- ============================================================ -->
     <section class="about-style-two sec-pad bg-white" id="about">
         <div class="auto-container">
             <div class="row about-fixed-row">
                 <div class="image-column">
                     <div class="about-image-wrapper">
-                        <!-- Placeholder for local lab image – replace with actual image -->
-                        <img src="assets/images/local/local-3.png" alt="Laboratory environment at our university">
+                        <img src="assets/images/local/local-5.png" alt="Laboratory environment at our university">
                     </div>
                 </div>
                 <div class="content-column">
@@ -942,6 +1037,54 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PROPER LAB ATTIRE – bg-mid-gray (lebih gelap) -->
+    <!-- ============================================================ -->
+    <section class="lab-attire-section sec-pad bg-mid-gray" id="lab-attire">
+        <div class="auto-container" style="position: relative; overflow: visible; min-height: 500px;">
+            
+            <!-- GAMBAR FOREGROUND (di sebelah kanan) -->
+            <div class="attire-foreground-image">
+                <img src="assets/images/clients/isketambola-1.PNG" alt="Student wearing lab coat" class="img-fluid">
+            </div>
+
+            <!-- KOLUM: TEKS DI KIRI, KOSONG DI KANAN UNTUK GAMBAR -->
+            <div class="row align-items-center" style="min-height: 500px;">
+                <!-- Kolom kiri – TEKS -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="attire-content">
+                        <div class="sec-title">
+                            <h6>Lab Safety First</h6>
+                            <h2>Proper Lab Attire – <br>Wear Your Lab Coat</h2>
+                        </div>
+                        <p class="attire-desc">
+                            Before entering the laboratory, always wear your lab coat and safety goggles. 
+                            This is the first step to ensuring your safety and professionalism in the lab. 
+                            Meet <strong>Isnabila Nur Janah</strong>, our Lab-Ready student ambassador, showing the proper lab attire.
+                        </p>
+                        <p class="attire-desc">
+                            A lab coat protects your skin and clothing from chemical spills, biological contaminants, 
+                            and heat. Always ensure your lab coat is buttoned up and sleeves are rolled down.
+                        </p>
+                        <ul class="list-style-one clearfix">
+                            <li>Protects from chemical splashes</li>
+                            <li>Prevents contamination of personal clothing</li>
+                            <li>Easy to remove in case of emergency</li>
+                        </ul>
+                        <div class="btn-box" style="margin-top: 20px;">
+                            <a href="emergency.html" class="theme-btn-one">Learn More About Safety</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kolom kanan – kosong (untuk ruang gambar) -->
+                <div class="col-lg-6 col-md-12">
+                    <!-- Biarkan kosong – gambar akan overlap di sini -->
                 </div>
             </div>
         </div>
@@ -973,7 +1116,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                 <p>Enhance your lab safety skills with step-by-step video guides. Hover over each card to preview.</p>
             </div>
             <div class="video-card-grid">
-                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-1.jpg');">
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/local/local-6.png');">
                     <span class="card-tag">🔥 Popular</span>
                     <div class="card-overlay">
                         <div class="play-icon"><i class="fas fa-play"></i></div>
@@ -981,7 +1124,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                         <div class="card-desc">Step-by-step demonstration of handling acid spills safely.</div>
                     </div>
                 </a>
-                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-5.jpg');">
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/local/local-7.png');">
                     <span class="card-tag">👁️ Essential</span>
                     <div class="card-overlay">
                         <div class="play-icon"><i class="fas fa-play"></i></div>
@@ -989,7 +1132,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                         <div class="card-desc">Proper technique for flushing eyes after chemical splash.</div>
                     </div>
                 </a>
-                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-6.jpg');">
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/local/local-8.png');">
                     <span class="card-tag">🧯 Critical</span>
                     <div class="card-overlay">
                         <div class="play-icon"><i class="fas fa-play"></i></div>
@@ -1038,8 +1181,10 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="main-footer bg-color-1">
+    <!-- ============================================================ -->
+    <!-- FOOTER – Background Image + Overlay -->
+    <!-- ============================================================ -->
+    <footer class="main-footer footer-with-bg">
         <div class="footer-top">
             <div class="auto-container">
                 <div class="row clearfix">
