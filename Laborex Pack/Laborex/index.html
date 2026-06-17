@@ -12,6 +12,7 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
 <link href="assets/css/font-awesome-all.css" rel="stylesheet">
@@ -25,6 +26,20 @@
 <link href="assets/css/responsive.css" rel="stylesheet">
 
 <style>
+/* ====== Override fonts for chemistry theme ====== */
+h1, h2, h3, h4, h5, h6,
+.sec-title h2,
+.banner-section .content-box h2,
+.page-title .title h1,
+.quiz-promo-card h3,
+.floating-quiz-btn .btn-text {
+    font-family: 'Poppins', 'Barlow', sans-serif !important;
+    font-weight: 700;
+}
+body, p, li, .btn, .theme-btn-one, .theme-btn-two {
+    font-family: 'Inter', 'Open Sans', sans-serif;
+}
+
 /* ====== Base & existing styles ====== */
 .btn-page-link {
     transition: all 0.3s ease;
@@ -136,9 +151,6 @@
 }
 .bg-lighter-blue {
     background: #e8f0f8;
-}
-.bg-dark-teal {
-    background: #1a5f7a;
 }
 
 /* ====== Introduction ====== */
@@ -301,8 +313,6 @@
 .quick-tips-carousel-owl .slider-tip-item .inner-box:hover .icon-box {
     transform: scale(1.1);
 }
-
-/* Owl Carousel custom dots */
 .quick-tips-carousel-owl .owl-dots {
     margin-top: 30px;
     text-align: center;
@@ -347,33 +357,290 @@
     }
 }
 
-/* ====== Video Preview Section ====== */
-.events-section .event-block-one .inner-box {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* ================================================================ */
+/* ====== VIDEO CARDS – HOVER EFFECT ====== */
+.video-showcase-section {
+    padding: 60px 0 80px;
+    background: #f0f4f8;
 }
-.events-section .event-block-one .inner-box:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+.video-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
 }
-
-/* ====== CTA Section – dark teal ====== */
-.cta-style-two.bg-dark-teal .inner-box {
-    padding: 60px 80px;
+@media (max-width: 992px) {
+    .video-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 576px) {
+    .video-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.video-card {
+    position: relative;
     border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.4s ease;
+    background: #fff;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
 }
-.cta-style-two.bg-dark-teal .text h2 {
+.video-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
+.video-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 95, 122, 0.75), rgba(231, 76, 60, 0.65));
+    opacity: 0.7;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
     color: #fff;
 }
-.cta-style-two.bg-dark-teal .banner-btn-two {
-    background: #fff;
-    color: #1a5f7a;
+.video-card:hover .card-overlay {
+    opacity: 0.95;
 }
-.cta-style-two.bg-dark-teal .banner-btn-two:hover {
-    background: #e8f0f8;
+.video-card .play-icon {
+    font-size: 48px;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+    backdrop-filter: blur(4px);
+    margin-bottom: 15px;
 }
-@media (max-width: 768px) {
-    .cta-style-two.bg-dark-teal .inner-box {
-        padding: 40px 30px;
+.video-card:hover .play-icon {
+    transform: scale(1.15);
+    background: rgba(231, 76, 60, 0.9);
+}
+.video-card .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    transform: translateY(10px);
+    transition: 0.4s;
+    opacity: 0;
+}
+.video-card .card-desc {
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 0.4s 0.1s;
+    max-width: 90%;
+}
+.video-card:hover .card-title,
+.video-card:hover .card-desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+.video-card .card-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+
+/* ================================================================ */
+/* ====== QUIZ SECTION – Video Background (FULL COVER) ====== */
+.quiz-promo-section {
+    position: relative;
+    overflow: hidden;
+    padding: 70px 0 90px;
+    color: #fff;
+}
+.quiz-promo-section .video-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+.quiz-promo-section .video-bg video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+}
+.quiz-promo-section .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+.quiz-promo-section .auto-container {
+    position: relative;
+    z-index: 2;
+}
+.quiz-promo-section .sec-title h6,
+.quiz-promo-section .sec-title h2 {
+    color: #fff;
+}
+.quiz-promo-section .sec-title p {
+    color: rgba(255,255,255,0.8);
+}
+.quiz-promo-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 45px 35px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-top: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+.quiz-promo-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: rgba(34, 182, 175, 0.5);
+    box-shadow: 0 20px 60px rgba(34,182,175,0.2);
+    background: rgba(255,255,255,0.12);
+}
+.quiz-promo-card .icon-big {
+    font-size: 72px;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: pulseIcon 3s infinite ease-in-out;
+}
+@keyframes pulseIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+.quiz-promo-card h3 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #22b6af, #6fda8a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.quiz-promo-card p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+    margin: 0 auto 25px;
+}
+.btn-quiz-cta {
+    background: linear-gradient(135deg, #22b6af, #1a9e98);
+    color: #fff;
+    padding: 16px 50px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 20px;
+    border: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(34,182,175,0.3);
+    position: relative;
+    overflow: hidden;
+}
+.btn-quiz-cta::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: shimmer 4s infinite linear;
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+.btn-quiz-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 45px rgba(34,182,175,0.5);
+    color: #fff;
+}
+.btn-quiz-cta i {
+    margin-right: 10px;
+}
+
+/* ================================================================ */
+/* ====== FLOATING QUIZ BUTTON – BOTTOM LEFT ====== */
+.floating-quiz-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 999;
+    background: linear-gradient(135deg, #22b6af, #1a9e98);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(34,182,175,0.5);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: pulse-glow 2.5s infinite;
+    font-weight: 600;
+    font-size: 16px;
+}
+.floating-quiz-btn i {
+    font-size: 24px;
+}
+.floating-quiz-btn .btn-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.floating-quiz-btn:hover {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #1a9e98, #0f7a75);
+    box-shadow: 0 12px 45px rgba(34,182,175,0.7);
+    color: #fff;
+}
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(34,182,175,0.5); }
+    70% { box-shadow: 0 0 0 20px rgba(34,182,175,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,182,175,0); }
+}
+@media (max-width: 576px) {
+    .floating-quiz-btn {
+        padding: 12px 18px;
+        font-size: 14px;
+        bottom: 16px;
+        left: 16px;
+    }
+    .floating-quiz-btn i {
+        font-size: 20px;
     }
 }
 </style>
@@ -512,7 +779,7 @@
                         <div class="col-lg-8 col-md-12 col-sm-12 content-column" style="margin-top: 100px;">
                             <div class="content-box">
                                 <h2>Common Chemicals</h2>
-                                <p>Learn safety precautions, storage, and usage for 25+ common lab chemicals – acids, bases, salts, indicators, and more.</p>
+                                <p>Learn safety precautions, storage, and usage for 70+ common lab chemicals – acids, bases, salts, indicators, and more.</p>
                                 <div class="btn-box">
                                     <a href="chemicals.html" class="theme-btn-one">View Chemicals</a>
                                     <a href="chemicals.html" class="banner-btn">Learn More</a>
@@ -681,35 +948,41 @@
         </div>
     </section>
 
-    <!-- VIDEO PREVIEW -->
-    <section class="events-section sec-pad bg-soft-blue">
+    <!-- ============================================================ -->
+    <!-- INTERACTIVE SIMULATION VIDEOS – ATTRACTIVE CARDS -->
+    <!-- ============================================================ -->
+    <section class="video-showcase-section">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h6>Watch & Learn</h6>
                 <h2>Interactive Simulation Videos</h2>
-                <p>Enhance your lab safety skills with step-by-step video guides.</p>
+                <p>Enhance your lab safety skills with step-by-step video guides. Hover over each card to preview.</p>
             </div>
-            <div class="row clearfix">
-                <div class="col-lg-6 col-md-12 col-sm-12 event-block">
-                    <div class="event-block-one wow fadeInUp">
-                        <div class="inner-box">
-                            <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
-                            <h4><a href="emergency.html">Chemical Spill Response</a></h4>
-                            <p>Step-by-step demonstration of handling acid spills safely.</p>
-                            <div class="btn-box"><a href="emergency.html" class="theme-btn-two">Watch Now →</a></div>
-                        </div>
+            <div class="video-card-grid">
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-1.jpg');">
+                    <span class="card-tag">🔥 Popular</span>
+                    <div class="card-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <div class="card-title">Chemical Spill Response</div>
+                        <div class="card-desc">Step-by-step demonstration of handling acid spills safely.</div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 event-block">
-                    <div class="event-block-one wow fadeInUp">
-                        <div class="inner-box">
-                            <div class="post-date"><h3>🎥<span>VIDEO</span></h3></div>
-                            <h4><a href="emergency.html">Using Eyewash Station</a></h4>
-                            <p>Proper technique for flushing eyes after chemical splash.</p>
-                            <div class="btn-box"><a href="emergency.html" class="theme-btn-two">Watch Now →</a></div>
-                        </div>
+                </a>
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-5.jpg');">
+                    <span class="card-tag">👁️ Essential</span>
+                    <div class="card-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <div class="card-title">Using Eyewash Station</div>
+                        <div class="card-desc">Proper technique for flushing eyes after chemical splash.</div>
                     </div>
-                </div>
+                </a>
+                <a href="emergency.html" class="video-card" style="background-image: url('assets/images/banner/apparatus-6.jpg');">
+                    <span class="card-tag">🧯 Critical</span>
+                    <div class="card-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <div class="card-title">Fire Extinguisher Usage</div>
+                        <div class="card-desc">Learn which extinguisher to use for different fire types.</div>
+                    </div>
+                </a>
             </div>
             <div class="text-center" style="margin-top: 40px;">
                 <a href="emergency.html" class="theme-btn-one">View All Videos →</a>
@@ -717,19 +990,44 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-style-two bg-dark-teal">
+    <!-- ============================================================ -->
+    <!-- QUIZ PROMO SECTION – Video Background (FULL COVER) -->
+    <!-- ============================================================ -->
+    <section class="quiz-promo-section">
+        <!-- Video Background -->
+        <div class="video-bg">
+            <video autoplay loop muted playsinline>
+                <source src="assets/images/video/quiz-bg.mp4" type="video/mp4">
+                <!-- Fallback jika video tak load -->
+                <div class="fallback-bg" style="position:absolute;inset:0;background:linear-gradient(135deg,#0f1a2e,#1a2b4c);"></div>
+            </video>
+        </div>
+        <!-- Overlay gelap -->
+        <div class="overlay"></div>
+
+        <!-- Content -->
         <div class="auto-container">
-            <div class="inner-box clearfix">
-                <div class="text pull-left">
-                    <h2>Interactive Simulation<br />Practice Emergency Response</h2>
-                </div>
-                <div class="btn-box pull-right">
-                    <a href="emergency.html" class="banner-btn-two">Start Simulation</a>
+            <div class="sec-title centred">
+                <h6>Test Your Knowledge</h6>
+                <h2>Lab Safety Quiz</h2>
+                <p>Challenge yourself with 10 questions about lab safety, apparatus, and chemicals. Track your score and learn from explanations.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="quiz-promo-card">
+                        <div class="icon-big">🧪</div>
+                        <h3>Ready to Quiz?</h3>
+                        <p>Answer 10 randomly selected questions, get instant feedback, and see your high score. It's fun and educational!</p>
+                        <a href="quiz.html" class="btn-quiz-cta"><i class="fas fa-brain"></i> Start Quiz Now</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ============================================================ -->
+    <!-- CTA SECTION – REMOVED (redundant) -->
+    <!-- ============================================================ -->
 
     <!-- FOOTER -->
     <footer class="main-footer bg-color-1">
@@ -759,6 +1057,7 @@
                                     <li><a href="apparatus.html">Apparatus</a></li>
                                     <li><a href="chemicals.html">Chemicals</a></li>
                                     <li><a href="emergency.html">Emergency SOP & Simulation</a></li>
+                                    <li><a href="quiz.html">Quiz</a></li>
                                     <li><a href="#about">About</a></li>
                                 </ul>
                             </div>
@@ -793,6 +1092,15 @@
     <button class="scroll-top scroll-to-target" data-target="html">
         <span class="fal fa-angle-up"></span>
     </button>
+
+    <!-- ============================================================ -->
+    <!-- FLOATING QUIZ BUTTON – BOTTOM LEFT -->
+    <!-- ============================================================ -->
+    <a href="quiz.html" class="floating-quiz-btn">
+        <i class="fas fa-brain"></i>
+        <span class="btn-text">Quiz</span>
+    </a>
+
 </div>
 
 <!-- Scripts -->
@@ -885,7 +1193,6 @@ $(document).ready(function(){
     });
 
 });
-
 </script>
 
 </body>
