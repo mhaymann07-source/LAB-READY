@@ -121,9 +121,7 @@
     display: none;
 }
 
-/* ============================================
-   OVERRIDE page-title: Buang video, guna image
-   ============================================ */
+/* Page Title with Image Background */
 .page-title.centred {
     position: relative;
     background-size: cover;
@@ -133,11 +131,9 @@
     display: flex;
     align-items: center;
 }
-
 .page-title .video-background {
     display: none !important;
 }
-
 .page-title .overlay {
     position: absolute;
     top: 0;
@@ -147,18 +143,15 @@
     background: rgba(0, 0, 0, 0.6);
     z-index: 1;
 }
-
 .page-title .auto-container {
     position: relative;
     z-index: 2;
 }
-
 .page-title .title h1,
 .page-title .bread-crumb li,
 .page-title .bread-crumb li a {
     color: #fff;
 }
-
 .page-title .content-box .shape {
     opacity: 0.8;
 }
@@ -168,7 +161,7 @@
 
 <div class="boxed_wrapper">
 
-    <!-- preloader (auto-hide) -->
+    <!-- preloader -->
     <div class="loader-wrap">
         <div class="preloader">
             <div class="preloader-close">Preloader Close</div>
@@ -211,7 +204,7 @@
     </div>
     <!-- search-popup end -->
 
-    <!-- main header -->
+    <!-- ===== HEADER ===== -->
     <header class="main-header style-four style-five">
         <div class="header-lower">
             <div class="outer-box">
@@ -271,7 +264,7 @@
         </nav>
     </div>
 
-    <!-- Page Title with Image Background -->
+    <!-- ===== PAGE TITLE ===== -->
     <section class="page-title centred" style="background-image: url('assets/images/banner/apparatus-1.jpg');">
         <div class="overlay"></div>
         <div class="auto-container">
@@ -288,7 +281,7 @@
         </div>
     </section>
 
-    <!-- Search & Filter (updated categories) -->
+    <!-- ===== SEARCH & FILTER ===== -->
     <section class="apparatus-grid">
         <div class="auto-container">
             <div class="search-box">
@@ -298,12 +291,10 @@
                 <button class="filter-btn active" data-category="all">All</button>
                 <button class="filter-btn" data-category="Glassware">Glassware</button>
                 <button class="filter-btn" data-category="Support & Handling">Support & Handling</button>
-                <button class="filter-btn" data-category="Heating">Heating</button>
-                <button class="filter-btn" data-category="Measuring">Measuring</button>
+                <button class="filter-btn" data-category="Heating & Mixing">Heating & Mixing</button>
+                <button class="filter-btn" data-category="Measuring Instruments">Measuring Instruments</button>
                 <button class="filter-btn" data-category="Safety Equipment">Safety Equipment</button>
                 <button class="filter-btn" data-category="Spectroscopy">Spectroscopy</button>
-                <button class="filter-btn" data-category="Heating & Mixing">Heating & Mixing</button>
-                <button class="filter-btn" data-category="Measurement">Measurement</button>
                 <button class="filter-btn" data-category="Chromatography">Chromatography</button>
             </div>
             <div class="row" id="apparatusContainer">
@@ -312,7 +303,7 @@
         </div>
     </section>
 
-    <!-- footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="main-footer bg-color-1">
         <div class="footer-top">
             <div class="auto-container">
@@ -340,6 +331,7 @@
                                     <li><a href="apparatus.html">Apparatus</a></li>
                                     <li><a href="chemicals.html">Chemicals</a></li>
                                     <li><a href="emergency.html">Emergency SOP & Simulation</a></li>
+                                    <li><a href="quiz.html">Quiz</a></li>
                                     <li><a href="index.html#about">About</a></li>
                                 </ul>
                             </div>
@@ -376,7 +368,7 @@
     </button>
 </div>
 
-<!-- Modal for details -->
+<!-- ===== MODAL ===== -->
 <div class="modal fade" id="apparatusDetailModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -391,7 +383,7 @@
     </div>
 </div>
 
-<!-- Scripts -->
+<!-- ===== SCRIPTS ===== -->
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -423,9 +415,11 @@ window.addEventListener('load', function() {
     if (preloader) preloader.style.display = 'none';
 });
 
-// APPARATUS DATA (original + new items from client)
+// ============================================================
+// APPARATUS DATA – UPDATED (Kategori digabung)
+// ============================================================
 const apparatusData = [
-    // ========== ORIGINAL GLASSWARE ==========
+    // ===== GLASSWARE (18) =====
     { name: "Beaker", category: "Glassware", storage: "Stack upside down on drying rack.", usage: "Mixing, heating liquids. Not for precise volume.", type: "Borosilicate glass, plastic. Sizes: 50-1000mL." },
     { name: "Erlenmeyer Flask (Conical Flask)", category: "Glassware", storage: "On shelves, avoid rim chipping.", usage: "Swirling liquids, titration.", type: "Conical shape, narrow neck." },
     { name: "Volumetric Flask", category: "Glassware", storage: "Stoppered, upright in cabinet.", usage: "Precise solution preparation.", type: "Glass, single calibration mark." },
@@ -444,7 +438,8 @@ const apparatusData = [
     { name: "Crucible", category: "Glassware", storage: "With lid, in desiccator.", usage: "Heating solids to high temperatures.", type: "Porcelain, metal." },
     { name: "Desiccator", category: "Glassware", storage: "On bench with lid sealed.", usage: "Drying substances.", type: "Glass with airtight lid." },
     { name: "Distillation Apparatus", category: "Glassware", storage: "Disassembled in padded box.", usage: "Separating liquids by boiling point.", type: "Glass set with condenser." },
-    // ========== ORIGINAL SUPPORT & HANDLING ==========
+
+    // ===== SUPPORT & HANDLING (9) =====
     { name: "Retort Stand (Ring Stand)", category: "Support & Handling", storage: "Upright on shelf.", usage: "Supporting clamps and apparatus.", type: "Metal rod + heavy base." },
     { name: "Iron Ring", category: "Support & Handling", storage: "Hanging on pegboard.", usage: "Holding wire gauze or clay triangle.", type: "Cast iron with clamp." },
     { name: "Clamps and Holders", category: "Support & Handling", storage: "Organised by size.", usage: "Holding burettes, flasks.", type: "Metal with rubber grips." },
@@ -454,20 +449,29 @@ const apparatusData = [
     { name: "Spatula", category: "Support & Handling", storage: "In drawer or beaker.", usage: "Transferring solids.", type: "Stainless steel, porcelain." },
     { name: "Scoopula", category: "Support & Handling", storage: "In drawer.", usage: "Scooping powders.", type: "Metal." },
     { name: "Wire Gauze", category: "Support & Handling", storage: "Flat on shelf.", usage: "Supporting beakers on tripod.", type: "Metal mesh with ceramic centre." },
-    // ========== ORIGINAL HEATING ==========
-    { name: "Bunsen Burner", category: "Heating", storage: "Securely on base, gas hose attached.", usage: "Heating, sterilizing, combustion.", type: "Adjustable air hole." },
-    { name: "Hot Plate", category: "Heating", storage: "On bench, cord wrapped.", usage: "Heating liquids indirectly.", type: "Electric, ceramic top." },
-    { name: "Water Bath", category: "Heating", storage: "Empty, dry.", usage: "Incubation at constant temperature.", type: "Electric or simple container." },
-    { name: "Heating Mantle", category: "Heating", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, electric." },
-    { name: "Drying Oven", category: "Heating", storage: "On bench, vented.", usage: "Drying glassware or samples.", type: "Electric, temperature controlled." },
-    // ========== ORIGINAL MEASURING ==========
-    { name: "Analytical Balance", category: "Measuring", storage: "On vibration-free bench, levelled.", usage: "Precise mass measurement (0.0001g).", type: "Digital, enclosed draft shield." },
-    { name: "Electronic Balance", category: "Measuring", storage: "On flat surface.", usage: "Mass measurement (0.01g - 0.1g).", type: "Digital." },
-    { name: "Thermometer", category: "Measuring", storage: "In protective case.", usage: "Measuring temperature.", type: "Mercury, alcohol, digital." },
-    { name: "pH Meter", category: "Measuring", storage: "Electrode stored in buffer.", usage: "Measuring pH of solutions.", type: "Electronic with probe." },
-    { name: "Conductivity Meter", category: "Measuring", storage: "Electrode clean and dry.", usage: "Measuring electrical conductivity.", type: "Portable or benchtop." },
-    { name: "Spectrophotometer", category: "Measuring", storage: "Covered, dust-free.", usage: "Measuring light absorbance.", type: "UV-Vis, single beam." }, // moved to spectroscopy later
-    // ========== ORIGINAL SAFETY EQUIPMENT ==========
+
+    // ===== HEATING & MIXING (10) – Gabungan Heating + Heating & Mixing =====
+    { name: "Bunsen Burner", category: "Heating & Mixing", storage: "Securely on base, gas hose attached.", usage: "Heating, sterilizing, combustion.", type: "Adjustable air hole." },
+    { name: "Hot Plate", category: "Heating & Mixing", storage: "On bench, cord wrapped.", usage: "Heating liquids indirectly.", type: "Electric, ceramic top." },
+    { name: "Heating Mantle", category: "Heating & Mixing", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, electric." },
+    { name: "Drying Oven", category: "Heating & Mixing", storage: "On bench, vented.", usage: "Drying glassware or samples.", type: "Electric, temperature controlled." },
+    { name: "Water Bath", category: "Heating & Mixing", storage: "Empty, dry.", usage: "Incubation at constant temperature.", type: "Electric or simple container." },
+    { name: "Magnetic Stirrer", category: "Heating & Mixing", storage: "With stir bar stored nearby.", usage: "Stirring liquids using magnetic field.", type: "Single position, multi-position." },
+    { name: "Hotplate Stirrer", category: "Heating & Mixing", storage: "On bench, away from flammables.", usage: "Heating and stirring simultaneously.", type: "Combined unit." },
+    { name: "Oil Bath", category: "Heating & Mixing", storage: "Covered, with oil inside.", usage: "High‑temperature heating (>100°C).", type: "Silicone oil, mineral oil." },
+    { name: "Sand Bath", category: "Heating & Mixing", storage: "Sand filled container.", usage: "Uniform heating for irregular vessels.", type: "Simple metal pan with sand." },
+
+    // ===== MEASURING INSTRUMENTS (10) – Gabungan Measuring + Measurement =====
+    { name: "Analytical Balance", category: "Measuring Instruments", storage: "On vibration-free bench, levelled.", usage: "Precise mass measurement (0.0001g).", type: "Digital, enclosed draft shield." },
+    { name: "Electronic Balance", category: "Measuring Instruments", storage: "On flat surface.", usage: "Mass measurement (0.01g - 0.1g).", type: "Digital." },
+    { name: "Thermometer", category: "Measuring Instruments", storage: "In protective case.", usage: "Measuring temperature.", type: "Mercury, alcohol, digital." },
+    { name: "pH Meter", category: "Measuring Instruments", storage: "Electrode stored in buffer.", usage: "Measuring pH of solutions.", type: "Electronic with probe." },
+    { name: "Conductivity Meter", category: "Measuring Instruments", storage: "Electrode clean and dry.", usage: "Measuring electrical conductivity.", type: "Portable or benchtop." },
+    { name: "Mercury Thermometer", category: "Measuring Instruments", storage: "In protective case, upright.", usage: "Accurate temperature measurement (mercury).", type: "Mercury-in-glass, various ranges." },
+    { name: "Digital Thermometer", category: "Measuring Instruments", storage: "With probe, clean.", usage: "Accurate temperature monitoring.", type: "Thermocouple, thermistor." },
+    { name: "Top-Loading Balance", category: "Measuring Instruments", storage: "On bench, calibrated.", usage: "General mass measurement (0.1g–0.01g).", type: "Digital, mechanical." },
+
+    // ===== SAFETY EQUIPMENT (16) =====
     { name: "Safety Goggles", category: "Safety Equipment", storage: "Clean, in case.", usage: "Protecting eyes from splashes.", type: "Chemical splash goggles." },
     { name: "Laboratory Coat", category: "Safety Equipment", storage: "Hanging.", usage: "Protecting skin and clothing.", type: "Cotton, polyester." },
     { name: "Chemical-Resistant Gloves", category: "Safety Equipment", storage: "Dry, away from sunlight.", usage: "Handling hazardous chemicals.", type: "Nitrile, neoprene." },
@@ -477,14 +481,14 @@ const apparatusData = [
     { name: "Safety Shower", category: "Safety Equipment", storage: "Clear access.", usage: "Emergency body rinse.", type: "Plumbed." },
     { name: "First Aid Kit", category: "Safety Equipment", storage: "Visible, accessible.", usage: "Treating minor injuries.", type: "Wall-mounted box." },
     { name: "Chemical Spill Kit", category: "Safety Equipment", storage: "Near chemical storage.", usage: "Containing and neutralising spills.", type: "Contains absorbents, neutralisers, PPE." },
-    // ========== NEW SAFETY ITEMS (mask, blanket, glove types) ==========
     { name: "Face Mask", category: "Safety Equipment", storage: "Clean, dry area.", usage: "Protecting from inhalation of dust or vapours.", type: "Surgical, N95, reusable cloth." },
     { name: "Fire Blanket", category: "Safety Equipment", storage: "Visible, accessible wall mount.", usage: "Smothering small fires or wrapping around person on fire.", type: "Wool, fiberglass." },
     { name: "Nitrile Gloves", category: "Safety Equipment", storage: "Box, away from sunlight.", usage: "Chemical resistance, puncture resistant.", type: "Nitrile, powder-free." },
     { name: "Vinyl Gloves", category: "Safety Equipment", storage: "Box, room temperature.", usage: "General protection, low chemical resistance.", type: "Vinyl, disposable." },
     { name: "Latex Gloves", category: "Safety Equipment", storage: "Box, away from heat.", usage: "Good dexterity, allergen risk.", type: "Natural rubber latex." },
+    { name: "Synthetic Vinyl Gloves", category: "Safety Equipment", storage: "Box, room temperature, away from heat.", usage: "Latex-free alternative, good for general lab work.", type: "Synthetic vinyl, powder-free, disposable." },
 
-    // ========== NEW SPECTROSCOPY INSTRUMENTS ==========
+    // ===== SPECTROSCOPY (9) =====
     { name: "UV-Visible Spectrophotometer", category: "Spectroscopy", storage: "Covered, dust-free, away from vibrations.", usage: "Measuring absorbance/transmittance of UV and visible light.", type: "Double beam, single beam." },
     { name: "Colorimeter", category: "Spectroscopy", storage: "Clean, dry, with calibration standards.", usage: "Measuring colour intensity for concentration analysis.", type: "Filter-based, LED." },
     { name: "FTIR Spectrometer", category: "Spectroscopy", storage: "Dry environment (moisture sensitive).", usage: "Identifying functional groups via infrared absorption.", type: "Benchtop, portable." },
@@ -495,34 +499,16 @@ const apparatusData = [
     { name: "NMR Spectrometer", category: "Spectroscopy", storage: "Shielded room, cryogen filled.", usage: "Structural elucidation of organic compounds.", type: "300MHz, 400MHz, 600MHz." },
     { name: "Mass Spectrometer (MS)", category: "Spectroscopy", storage: "Clean, vibration-free bench.", usage: "Determining molecular mass and structure.", type: "Quadrupole, TOF, ion trap." },
 
-    // ========== NEW HEATING & MIXING EQUIPMENT ==========
-    { name: "Hot Plate", category: "Heating & Mixing", storage: "On bench, cord wrapped.", usage: "Heating samples.", type: "Ceramic top, digital." },
-    { name: "Magnetic Stirrer", category: "Heating & Mixing", storage: "With stir bar stored nearby.", usage: "Stirring liquids using magnetic field.", type: "Single position, multi-position." },
-    { name: "Hotplate Stirrer", category: "Heating & Mixing", storage: "On bench, away from flammables.", usage: "Heating and stirring simultaneously.", type: "Combined unit." },
-    { name: "Heating Mantle", category: "Heating & Mixing", storage: "Hanging or on shelf.", usage: "Heating round-bottom flasks.", type: "Fiberglass, temperature controlled." },
-    { name: "Water Bath", category: "Heating & Mixing", storage: "Empty, dry, clean.", usage: "Controlled heating (up to 100°C).", type: "Digital, shaking." },
-    { name: "Oil Bath", category: "Heating & Mixing", storage: "Covered, with oil inside.", usage: "High‑temperature heating (>100°C).", type: "Silicone oil, mineral oil." },
-    { name: "Sand Bath", category: "Heating & Mixing", storage: "Sand filled container.", usage: "Uniform heating for irregular vessels.", type: "Simple metal pan with sand." },
-
-    // ========== NEW MEASUREMENT DEVICES (temperature, pH, conductivity, balances) ==========
-    { name: "Mercury Thermometer", category: "Measurement", storage: "In protective case, upright.", usage: "Accurate temperature measurement (mercury).", type: "Mercury-in-glass, various ranges." },
-    { name: "Digital Thermometer", category: "Measurement", storage: "With probe, clean.", usage: "Accurate temperature monitoring.", type: "Thermocouple, thermistor." },
-    { name: "Conductivity Meter", category: "Measurement", storage: "Electrode stored in water or dry (according to type).", usage: "Measuring electrical conductivity of solutions.", type: "Portable, benchtop." },
-    { name: "pH Meter", category: "Measurement", storage: "Electrode stored in buffer solution.", usage: "pH determination of solutions.", type: "Laboratory grade, portable." },
-    { name: "Analytical Balance", category: "Measurement", storage: "Vibration-free bench, levelled.", usage: "High-precision weighing (±0.0001 g).", type: "Enclosed draft shield." },
-    { name: "Electronic Balance", category: "Measurement", storage: "On flat surface.", usage: "Routine weighing (0.01g–0.1g).", type: "Digital, top-loading." },
-    { name: "Top-Loading Balance", category: "Measurement", storage: "On bench, calibrated.", usage: "General mass measurement (0.1g–0.01g).", type: "Digital, mechanical." },
-
-    // ========== NEW CHROMATOGRAPHY APPARATUS ==========
+    // ===== CHROMATOGRAPHY (4) =====
     { name: "TLC Plate", category: "Chromatography", storage: "In closed container, away from moisture.", usage: "Thin Layer Chromatography – compound separation.", type: "Silica gel, alumina, cellulose." },
     { name: "TLC Chamber", category: "Chromatography", storage: "Clean, with lid.", usage: "Solvent development for TLC plates.", type: "Glass or metal with lid." },
     { name: "Chromatography Column", category: "Chromatography", storage: "Vertical, with stopcock closed.", usage: "Column chromatography – purification of compounds.", type: "Glass with frit, PTFE stopcock." },
     { name: "UV Lamp", category: "Chromatography", storage: "In protective housing.", usage: "Visualising spots on TLC plates.", type: "254nm, 365nm dual wavelength." }
 ];
 
-// Remove duplicate spectrophotometer from Measuring if needed? we keep it separate; but we have a new UV-Vis spectrophotometer under Spectroscopy.
-// Also note the original Spectrophotometer under Measuring remains; but for consistency we keep both.
-
+// ============================================================
+// RENDER CARDS
+// ============================================================
 function renderCards(filterCategory = "all", searchTerm = "") {
     const container = document.getElementById("apparatusContainer");
     container.innerHTML = "";
@@ -538,14 +524,13 @@ function renderCards(filterCategory = "all", searchTerm = "") {
     filtered.forEach(item => {
         const imageName = getImageFileName(item.name);
         const imgPath = `assets/images/apparatus/${imageName}`;
-        const fullImgPath = imgPath;
         const fallbackPlaceholder = `https://placehold.co/200x200?text=${encodeURIComponent(item.name.substring(0,20))}`;
         
         const col = document.createElement("div");
         col.className = "col-lg-4 col-md-6 col-sm-12";
         col.innerHTML = `
             <div class="apparatus-card">
-                <a href="${fullImgPath}" data-fancybox="apparatus-gallery" data-caption="${item.name}">
+                <a href="${imgPath}" data-fancybox="apparatus-gallery" data-caption="${item.name}">
                     <img src="${imgPath}" alt="${item.name}" class="apparatus-img" onerror="this.src='${fallbackPlaceholder}'; this.onerror=null;">
                 </a>
                 <h4>${item.name}</h4>
@@ -586,6 +571,7 @@ function updateDisplay() {
     renderCards(currentCategory, currentSearch);
 }
 
+// ===== FILTER BUTTONS =====
 document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.addEventListener("click", function() {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
@@ -595,11 +581,13 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     });
 });
 
+// ===== SEARCH =====
 document.getElementById("searchInput").addEventListener("keyup", function(e) {
     currentSearch = this.value;
     updateDisplay();
 });
 
+// ===== INITIAL RENDER =====
 renderCards();
 </script>
 
