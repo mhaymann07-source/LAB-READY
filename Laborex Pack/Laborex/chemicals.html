@@ -510,9 +510,32 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 
 <script>
 // ================================================================
-// CHEMICAL IMAGE FILENAME HELPER – UPDATED (handle · middle dot)
+// MANUAL IMAGE FILENAME MAPPING (untuk chemical yang tak display)
+// ================================================================
+const imageNameOverrides = {
+    "Hexane (C₆H₁₄)": "hexane-c6h14.jpg",
+    "Cyclohexane (C₆H₁₂)": "cyclohexane-c6h12.jpg",
+    "Diethyl Ether (C₄H₁₀O)": "diethyl-ether-c4h10o.jpg",
+    "Copper(II) Sulfate Pentahydrate (CuSO₄·5H₂O)": "copperii-sulfate-pentahydrate-cuso45h2o.jpg",
+    "Copper(II) Nitrate Trihydrate (Cu(NO₃)₂·3H₂O)": "copperii-nitrate-trihydrate-cuno323h2o.jpg",
+    "Iron(II) Sulfate Heptahydrate (FeSO₄·7H₂O)": "ironii-sulfate-heptahydrate-feso47h2o.jpg",
+    "Nickel(II) Sulfate Hexahydrate (NiSO₄·6H₂O)": "nickelii-sulfate-hexahydrate-niso46h2o.jpg",
+    "Chromium(III) Chloride Hexahydrate (CrCl₃·6H₂O)": "chromiumiii-chloride-hexahydrate-crcl36h2o.jpg",
+    "Iron(III) Chloride (FeCl₃)": "ironiii-chloride-fecl3.jpg",
+    "Cobalt(II) Chloride Hexahydrate (CoCl₂·6H₂O)": "cobaltii-chloride-hexahydrate-cocl26h2o.jpg",
+    "Lead(II) Nitrate (Pb(NO₃)₂)": "leadii-nitrate-pbno32.jpg"
+};
+
+// ================================================================
+// Helper to convert chemical name to image filename (with override)
 // ================================================================
 function getChemicalImageFileName(name) {
+    // Jika ada dalam mapping, guna terus
+    if (imageNameOverrides[name]) {
+        return imageNameOverrides[name];
+    }
+    
+    // Jika tiada, proses macam biasa
     let processed = name
         .toLowerCase()
         .replace(/\(i\)/g, '-i')
@@ -528,7 +551,6 @@ function getChemicalImageFileName(name) {
         .replace(/₇/g, '7')
         .replace(/₈/g, '8')
         .replace(/₉/g, '9')
-        .replace(/·/g, '-')   // 🔥 NEW: handle middle dot (·) → -
         .replace(/[^a-z0-9\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
@@ -536,6 +558,9 @@ function getChemicalImageFileName(name) {
     return processed + '.jpg';
 }
 
+// ================================================================
+// Preloader hide
+// ================================================================
 window.addEventListener('load', () => { 
     const preloader = document.querySelector('.loader-wrap');
     if (preloader) preloader.style.display = 'none';
@@ -685,6 +710,9 @@ function renderCards(filterCategory = "all", searchTerm = "") {
     }
 }
 
+// ================================================================
+// FILTER & SEARCH
+// ================================================================
 let currentCategory = "all", currentSearch = "";
 function update() { renderCards(currentCategory, currentSearch); }
 document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("click", function() {
@@ -694,6 +722,10 @@ document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("cl
     update();
 }));
 document.getElementById("searchInput").addEventListener("keyup", e => { currentSearch = e.target.value; update(); });
+
+// ================================================================
+// INITIAL RENDER
+// ================================================================
 renderCards();
 </script>
 
