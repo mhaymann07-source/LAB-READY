@@ -12,7 +12,6 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
-<!-- ADD: Poppins for modern/chemistry feel -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
@@ -338,6 +337,265 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
     }
 }
 
+/* ================================================================ */
+/* ====== SEARCH OVERLAY ====== */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+    animation: fadeIn 0.3s ease;
+}
+.search-overlay.active {
+    display: flex;
+}
+.search-overlay .search-container {
+    width: 100%;
+    max-width: 720px;
+    padding: 0 20px;
+}
+.search-overlay .search-input-wrap {
+    position: relative;
+    margin-bottom: 30px;
+}
+.search-overlay .search-input-wrap i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 20px;
+}
+.search-overlay .search-input-wrap input {
+    width: 100%;
+    padding: 18px 20px 18px 55px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 60px;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+.search-overlay .search-input-wrap input::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+.search-overlay .search-input-wrap input:focus {
+    border-color: rgba(34, 182, 175, 0.5);
+    background: rgba(255,255,255,0.08);
+}
+.search-overlay .search-input-wrap .clear-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    transition: 0.2s;
+}
+.search-overlay .search-input-wrap .clear-btn:hover {
+    color: #fff;
+}
+.search-overlay .search-input-wrap .clear-btn.show {
+    display: block;
+}
+.search-overlay .search-results {
+    max-height: 55vh;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+.search-overlay .search-results::-webkit-scrollbar {
+    width: 4px;
+}
+.search-overlay .search-results::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+.search-overlay .search-results::-webkit-scrollbar-thumb {
+    background: rgba(34, 182, 175, 0.4);
+    border-radius: 10px;
+}
+.search-overlay .result-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 4px;
+    text-decoration: none;
+    color: #fff;
+}
+.search-overlay .result-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateX(4px);
+}
+.search-overlay .result-item .result-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 182, 175, 0.15);
+    border-radius: 10px;
+    color: #22b6af;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.search-overlay .result-item .result-info {
+    flex: 1;
+    min-width: 0;
+}
+.search-overlay .result-item .result-info .result-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+}
+.search-overlay .result-item .result-info .result-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-overlay .result-item .result-info .result-category {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 2px;
+}
+.search-overlay .no-results {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    padding: 40px 0;
+}
+.search-overlay .search-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 13px;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+.search-overlay .close-search-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.search-overlay .close-search-btn:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ===== MOST SEARCHED / POPULAR SUGGESTIONS ===== */
+.search-suggestions {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+.search-suggestions .suggestion-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+}
+.search-suggestions .suggestion-card:hover {
+    background: rgba(34, 182, 175, 0.15);
+    border-color: rgba(34, 182, 175, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(34, 182, 175, 0.1);
+}
+.search-suggestions .suggestion-card .suggestion-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+.search-suggestions .suggestion-card .suggestion-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+}
+.search-suggestions .suggestion-card .suggestion-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+}
+.search-suggestions .suggestion-card .suggestion-badge {
+    display: inline-block;
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 768px) {
+    .search-suggestions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .search-suggestions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-suggestions .suggestion-card {
+        padding: 12px 8px;
+    }
+    .search-suggestions .suggestion-card .suggestion-icon {
+        font-size: 22px;
+    }
+}
+@media (max-width: 576px) {
+    .search-overlay {
+        padding-top: 60px;
+    }
+    .search-overlay .close-search-btn {
+        top: 16px;
+        right: 20px;
+        font-size: 22px;
+    }
+    .search-overlay .search-input-wrap input {
+        padding: 14px 16px 14px 48px;
+        font-size: 16px;
+    }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .emergency-card { margin-bottom: 20px; }
@@ -372,8 +630,23 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
         </div>
     </div>
 
-    <!-- search-popup -->
-    <div id="search-popup" class="search-popup">
+    <!-- ===== SEARCH OVERLAY ===== -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="close-search-btn" id="closeSearchBtn"><i class="fas fa-times"></i></button>
+        <div class="search-container">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search emergencies..." autofocus>
+                <button class="clear-btn" id="clearSearchBtn"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Popular Suggestions -->
+            </div>
+        </div>
+    </div>
+
+    <!-- search-popup (old – hidden) -->
+    <div id="search-popup" class="search-popup" style="display:none;">
         <div class="close-search"><span>x</span></div>
         <div class="popup-inner">
             <div class="overlay-layer"></div>
@@ -417,7 +690,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                 </div>
                 <ul class="menu-right-content clearfix">
                     <li class="search-btn">
-                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                        <button type="button" class="search-toggler" id="searchToggler"><i class="icon-1"></i></button>
                     </li>
                     <li class="btn-box">
                         <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
@@ -432,7 +705,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                         <nav class="main-menu clearfix"></nav>
                     </div>
                     <ul class="menu-right-content pull-right clearfix">
-                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="search-btn"><button type="button" class="search-toggler" id="searchTogglerSticky"><i class="icon-1"></i></button></li>
                         <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
                     </ul>
                 </div>
@@ -626,28 +899,18 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 <script src="assets/js/script.js"></script>
 
 <script>
-// ===== PRELOADER HIDE =====
-window.addEventListener('load', function() {
-    var preloader = document.querySelector('.loader-wrap');
-    if (preloader) preloader.style.display = 'none';
-});
+// ================================================================
+// SEARCH ENGINE – Emergency Page Search
+// ================================================================
 
-// ===== VIDEO MODAL HELPERS =====
-function getVideoEmbedAutoplay(videoId) {
-    if (!videoId) return '';
-    return 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
-}
-
-function openVideoModal(videoId, title) {
-    if (!videoId) return;
-    document.getElementById('videoIframe').src = getVideoEmbedAutoplay(videoId);
-    document.getElementById('videoModalTitle').innerText = title || 'Watch Video';
-    $('#videoModal').modal('show');
-}
-
-$('#videoModal').on('hidden.bs.modal', function() {
-    document.getElementById('videoIframe').src = '';
-});
+// ===== POPULAR SUGGESTIONS =====
+const popularSuggestions = [
+    { icon: "fa-triangle-exclamation", label: "Chemical Spills", desc: "Acid, toxic, mercury spills", url: "#", badge: "Critical" },
+    { icon: "fa-fire", label: "Fire & Burns", desc: "Fire, clothing fire", url: "#", badge: "Emergency" },
+    { icon: "fa-hand-holding-water", label: "Medical", desc: "Skin, eye splashes, inhalation", url: "#", badge: "First Aid" },
+    { icon: "fa-glass-martini-alt", label: "Physical Hazards", desc: "Broken glassware", url: "#", badge: "Safety" },
+    { icon: "fa-tint", label: "Mercury Spill", desc: "Small & large spill response", url: "#", badge: "Toxic" }
+];
 
 // ===== EMERGENCY DATA =====
 var emergencies = [
@@ -664,6 +927,199 @@ var emergencies = [
         { videoId: "QimNlohjkMc", label: "Large Spill (Professional Cleanup)" }
     ], steps: ["Evacuate area and close doors.", "Wear nitrile gloves and face shield.", "Do NOT use a regular vacuum cleaner (spreads vapours).", "Use mercury spill kit: amalgamation powder or mercury vacuum.", "Collect mercury beads with sticky tape or suction device.", "Place all contaminated materials in sealed hazardous waste container.", "Ventilate the area for at least 24 hours.", "Report incident and seek medical evaluation if exposure suspected."] }
 ];
+
+// ===== BUILD SEARCH DATA =====
+function buildSearchData() {
+    const data = [];
+    // Add page entry
+    data.push({
+        title: "Emergency SOP",
+        url: "emergency.html",
+        category: "Page",
+        icon: "fa-triangle-exclamation",
+        desc: "Step-by-step emergency procedures with interactive simulation"
+    });
+    // Add all emergencies
+    emergencies.forEach(item => {
+        data.push({
+            title: item.title,
+            url: "emergency.html",
+            category: item.category,
+            icon: item.icon,
+            desc: item.description
+        });
+    });
+    return data;
+}
+
+let searchData = [];
+
+// ===== RENDER SUGGESTIONS =====
+function renderSuggestions() {
+    const container = document.getElementById('searchResults');
+    let html = `
+        <div class="search-suggestions">
+    `;
+    popularSuggestions.forEach(item => {
+        html += `
+            <div class="suggestion-card" onclick="applyFilter('${item.label}')">
+                <span class="suggestion-icon"><i class="fas ${item.icon}"></i></span>
+                <div class="suggestion-label">${item.label}</div>
+                <div class="suggestion-desc">${item.desc}</div>
+                ${item.badge ? `<span class="suggestion-badge">${item.badge}</span>` : ''}
+            </div>
+        `;
+    });
+    html += `</div>`;
+    html += `<div class="search-hint">✨ Popular categories — click to filter emergencies</div>`;
+    container.innerHTML = html;
+}
+
+// ===== APPLY FILTER =====
+function applyFilter(category) {
+    closeSearch();
+    const categoryMap = {
+        "Chemical Spills": "Chemical Spills",
+        "Fire & Burns": "Fire & Burns",
+        "Medical": "Medical",
+        "Physical Hazards": "Physical Hazards",
+        "Mercury Spill": "Chemical Spills"
+    };
+    const targetCategory = categoryMap[category] || category;
+    
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-category') === targetCategory) {
+            btn.classList.add('active');
+            btn.click();
+        }
+    });
+    if (category === "All") {
+        document.querySelector('.filter-btn[data-category="all"]')?.click();
+    }
+}
+
+// ===== PERFORM SEARCH =====
+function performSearch(query) {
+    if (!query || query.length < 1) return [];
+    const q = query.toLowerCase().trim();
+    const results = searchData.filter(item => {
+        return item.title.toLowerCase().includes(q) || 
+               item.desc.toLowerCase().includes(q) ||
+               item.category.toLowerCase().includes(q);
+    });
+    results.sort((a, b) => {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase();
+        if (aTitle === q && bTitle !== q) return -1;
+        if (bTitle === q && aTitle !== q) return 1;
+        return 0;
+    });
+    return results.slice(0, 20);
+}
+
+// ===== RENDER RESULTS =====
+function renderResults(results) {
+    const container = document.getElementById('searchResults');
+    if (results.length === 0) {
+        container.innerHTML = `<div class="no-results"><i class="fas fa-search" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>No emergencies found. Try a different keyword.</div>`;
+        return;
+    }
+    let html = '';
+    results.forEach(item => {
+        const icon = item.icon || 'fa-circle';
+        const url = item.url || '#';
+        html += `
+            <a href="${url}" class="result-item" onclick="closeSearch()">
+                <div class="result-icon"><i class="fas ${icon}"></i></div>
+                <div class="result-info">
+                    <div class="result-title">${highlightMatch(item.title)}</div>
+                    <div class="result-desc">${highlightMatch(item.desc)}</div>
+                    <span class="result-category">${item.category}</span>
+                </div>
+            </a>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+// ===== HIGHLIGHT =====
+function highlightMatch(text) {
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query || query.length < 2) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark style="background:rgba(34,182,175,0.3);color:#fff;padding:1px 4px;border-radius:3px;">$1</mark>');
+}
+
+// ===== SEARCH CONTROLS =====
+function openSearch() {
+    document.getElementById('searchOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderSuggestions();
+    setTimeout(() => document.getElementById('searchInput').focus(), 200);
+}
+function closeSearch() {
+    document.getElementById('searchOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('clearSearchBtn').classList.remove('show');
+    renderSuggestions();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    searchData = buildSearchData();
+    renderSuggestions();
+
+    document.querySelectorAll('.search-toggler').forEach(el => {
+        el.addEventListener('click', function(e) { e.preventDefault(); openSearch(); });
+    });
+    document.getElementById('closeSearchBtn').addEventListener('click', closeSearch);
+    document.getElementById('clearSearchBtn').addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        this.classList.remove('show');
+        renderSuggestions();
+        document.getElementById('searchInput').focus();
+    });
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const query = this.value.trim();
+        if (query.length > 0) {
+            document.getElementById('clearSearchBtn').classList.add('show');
+            renderResults(performSearch(query));
+        } else {
+            document.getElementById('clearSearchBtn').classList.remove('show');
+            renderSuggestions();
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+        if (e.key === 'Escape' && document.getElementById('searchOverlay').classList.contains('active')) closeSearch();
+    });
+    document.getElementById('searchOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeSearch();
+    });
+});
+
+// ===== PRELOADER HIDE =====
+window.addEventListener('load', function() {
+    var preloader = document.querySelector('.loader-wrap');
+    if (preloader) preloader.style.display = 'none';
+});
+
+// ===== VIDEO MODAL HELPERS =====
+function getVideoEmbedAutoplay(videoId) {
+    if (!videoId) return '';
+    return 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+}
+function openVideoModal(videoId, title) {
+    if (!videoId) return;
+    document.getElementById('videoIframe').src = getVideoEmbedAutoplay(videoId);
+    document.getElementById('videoModalTitle').innerText = title || 'Watch Video';
+    $('#videoModal').modal('show');
+}
+$('#videoModal').on('hidden.bs.modal', function() {
+    document.getElementById('videoIframe').src = '';
+});
 
 // ===== RENDER EMERGENCY CARDS =====
 function renderCards(filterCategory) {
@@ -719,7 +1175,6 @@ function renderCards(filterCategory) {
         '</div>';
         container.appendChild(col);
 
-        // Attach video click handlers
         if (!hasCarousel) {
             var videoDiv = col.querySelector('.card-video');
             if (videoDiv && videoDiv.dataset.videoId) {
@@ -744,7 +1199,6 @@ function renderCards(filterCategory) {
         }
     });
 
-    // SOP buttons
     document.querySelectorAll(".btn-emergency").forEach(function(btn) {
         btn.addEventListener("click", function() {
             var id = this.getAttribute("data-id");
@@ -814,13 +1268,11 @@ document.getElementById("nextStepBtn").addEventListener("click", function() {
         $("#simulationModal").modal("hide");
     }
 });
-
 document.getElementById("resetSimBtn").addEventListener("click", function() {
     if (!currentSim) return;
     currentStep = 0;
     updateModalUI();
 });
-
 $("#simulationModal").on("hidden.bs.modal", function() {
     currentSim = null;
     currentStep = 0;

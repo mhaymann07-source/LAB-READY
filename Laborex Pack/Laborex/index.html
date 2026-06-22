@@ -743,6 +743,265 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 .main-footer.footer-with-bg .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
+
+/* ================================================================ */
+/* ====== SEARCH OVERLAY ====== */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+    animation: fadeIn 0.3s ease;
+}
+.search-overlay.active {
+    display: flex;
+}
+.search-overlay .search-container {
+    width: 100%;
+    max-width: 720px;
+    padding: 0 20px;
+}
+.search-overlay .search-input-wrap {
+    position: relative;
+    margin-bottom: 30px;
+}
+.search-overlay .search-input-wrap i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 20px;
+}
+.search-overlay .search-input-wrap input {
+    width: 100%;
+    padding: 18px 20px 18px 55px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 60px;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+.search-overlay .search-input-wrap input::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+.search-overlay .search-input-wrap input:focus {
+    border-color: rgba(34, 182, 175, 0.5);
+    background: rgba(255,255,255,0.08);
+}
+.search-overlay .search-input-wrap .clear-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    transition: 0.2s;
+}
+.search-overlay .search-input-wrap .clear-btn:hover {
+    color: #fff;
+}
+.search-overlay .search-input-wrap .clear-btn.show {
+    display: block;
+}
+.search-overlay .search-results {
+    max-height: 55vh;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+.search-overlay .search-results::-webkit-scrollbar {
+    width: 4px;
+}
+.search-overlay .search-results::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+.search-overlay .search-results::-webkit-scrollbar-thumb {
+    background: rgba(34, 182, 175, 0.4);
+    border-radius: 10px;
+}
+.search-overlay .result-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 4px;
+    text-decoration: none;
+    color: #fff;
+}
+.search-overlay .result-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateX(4px);
+}
+.search-overlay .result-item .result-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 182, 175, 0.15);
+    border-radius: 10px;
+    color: #22b6af;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.search-overlay .result-item .result-info {
+    flex: 1;
+    min-width: 0;
+}
+.search-overlay .result-item .result-info .result-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+}
+.search-overlay .result-item .result-info .result-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-overlay .result-item .result-info .result-category {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 2px;
+}
+.search-overlay .no-results {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    padding: 40px 0;
+}
+.search-overlay .search-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 13px;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+.search-overlay .close-search-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.search-overlay .close-search-btn:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ===== MOST SEARCHED / POPULAR SUGGESTIONS ===== */
+.search-suggestions {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+.search-suggestions .suggestion-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+}
+.search-suggestions .suggestion-card:hover {
+    background: rgba(34, 182, 175, 0.15);
+    border-color: rgba(34, 182, 175, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(34, 182, 175, 0.1);
+}
+.search-suggestions .suggestion-card .suggestion-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+.search-suggestions .suggestion-card .suggestion-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+}
+.search-suggestions .suggestion-card .suggestion-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+}
+.search-suggestions .suggestion-card .suggestion-badge {
+    display: inline-block;
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 768px) {
+    .search-suggestions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .search-suggestions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-suggestions .suggestion-card {
+        padding: 12px 8px;
+    }
+    .search-suggestions .suggestion-card .suggestion-icon {
+        font-size: 22px;
+    }
+}
+@media (max-width: 576px) {
+    .search-overlay {
+        padding-top: 60px;
+    }
+    .search-overlay .close-search-btn {
+        top: 16px;
+        right: 20px;
+        font-size: 22px;
+    }
+    .search-overlay .search-input-wrap input {
+        padding: 14px 16px 14px 48px;
+        font-size: 16px;
+    }
+}
 </style>
 </head>
 <body>
@@ -773,8 +1032,23 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
     </div>
     <!-- preloader end -->
 
-    <!-- search-popup -->
-    <div id="search-popup" class="search-popup">
+    <!-- ===== SEARCH OVERLAY ===== -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="close-search-btn" id="closeSearchBtn"><i class="fas fa-times"></i></button>
+        <div class="search-container">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search apparatus, chemicals, emergencies..." autofocus>
+                <button class="clear-btn" id="clearSearchBtn"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Popular Suggestions will be shown here by default -->
+            </div>
+        </div>
+    </div>
+
+    <!-- search-popup (old – hidden) -->
+    <div id="search-popup" class="search-popup" style="display:none;">
         <div class="close-search"><span>x</span></div>
         <div class="popup-inner">
             <div class="overlay-layer"></div>
@@ -790,7 +1064,6 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
             </div>
         </div>
     </div>
-    <!-- search-popup end -->
 
     <!-- main header -->
     <header class="main-header style-four style-five">
@@ -819,7 +1092,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                 </div>
                 <ul class="menu-right-content clearfix">
                     <li class="search-btn">
-                        <button type="button" class="search-toggler"><i class="icon-1"></i></button>
+                        <button type="button" class="search-toggler" id="searchToggler"><i class="icon-1"></i></button>
                     </li>
                     <li class="btn-box">
                         <a href="emergency.html" class="theme-btn-one">Emergency Guide</a>
@@ -834,7 +1107,7 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
                         <nav class="main-menu clearfix"></nav>
                     </div>
                     <ul class="menu-right-content pull-right clearfix">
-                        <li class="search-btn"><button type="button" class="search-toggler"><i class="icon-1"></i></button></li>
+                        <li class="search-btn"><button type="button" class="search-toggler" id="searchTogglerSticky"><i class="icon-1"></i></button></li>
                         <li class="btn-box"><a href="emergency.html" class="theme-btn-one">Emergency Guide</a></li>
                     </ul>
                 </div>
@@ -1278,6 +1551,232 @@ body, p, li, .btn, .theme-btn-one, .theme-btn-two {
 <script src="assets/js/script.js"></script>
 
 <script>
+// ================================================================
+// SEARCH ENGINE – Lab-Ready Site-wide Search
+// ================================================================
+
+// ===== POPULAR SUGGESTIONS =====
+const popularSuggestions = [
+    { icon: "fa-flask", label: "Apparatus", desc: "Browse 40+ lab equipment", url: "apparatus.html", badge: "Most Searched" },
+    { icon: "fa-vial", label: "Chemicals", desc: "70+ chemicals with safety data", url: "chemicals.html", badge: "Popular" },
+    { icon: "fa-triangle-exclamation", label: "Emergency SOP", desc: "9 emergencies with simulation", url: "emergency.html", badge: "Critical" },
+    { icon: "fa-brain", label: "Quiz", desc: "Test your lab knowledge", url: "quiz.html", badge: "Try Now" },
+    { icon: "fa-info-circle", label: "About", desc: "Learn about Lab-Ready", url: "#about", badge: "" }
+];
+
+// ===== SEARCH DATA =====
+const searchData = [
+    // === PAGES ===
+    { title: "Home", url: "index.html", category: "Page", icon: "fa-home", desc: "Lab-Ready homepage – interactive lab management and safety" },
+    { title: "Apparatus", url: "apparatus.html", category: "Page", icon: "fa-flask", desc: "Browse 40+ laboratory apparatus with storage, usage, and types" },
+    { title: "Chemicals", url: "chemicals.html", category: "Page", icon: "fa-vial", desc: "70+ common lab chemicals – safety precautions, storage, and usage" },
+    { title: "Emergency SOP", url: "emergency.html", category: "Page", icon: "fa-triangle-exclamation", desc: "Step-by-step emergency procedures with interactive simulation" },
+    { title: "Quiz", url: "quiz.html", category: "Page", icon: "fa-brain", desc: "Test your knowledge with 10 questions on lab safety" },
+    { title: "About", url: "#about", category: "Page", icon: "fa-info-circle", desc: "Learn about the Lab-Ready project" },
+    { title: "Modules", url: "#modules", category: "Page", icon: "fa-th-large", desc: "Lab-Ready modules – Apparatus, Chemicals, Emergency" },
+    // === APPARATUS (samples) ===
+    { title: "Beaker", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Mixing, heating liquids. Borosilicate glass, sizes 50-1000mL." },
+    { title: "Erlenmeyer Flask", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Conical shape, narrow neck. Used for swirling liquids, titration." },
+    { title: "Volumetric Flask", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Precise solution preparation. Glass, single calibration mark." },
+    { title: "Bunsen Burner", url: "apparatus.html", category: "Apparatus", icon: "fa-fire", desc: "Heating, sterilizing, combustion. Adjustable air hole." },
+    { title: "Hot Plate", url: "apparatus.html", category: "Apparatus", icon: "fa-fire", desc: "Heating liquids indirectly. Electric, ceramic top." },
+    { title: "Analytical Balance", url: "apparatus.html", category: "Apparatus", icon: "fa-weight-scale", desc: "Precise mass measurement (0.0001g). Digital, enclosed draft shield." },
+    { title: "pH Meter", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Measuring pH of solutions. Electronic with probe." },
+    { title: "Spectrophotometer", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Measuring light absorbance. UV-Vis, single beam." },
+    { title: "Safety Goggles", url: "apparatus.html", category: "Apparatus", icon: "fa-eye", desc: "Protecting eyes from splashes. Chemical splash goggles." },
+    { title: "Laboratory Coat", url: "apparatus.html", category: "Apparatus", icon: "fa-shirt", desc: "Protecting skin and clothing. Cotton, polyester." },
+    { title: "Fume Hood", url: "apparatus.html", category: "Apparatus", icon: "fa-wind", desc: "Removing toxic fumes. Ducted or recirculating." },
+    { title: "Fire Extinguisher", url: "apparatus.html", category: "Apparatus", icon: "fa-fire-extinguisher", desc: "Putting out small fires. Class ABC, CO2." },
+    { title: "Eyewash Station", url: "apparatus.html", category: "Apparatus", icon: "fa-eye", desc: "Flushing eyes after chemical splash. Plumbed or portable." },
+    { title: "Magnetic Stirrer", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Stirring liquids using magnetic field." },
+    { title: "UV-Visible Spectrophotometer", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "Measuring absorbance/transmittance of UV and visible light." },
+    { title: "HPLC", url: "apparatus.html", category: "Apparatus", icon: "fa-flask", desc: "High-Performance Liquid Chromatograph – non-volatile compounds." },
+    // === CHEMICALS ===
+    { title: "Hydrochloric Acid", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "HCl – Strong acid. Corrosive. Use fume hood, wear PPE." },
+    { title: "Sulfuric Acid", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "H₂SO₄ – Strong acid, dehydrating agent. Use fume hood." },
+    { title: "Nitric Acid", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "HNO₃ – Strong acid, oxidizer. Use fume hood." },
+    { title: "Sodium Hydroxide", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "NaOH – Strong base. Causes severe burns. Wear PPE." },
+    { title: "Potassium Hydroxide", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "KOH – Strong base. Corrosive. Absorbent for CO₂." },
+    { title: "Ammonia", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "NH₃ – Aqueous ammonia. Toxic, irritant. Use fume hood." },
+    { title: "Ethanol", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "C₂H₅OH – Flammable. Solvent, disinfectant, extraction." },
+    { title: "Acetone", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "C₃H₆O – Highly flammable. Cleaning glassware, solvent." },
+    { title: "Copper Sulfate", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "CuSO₄·5H₂O – Blue salt. Hydrate experiments, electroplating." },
+    { title: "Silver Nitrate", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "AgNO₃ – Corrosive, stains skin black. Light sensitive." },
+    { title: "Phenolphthalein", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "pH indicator – colourless in acid, pink in base." },
+    { title: "Methyl Orange", url: "chemicals.html", category: "Chemical", icon: "fa-vial", desc: "pH indicator – red in acid, yellow in base." },
+    // === EMERGENCY ===
+    { title: "Acid Spill", url: "emergency.html", category: "Emergency", icon: "fa-triangle-exclamation", desc: "Neutralize with sodium bicarbonate, contain spill, dispose safely." },
+    { title: "Chemical Spill", url: "emergency.html", category: "Emergency", icon: "fa-triangle-exclamation", desc: "Evacuate, neutralize with appropriate agent, dispose safely." },
+    { title: "Skin Splash", url: "emergency.html", category: "Emergency", icon: "fa-hand-holding-water", desc: "Rinse with copious water for 15 minutes, remove contaminated clothing." },
+    { title: "Eye Splash", url: "emergency.html", category: "Emergency", icon: "fa-eye", desc: "Use eyewash station for 15+ minutes, keep eyelids open." },
+    { title: "Fire", url: "emergency.html", category: "Emergency", icon: "fa-fire", desc: "Activate alarm, smother small fires, evacuate if large." },
+    { title: "Clothing Fire", url: "emergency.html", category: "Emergency", icon: "fa-fire", desc: "STOP, DROP, and ROLL. Use safety shower if available." },
+    { title: "Mercury Spill", url: "emergency.html", category: "Emergency", icon: "fa-tint", desc: "Contain droplets, use mercury vacuum or amalgamation." }
+];
+
+// ===== RENDER SUGGESTIONS =====
+function renderSuggestions() {
+    const container = document.getElementById('searchResults');
+    let html = `
+        <div class="search-suggestions">
+    `;
+    popularSuggestions.forEach(item => {
+        html += `
+            <a href="${item.url}" class="suggestion-card" onclick="closeSearch()">
+                <span class="suggestion-icon"><i class="fas ${item.icon}"></i></span>
+                <div class="suggestion-label">${item.label}</div>
+                <div class="suggestion-desc">${item.desc}</div>
+                ${item.badge ? `<span class="suggestion-badge">${item.badge}</span>` : ''}
+            </a>
+        `;
+    });
+    html += `</div>`;
+    // Also add a small hint below
+    html += `<div class="search-hint">✨ Popular searches — click to navigate</div>`;
+    container.innerHTML = html;
+}
+
+// ===== SEARCH FUNCTION =====
+function performSearch(query) {
+    if (!query || query.length < 1) {
+        return [];
+    }
+    const q = query.toLowerCase().trim();
+    const results = searchData.filter(item => {
+        return item.title.toLowerCase().includes(q) || 
+               item.desc.toLowerCase().includes(q) ||
+               item.category.toLowerCase().includes(q);
+    });
+    results.sort((a, b) => {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase();
+        if (aTitle === q && bTitle !== q) return -1;
+        if (bTitle === q && aTitle !== q) return 1;
+        if (a.category === "Page" && b.category !== "Page") return -1;
+        if (b.category === "Page" && a.category !== "Page") return 1;
+        return 0;
+    });
+    return results.slice(0, 20);
+}
+
+// ===== RENDER RESULTS =====
+function renderResults(results) {
+    const container = document.getElementById('searchResults');
+    if (results.length === 0) {
+        container.innerHTML = `<div class="no-results"><i class="fas fa-search" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>No results found. Try a different keyword.</div>`;
+        return;
+    }
+    let html = '';
+    results.forEach(item => {
+        const icon = item.icon || 'fa-circle';
+        const url = item.url || '#';
+        html += `
+            <a href="${url}" class="result-item" onclick="closeSearch()">
+                <div class="result-icon"><i class="fas ${icon}"></i></div>
+                <div class="result-info">
+                    <div class="result-title">${highlightMatch(item.title)}</div>
+                    <div class="result-desc">${highlightMatch(item.desc)}</div>
+                    <span class="result-category">${item.category}</span>
+                </div>
+            </a>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+// ===== HIGHLIGHT MATCH =====
+function highlightMatch(text) {
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query || query.length < 2) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark style="background:rgba(34,182,175,0.3);color:#fff;padding:1px 4px;border-radius:3px;">$1</mark>');
+}
+
+// ===== SEARCH OVERLAY CONTROLS =====
+function openSearch() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderSuggestions();
+    setTimeout(() => {
+        document.getElementById('searchInput').focus();
+    }, 200);
+}
+
+function closeSearch() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('clearSearchBtn').classList.remove('show');
+    renderSuggestions();
+}
+
+// ===== EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Init suggestions
+    renderSuggestions();
+
+    // Search togglers
+    document.querySelectorAll('.search-toggler').forEach(el => {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            openSearch();
+        });
+    });
+
+    // Close button
+    document.getElementById('closeSearchBtn').addEventListener('click', closeSearch);
+
+    // Clear button
+    document.getElementById('clearSearchBtn').addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        this.classList.remove('show');
+        renderSuggestions();
+        document.getElementById('searchInput').focus();
+    });
+
+    // Input handler
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const query = this.value.trim();
+        const clearBtn = document.getElementById('clearSearchBtn');
+        if (query.length > 0) {
+            clearBtn.classList.add('show');
+        } else {
+            clearBtn.classList.remove('show');
+        }
+        if (query.length > 0) {
+            const results = performSearch(query);
+            renderResults(results);
+        } else {
+            renderSuggestions();
+        }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            openSearch();
+        }
+        if (e.key === 'Escape') {
+            if (document.getElementById('searchOverlay').classList.contains('active')) {
+                closeSearch();
+            }
+        }
+    });
+
+    // Click outside to close
+    document.getElementById('searchOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeSearch();
+        }
+    });
+});
+
+// ================================================================
+// EXISTING SCRIPTS (Banner Carousel + Quick Tips)
+// ================================================================
 $(document).ready(function(){
 
     // ===== BANNER CAROUSEL =====
